@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { MagneticButton } from "./MagneticButton";
 
 const menu = [
   { label: "Home", href: "#home" },
@@ -35,17 +36,18 @@ export function Nav() {
         </a>
         <div className="hidden md:flex justify-center gap-8 text-[13px] text-muted-foreground">
           {menu.map((m) => (
-            <a key={m.label} href={m.href} className="hover:text-foreground transition-colors">
+            <a
+              key={m.label}
+              href={m.href}
+              className="link-underline hover:text-foreground transition-colors"
+            >
               {m.label}
             </a>
           ))}
         </div>
-        <a
-          href="#cta"
-          className="px-4 py-2 rounded-full bg-foreground text-background text-[13px] font-medium hover:bg-foreground/90 transition-all duration-300 shrink-0"
-        >
+        <MagneticButton href="#cta" variant="primary" className="!px-4 !py-2 !text-[13px] shrink-0">
           Get Quote
-        </a>
+        </MagneticButton>
       </div>
     </nav>
   );
