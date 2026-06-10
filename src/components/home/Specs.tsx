@@ -1,4 +1,5 @@
 import { useReveal } from "./useReveal";
+import { RevealOnScroll } from "./RevealOnScroll";
 
 const specs: Array<[string, string]> = [
   ["Device Name", "BLTDAS140"],
@@ -33,11 +34,13 @@ export function Specs() {
           </div>
           <div className="lg:col-span-8">
             <dl className="divide-y divide-border border-y border-border">
-              {specs.map(([k, v]) => (
-                <div key={k} className="grid grid-cols-1 sm:grid-cols-[200px_1fr] gap-2 py-5">
-                  <dt className="text-sm text-muted-foreground">{k}</dt>
-                  <dd className="text-sm text-foreground">{v}</dd>
-                </div>
+              {specs.map(([k, v], i) => (
+                <RevealOnScroll key={k} delay={i * 50}>
+                  <div className="grid grid-cols-1 sm:grid-cols-[200px_1fr] gap-2 py-5">
+                    <dt className="text-sm text-muted-foreground">{k}</dt>
+                    <dd className="text-sm text-foreground">{v}</dd>
+                  </div>
+                </RevealOnScroll>
               ))}
             </dl>
           </div>
