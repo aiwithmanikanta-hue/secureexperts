@@ -138,10 +138,10 @@ export function Chatbot() {
       const next = { ...flow.data };
       const purpose = flow.purpose;
       const isDemo = purpose === "demo";
-      const steps = isDemo
+      const steps: readonly ("name" | "phone" | "city" | "requirement")[] = isDemo
         ? (["name", "phone", "city"] as const)
         : (["name", "phone", "city", "requirement"] as const);
-      const fieldKey = steps[flow.step];
+      const fieldKey = steps[flow.step] ?? "requirement";
       (next as Record<string, string>)[fieldKey] = text;
 
       if (flow.step < steps.length - 1) {
@@ -152,7 +152,8 @@ export function Chatbot() {
           city: <p>Which <strong>city</strong> are you in?</p>,
           requirement: <p>How many units / what's your <strong>requirement</strong>?</p>,
         };
-        botSay(prompts[steps[nextStep]]);
+        const nextKey = steps[nextStep] ?? "requirement";
+        botSay(prompts[nextKey]);
       } else {
         setFlow({ kind: "idle" });
         setTyping(true);
