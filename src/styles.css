@@ -336,6 +336,33 @@
   100% { transform: scale(1.8); opacity: 0; }
 }
 
+@keyframes logo-reveal {
+  0% { opacity: 0; transform: translateY(8px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes logo-glow {
+  0%, 100% { filter: drop-shadow(0 4px 14px rgba(10, 132, 255, 0.18)); }
+  50% { filter: drop-shadow(0 6px 22px rgba(10, 132, 255, 0.35)); }
+}
+
+@utility logo-reveal {
+  animation: logo-reveal 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@utility logo-hover {
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), filter 0.35s ease;
+}
+
+.logo-hover:hover {
+  transform: scale(1.03);
+  filter: drop-shadow(0 6px 22px rgba(10, 132, 255, 0.45));
+}
+
+@utility logo-glow {
+  animation: logo-glow 3s ease-in-out infinite;
+}
+
 @utility float-soft {
   animation: float-soft 5s ease-in-out infinite;
 }

@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Logo } from "./Logo";
 
 const KEY = "se_intro_shown";
 
@@ -34,11 +35,14 @@ export function IntroOverlay() {
       }`}
       aria-hidden
     >
-      <div className="flex items-center gap-3" style={{ animation: "reveal-up 0.6s ease-out both" }}>
-        <span className="size-8 rounded-full bg-foreground grid place-items-center">
-          <span className="size-2.5 rounded-full bg-background" style={{ animation: "soft-pulse 1.4s ease-in-out infinite" }} />
-        </span>
-        <span className="font-semibold tracking-tight text-lg text-foreground">Secure Experts</span>
+      <div
+        className="flex flex-col items-center gap-3"
+        style={{ animation: "reveal-up 0.7s cubic-bezier(0.16,1,0.3,1) both" }}
+      >
+        <Logo
+          priority
+          className="h-24 md:h-32 w-auto logo-glow"
+        />
       </div>
     </div>
   );

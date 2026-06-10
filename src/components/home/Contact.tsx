@@ -2,6 +2,7 @@ import { useState, type FormEvent } from "react";
 import { MapPin, Phone, Mail, MessageCircle, Clock, CheckCircle2, Navigation } from "lucide-react";
 import { useReveal } from "./useReveal";
 import { openWhatsApp } from "@/components/chatbot/whatsapp";
+import { Logo } from "./Logo";
 
 const PRODUCTS = [
   "VLTDAIS140 GPS Tracking System",
@@ -239,6 +240,9 @@ export function Contact() {
           {/* RIGHT — Info + Map */}
           <div className="space-y-6">
             <div className="relative rounded-[28px] border border-border bg-white/80 backdrop-blur-xl p-8 shadow-[0_20px_60px_-30px_rgba(17,17,17,0.18)]">
+              <div className="mb-5 flex items-center">
+                <Logo className="h-14 w-auto logo-hover" />
+              </div>
               <p className="text-[11px] font-semibold tracking-[0.18em] text-primary mb-2">
                 HEADQUARTERS
               </p>

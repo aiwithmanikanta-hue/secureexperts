@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { MagneticButton } from "./MagneticButton";
+import { Logo } from "./Logo";
 
 const menu = [
   { label: "Home", href: "#home" },
@@ -28,11 +29,12 @@ export function Nav() {
       }`}
     >
       <div className="max-w-6xl mx-auto px-6 h-16 grid grid-cols-[auto_1fr_auto] items-center gap-6">
-        <a href="#home" className="flex items-center gap-2 shrink-0">
-          <span className="size-7 rounded-full bg-foreground grid place-items-center">
-            <span className="size-2 rounded-full bg-background" />
-          </span>
-          <span className="font-semibold tracking-tight text-[15px]">Secure Experts</span>
+        <a
+          href="#home"
+          aria-label="Secure Experts — Home"
+          className="logo-reveal logo-hover flex items-center shrink-0"
+        >
+          <Logo priority className="h-10 md:h-14 w-auto" />
         </a>
         <div className="hidden md:flex justify-center gap-8 text-[13px] text-muted-foreground">
           {menu.map((m) => (

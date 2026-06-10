@@ -17,6 +17,7 @@ import {
   Zap,
 } from "lucide-react";
 import productImg from "@/assets/vltdais140-hero.png";
+import logoAsset from "@/assets/secure-experts-logo.png.asset.json";
 import { submitLead } from "@/lib/leads.functions";
 import { buildLeadMessage, openWhatsApp } from "./whatsapp";
 import { answerFaq } from "./FaqEngine";
@@ -219,8 +220,13 @@ export function Chatbot({
         >
           {/* Header */}
           <div className="relative flex items-center gap-3 border-b border-border/60 bg-gradient-to-br from-white to-[var(--tint-sky)] px-4 py-3.5">
-            <div className="relative grid size-10 place-items-center rounded-2xl bg-gradient-to-br from-primary to-[#5eb1ff] text-white shadow-soft">
-              <Sparkles className="size-5" strokeWidth={2.2} />
+            <div className="relative grid size-10 place-items-center rounded-2xl bg-white ring-1 ring-primary/15 shadow-soft overflow-hidden">
+              <img
+                src={logoAsset.url}
+                alt="Secure Experts"
+                className="size-9 object-contain"
+                draggable={false}
+              />
               <span className="absolute -bottom-0.5 -right-0.5 size-3 rounded-full border-2 border-white bg-emerald-500" />
             </div>
             <div className="flex-1">
