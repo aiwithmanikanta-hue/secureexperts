@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from "react";
 export function useCountUp(target: number, duration = 1800) {
   const ref = useRef<HTMLSpanElement | null>(null);
   const [value, setValue] = useState(0);
+  const [done, setDone] = useState(false);
   const started = useRef(false);
 
   useEffect(() => {
@@ -19,7 +20,10 @@ export function useCountUp(target: number, duration = 1800) {
               const eased = 1 - Math.pow(1 - p, 3);
               setValue(target * eased);
               if (p < 1) requestAnimationFrame(tick);
-              else setValue(target);
+              else {
+                setValue(target);
+                setDone(true);
+              }
             };
             requestAnimationFrame(tick);
             io.unobserve(el);
@@ -32,5 +36,5 @@ export function useCountUp(target: number, duration = 1800) {
     return () => io.disconnect();
   }, [target, duration]);
 
-  return { ref, value };
+  return { ref, value, done };
 }
