@@ -276,6 +276,21 @@
   50% { transform: translate3d(4%, 3%, 0); opacity: 1; }
 }
 
+@keyframes marquee-x {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+@keyframes marquee-x-rev {
+  0% { transform: translateX(-50%); }
+  100% { transform: translateX(0); }
+}
+@utility marquee { animation: marquee-x 38s linear infinite; }
+@utility marquee-rev { animation: marquee-x-rev 44s linear infinite; }
+@utility mask-fade-x {
+  mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+  -webkit-mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+}
+
 @utility security-grid {
   background-image:
     linear-gradient(to right, rgba(10,132,255,0.06) 1px, transparent 1px),
