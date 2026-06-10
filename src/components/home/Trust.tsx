@@ -1,18 +1,19 @@
 import { ShieldCheck, Users, Lock, Headphones } from "lucide-react";
+import { useReveal } from "./useReveal";
 
 const reviews = [
   {
-    q: "The precision of the BLTDAS140 is unmatched. In our sector, a ten-meter margin is unacceptable. Secure Experts delivers within centimeters.",
+    q: "The precision of the BLTDAS140 is unmatched. In our sector, a ten-meter margin is unacceptable.",
     a: "Marcus Thorne",
     r: "Director of Logistics, Aerotech",
   },
   {
-    q: "Aesthetics meet extreme functionality. It is the first security device we have deployed without compromising on build or software integrity.",
+    q: "Aesthetics meet extreme functionality. The first security device we have deployed without compromise.",
     a: "Elena Vance",
     r: "Chief Security Officer, Novus Corp",
   },
   {
-    q: "Battery longevity changed our entire maintenance cycle. We have reduced operational overhead by 40% since switching to Secure Experts.",
+    q: "Battery longevity changed our entire maintenance cycle. Operational overhead is down 40%.",
     a: "Jameson Reed",
     r: "Fleet Manager, Global Transit",
   },
@@ -26,36 +27,47 @@ const badges = [
 ];
 
 export function Trust() {
+  const r = useReveal();
   return (
-    <section className="relative py-28 px-6 border-t border-border bg-card/20">
-      <div className="max-w-7xl mx-auto">
+    <section className="relative py-32 px-6 surface-2">
+      <div ref={r} className="reveal max-w-6xl mx-auto">
         <div className="text-center mb-16">
-          <p className="font-mono-tech text-[10px] uppercase tracking-[0.3em] text-accent mb-4">
-            Trusted Worldwide
-          </p>
-          <h2 className="text-4xl md:text-5xl font-extrabold uppercase italic tracking-tighter leading-[0.95]">
-            Specified by Professionals.
+          <div className="inline-flex px-3 py-1 rounded-full bg-background border border-border text-[12px] text-muted-foreground mb-5">
+            Customer Trust
+          </div>
+          <h2 className="text-4xl md:text-6xl font-semibold leading-[1.05] text-balance">
+            Specified by professionals.
           </h2>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-px bg-border border border-border mb-20">
-          {reviews.map((r) => (
-            <div key={r.a} className="bg-background p-10">
-              <div className="text-accent font-mono-tech text-2xl mb-5">“</div>
-              <p className="text-foreground/90 text-sm leading-relaxed mb-8">{r.q}</p>
-              <div className="pt-5 border-t border-border">
-                <div className="text-sm font-bold uppercase tracking-wider">{r.a}</div>
-                <div className="text-[11px] text-muted-foreground font-mono-tech tracking-widest mt-1">{r.r}</div>
-              </div>
-            </div>
+        <div className="grid md:grid-cols-3 gap-4 mb-12">
+          {reviews.map((rv) => (
+            <figure
+              key={rv.a}
+              className="bg-background rounded-3xl border border-border p-8 hover:shadow-lift transition-all duration-300"
+            >
+              <blockquote className="text-base text-foreground leading-relaxed mb-8">
+                “{rv.q}”
+              </blockquote>
+              <figcaption className="flex items-center gap-3 pt-5 border-t border-border">
+                <div className="size-10 rounded-full bg-gradient-to-br from-muted to-secondary border border-border" />
+                <div>
+                  <div className="text-sm font-medium text-foreground">{rv.a}</div>
+                  <div className="text-xs text-muted-foreground">{rv.r}</div>
+                </div>
+              </figcaption>
+            </figure>
           ))}
         </div>
 
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-px bg-border border border-border">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
           {badges.map((b) => (
-            <div key={b.t} className="bg-background p-8 flex items-center gap-4">
-              <b.Icon className="size-5 text-accent shrink-0" strokeWidth={1.5} />
-              <span className="text-xs font-bold uppercase tracking-widest">{b.t}</span>
+            <div
+              key={b.t}
+              className="bg-background rounded-2xl border border-border p-5 flex items-center gap-3"
+            >
+              <b.Icon className="size-4 text-primary shrink-0" strokeWidth={2} />
+              <span className="text-sm font-medium">{b.t}</span>
             </div>
           ))}
         </div>

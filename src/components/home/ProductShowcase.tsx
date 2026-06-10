@@ -1,60 +1,72 @@
 import showcaseImg from "@/assets/bltdas140-showcase.jpg";
-
-const benefits = [
-  { n: "01", title: "Real-Time Tracking", body: "Sub-meter accuracy with millisecond reporting cadence." },
-  { n: "02", title: "Compact Design", body: "Aerospace-grade housing engineered for total discretion." },
-  { n: "03", title: "Secure Performance", body: "AES-256 encrypted channels with hardware key isolation." },
-  { n: "04", title: "Easy Installation", body: "Magnetic mount with zero-config pairing in under 60 seconds." },
-  { n: "05", title: "Accurate Monitoring", body: "Quad-GNSS constellation lock across 142 countries." },
-];
+import { useReveal } from "./useReveal";
+import { MapPin, Layers, Lock } from "lucide-react";
 
 export function ProductShowcase() {
+  const r1 = useReveal();
   return (
-    <section id="product" className="relative py-28 px-6 border-t border-border">
-      <div className="max-w-7xl mx-auto grid lg:grid-cols-12 gap-12 items-center">
-        <div className="lg:col-span-7 relative">
-          <div className="relative rounded-3xl overflow-hidden border border-border ring-1 ring-white/5 bg-card">
-            <img
-              src={showcaseImg}
-              alt="BLTDAS140 detail view on a blueprint surface"
-              width={1280}
-              height={1024}
-              loading="lazy"
-              className="w-full h-full object-cover"
-            />
-            <div className="absolute inset-0 bg-gradient-to-tr from-background/60 via-transparent to-transparent pointer-events-none" />
-            <div className="absolute bottom-6 left-6 font-mono-tech text-[10px] uppercase tracking-widest text-accent/80">
-              BLTDAS140 · ASSET TRACKING UNIT
-            </div>
+    <section id="product" className="relative py-32 px-6">
+      <div ref={r1} className="reveal max-w-6xl mx-auto">
+        <div className="text-center mb-16">
+          <div className="inline-flex px-3 py-1 rounded-full bg-card border border-border text-[12px] text-muted-foreground mb-5">
+            The Product
           </div>
+          <h2 className="text-4xl md:text-6xl font-semibold leading-[1.05] text-balance">
+            One device.<br className="sm:hidden" />{" "}
+            <span className="text-muted-foreground">Total visibility.</span>
+          </h2>
         </div>
 
-        <div className="lg:col-span-5">
-          <p className="font-mono-tech text-[10px] uppercase tracking-[0.3em] text-accent mb-5">
-            The Product
-          </p>
-          <h2 className="text-4xl md:text-5xl font-extrabold uppercase italic tracking-tighter mb-6 leading-[0.95]">
-            One Device.<br />Total Visibility.
-          </h2>
-          <p className="text-muted-foreground mb-10 leading-relaxed">
-            The BLTDAS140 is the foundation of the Secure Experts ecosystem — a precision
-            instrument engineered to monitor, protect, and report with absolute consistency.
-          </p>
+        {/* Bento */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div className="md:col-span-2 md:row-span-2 surface-1 rounded-3xl border border-border p-8 sm:p-12 relative overflow-hidden group hover:shadow-lift transition-all duration-500">
+            <div className="absolute -top-24 -right-24 size-72 rounded-full bg-primary/8 blur-3xl pointer-events-none" />
+            <div className="relative aspect-[4/3] rounded-2xl overflow-hidden bg-muted">
+              <img
+                src={showcaseImg}
+                alt="BLTDAS140 detail"
+                width={1280}
+                height={1024}
+                loading="lazy"
+                className="w-full h-full object-cover scale-100 group-hover:scale-[1.02] transition-transform duration-1000"
+              />
+            </div>
+            <div className="mt-8">
+              <p className="text-[12px] text-muted-foreground mb-2">BLTDAS140</p>
+              <h3 className="text-2xl md:text-3xl font-semibold leading-tight max-w-md">
+                Precision tracking, engineered for everyday confidence.
+              </h3>
+            </div>
+          </div>
 
-          <ul className="space-y-px bg-border">
-            {benefits.map((b) => (
-              <li
-                key={b.n}
-                className="bg-background p-5 flex gap-5 items-start group hover:bg-card transition-colors"
-              >
-                <span className="font-mono-tech text-[10px] text-accent mt-1 tracking-widest">{b.n}</span>
-                <div>
-                  <div className="text-sm font-bold uppercase tracking-wider">{b.title}</div>
-                  <div className="text-xs text-muted-foreground mt-1">{b.body}</div>
-                </div>
-              </li>
-            ))}
-          </ul>
+          {[
+            {
+              Icon: MapPin,
+              t: "Real-time",
+              d: "Continuous position fix with sub-meter accuracy.",
+            },
+            {
+              Icon: Layers,
+              t: "Compact",
+              d: "48 × 32 × 14mm aerospace-grade housing.",
+            },
+            {
+              Icon: Lock,
+              t: "Secure",
+              d: "AES-256 encrypted telemetry, hardware key isolation.",
+            },
+          ].map((c) => (
+            <div
+              key={c.t}
+              className="surface-1 rounded-3xl border border-border p-8 hover:shadow-lift hover:-translate-y-0.5 transition-all duration-300 group"
+            >
+              <div className="size-10 rounded-xl bg-tint-blue grid place-items-center mb-5 group-hover:scale-110 transition-transform">
+                <c.Icon className="size-5 text-primary" strokeWidth={2} />
+              </div>
+              <h3 className="text-lg font-semibold mb-2">{c.t}</h3>
+              <p className="text-sm text-muted-foreground leading-relaxed">{c.d}</p>
+            </div>
+          ))}
         </div>
       </div>
     </section>
