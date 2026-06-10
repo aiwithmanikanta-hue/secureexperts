@@ -37,8 +37,14 @@ type LeadData = { name: string; phone: string; city: string; requirement: string
 
 const uid = () => Math.random().toString(36).slice(2);
 
-export function Chatbot() {
-  const [open, setOpen] = useState(false);
+export function Chatbot({
+  open,
+  onOpenChange,
+}: {
+  open: boolean;
+  onOpenChange: (open: boolean) => void;
+}) {
+  const setOpen = onOpenChange;
   const [messages, setMessages] = useState<Msg[]>([]);
   const [input, setInput] = useState("");
   const [typing, setTyping] = useState(false);
@@ -203,17 +209,6 @@ export function Chatbot() {
 
   return (
     <>
-      {/* Launcher */}
-      <button
-        type="button"
-        aria-label={open ? "Close assistant" : "Open Secure Experts AI assistant"}
-        onClick={() => setOpen((o) => !o)}
-        className="fixed bottom-6 right-6 z-50 grid size-14 place-items-center rounded-full bg-gradient-to-br from-white to-[var(--tint-blue)] text-primary shadow-lift ring-1 ring-primary/10 transition-transform duration-300 hover:scale-105 active:scale-95 breathe-glow"
-        style={{ animation: open ? undefined : "float-y 6s ease-in-out infinite, breathe 4.5s ease-in-out infinite" }}
-      >
-        {open ? <X className="size-6" /> : <MessageCircle className="size-6" strokeWidth={2.2} />}
-      </button>
-
       {/* Panel */}
       {open && (
         <div
