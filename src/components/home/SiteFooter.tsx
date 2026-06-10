@@ -1,4 +1,5 @@
 import { Linkedin, Twitter, Instagram, Mail } from "lucide-react";
+import { Logo } from "./Logo";
 
 export function SiteFooter() {
   return (
@@ -6,12 +7,12 @@ export function SiteFooter() {
       <div className="max-w-6xl mx-auto">
         <div className="grid grid-cols-2 md:grid-cols-5 gap-10 mb-14">
           <div className="col-span-2">
-            <a href="#home" className="flex items-center gap-2 mb-5">
-              <span className="size-7 rounded-full bg-foreground grid place-items-center">
-                <span className="size-2 rounded-full bg-background" />
-              </span>
-              <span className="font-semibold tracking-tight">Secure Experts</span>
+            <a href="#home" aria-label="Secure Experts — Home" className="inline-flex items-center mb-3 logo-hover">
+              <Logo className="h-16 w-auto" />
             </a>
+            <p className="text-sm font-medium tracking-wide text-primary mb-4">
+              Securing Every Mile
+            </p>
             <p className="text-muted-foreground max-w-xs text-sm leading-relaxed">
               Precision security technology for fleet management, corporate assets, and
               high-value personal protection.
