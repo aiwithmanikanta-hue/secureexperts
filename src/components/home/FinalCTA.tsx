@@ -7,8 +7,16 @@ export function FinalCTA() {
     <section id="cta" className="relative py-32 px-6">
       <div ref={r} className="reveal max-w-5xl mx-auto">
         <div className="relative surface-4 rounded-[40px] border border-border px-8 py-20 sm:p-24 text-center overflow-hidden">
-          <div className="absolute -top-32 left-1/2 -translate-x-1/2 size-[600px] bg-primary/10 rounded-full blur-3xl pointer-events-none" />
-          <div className="absolute inset-0 dot-grid opacity-30 pointer-events-none" />
+          {/* Slow light waves */}
+          <div
+            className="absolute -top-40 left-1/2 -translate-x-1/2 size-[700px] bg-primary/15 rounded-full blur-3xl pointer-events-none"
+            style={{ animation: "wave-shift 16s ease-in-out infinite" }}
+          />
+          <div
+            className="absolute -bottom-40 right-0 size-[500px] bg-sky-300/20 rounded-full blur-3xl pointer-events-none"
+            style={{ animation: "wave-shift 22s ease-in-out -8s infinite" }}
+          />
+          <div className="absolute inset-0 security-grid opacity-40 pointer-events-none" />
           <div className="relative">
             <div className="inline-flex px-3 py-1 rounded-full bg-background border border-border text-[12px] text-muted-foreground mb-6">
               Get Started
@@ -23,7 +31,7 @@ export function FinalCTA() {
             <div className="flex flex-wrap justify-center gap-3">
               <a
                 href="#contact"
-                className="group px-6 py-3 rounded-full bg-foreground text-background text-sm font-medium hover:scale-[1.02] transition-transform inline-flex items-center gap-2 shadow-soft"
+                className="group breathe-glow px-6 py-3 rounded-full bg-foreground text-background text-sm font-medium hover:scale-[1.02] transition-transform inline-flex items-center gap-2"
               >
                 Contact Secure Experts
                 <ArrowRight className="size-4 group-hover:translate-x-0.5 transition-transform" />
