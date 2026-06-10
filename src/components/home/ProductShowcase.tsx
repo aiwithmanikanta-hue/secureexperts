@@ -28,7 +28,7 @@ export function ProductShowcase() {
             <div className="absolute -top-24 -right-24 size-72 rounded-full bg-primary/10 blur-3xl pointer-events-none ambient-blob" />
             <ParallaxImage
               src={showcaseImg}
-              alt="BLTDAS140 detail"
+              alt="VLTDAIS140 detail"
               width={1280}
               height={1024}
               loading="lazy"
@@ -36,7 +36,7 @@ export function ProductShowcase() {
               className="w-full h-full object-cover"
             />
             <div className="relative mt-8">
-              <p className="text-[12px] text-muted-foreground mb-2">BLTDAS140</p>
+              <p className="text-[12px] text-muted-foreground mb-2">VLTDAIS140</p>
               <h3 className="text-2xl md:text-3xl font-semibold leading-tight max-w-md">
                 Precision tracking, engineered for everyday confidence.
               </h3>

@@ -2,7 +2,7 @@ import { useReveal } from "./useReveal";
 import { RevealOnScroll } from "./RevealOnScroll";
 
 const specs: Array<[string, string]> = [
-  ["Device Name", "BLTDAS140"],
+  ["Device Name", "VLTDAIS140"],
   ["Type", "Asset & Vehicle GPS Tracker"],
   ["Tracking", "GPS · GLONASS · Galileo · BeiDou"],
   ["Connectivity", "LTE-M · NB-IoT · Quad-band GSM · BLE 5.2"],

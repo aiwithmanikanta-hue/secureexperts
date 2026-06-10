@@ -5,13 +5,13 @@ import heroImg from "@/assets/bltdas140-hero.jpg";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Secure Experts — BLTDAS140 Premium GPS Tracking Device" },
+      { title: "Secure Experts — VLTDAIS140 Premium GPS Tracking Device" },
       {
         name: "description",
         content:
-          "Advanced GPS tracking built for security, control, and confidence. Meet the BLTDAS140 — a precision instrument for real-time visibility and modern protection.",
+          "Advanced GPS tracking built for security, control, and confidence. Meet the VLTDAIS140 — a precision instrument for real-time visibility and modern protection.",
       },
-      { property: "og:title", content: "Secure Experts — BLTDAS140 GPS Tracking Device" },
+      { property: "og:title", content: "Secure Experts — VLTDAIS140 GPS Tracking Device" },
       {
         property: "og:description",
         content:
