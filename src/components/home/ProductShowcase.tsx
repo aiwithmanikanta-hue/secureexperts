@@ -1,4 +1,4 @@
-import showcaseImg from "@/assets/bltdas140-showcase.jpg";
+import showcaseImg from "@/assets/vltdais140-showcase.jpg";
 import { useReveal } from "./useReveal";
 import { useTilt } from "./useTilt";
 import { MapPin, Layers, Lock } from "lucide-react";
