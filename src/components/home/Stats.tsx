@@ -27,11 +27,11 @@ function StatCell({ s, delay }: { s: Stat; delay: number }) {
       className="reveal text-center md:text-left"
       style={{ transitionDelay: `${delay}ms` }}
     >
-      <div className="text-4xl md:text-5xl font-semibold tracking-tight text-foreground tabular-nums">
+      <div className="text-4xl md:text-5xl font-semibold tracking-tight text-black tabular-nums">
         <span ref={ref}>{format(value, s)}</span>
-        <span className="text-primary">{s.suffix}</span>
+        <span className="text-black">{s.suffix}</span>
       </div>
-      <div className="mt-2 text-sm text-muted-foreground">{s.label}</div>
+      <div className="mt-2 text-sm text-black/70">{s.label}</div>
     </div>
   );
 }
