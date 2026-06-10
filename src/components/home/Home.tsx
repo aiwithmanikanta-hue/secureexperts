@@ -7,6 +7,7 @@ import { WhyUs } from "./WhyUs";
 import { Specs } from "./Specs";
 import { Trust } from "./Trust";
 import { FinalCTA } from "./FinalCTA";
+import { Contact } from "./Contact";
 import { SiteFooter } from "./SiteFooter";
 import { AmbientBackground } from "./AmbientBackground";
 import { IntroOverlay } from "./IntroOverlay";
@@ -26,6 +27,7 @@ export function Home() {
         <Specs />
         <Trust />
         <FinalCTA />
+        <Contact />
       </main>
       <SiteFooter />
     </div>

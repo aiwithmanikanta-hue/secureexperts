@@ -2,7 +2,7 @@ import { Linkedin, Twitter, Instagram, Mail } from "lucide-react";
 
 export function SiteFooter() {
   return (
-    <footer id="contact" className="py-20 px-6 surface-2 border-t border-border">
+    <footer className="py-20 px-6 surface-2 border-t border-border">
       <div className="max-w-6xl mx-auto">
         <div className="grid grid-cols-2 md:grid-cols-5 gap-10 mb-14">
           <div className="col-span-2">
