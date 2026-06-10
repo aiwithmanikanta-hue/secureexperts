@@ -1,5 +1,7 @@
 import { Satellite, ShieldCheck, Cpu, Plug, Award, Activity } from "lucide-react";
 import { useReveal } from "./useReveal";
+import { GlassCard } from "./GlassCard";
+import { RevealOnScroll } from "./RevealOnScroll";
 
 const features = [
   { Icon: Satellite, t: "Live GPS tracking", d: "Continuous fix across GPS, GLONASS, Galileo, BeiDou." },
@@ -26,17 +28,16 @@ export function Features() {
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-          {features.map((f) => (
-            <div
-              key={f.t}
-              className="bg-background rounded-3xl border border-border p-8 hover:shadow-lift hover:-translate-y-0.5 transition-all duration-300 group"
-            >
-              <div className="size-10 rounded-xl bg-tint-blue grid place-items-center mb-6 group-hover:scale-110 transition-transform">
-                <f.Icon className="size-5 text-primary" strokeWidth={2} />
-              </div>
-              <h3 className="text-lg font-semibold mb-2">{f.t}</h3>
-              <p className="text-sm text-muted-foreground leading-relaxed">{f.d}</p>
-            </div>
+          {features.map((f, i) => (
+            <RevealOnScroll key={f.t} delay={i * 70}>
+              <GlassCard tiltMax={4}>
+                <div className="size-10 rounded-xl bg-tint-blue grid place-items-center mb-6 transition-transform duration-500 group-hover:scale-110 group-hover:-rotate-3">
+                  <f.Icon className="size-5 text-primary" strokeWidth={2} />
+                </div>
+                <h3 className="text-lg font-semibold mb-2">{f.t}</h3>
+                <p className="text-sm text-muted-foreground leading-relaxed">{f.d}</p>
+              </GlassCard>
+            </RevealOnScroll>
           ))}
         </div>
       </div>
