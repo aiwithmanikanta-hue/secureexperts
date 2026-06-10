@@ -1,5 +1,7 @@
 import { Sparkles, ShieldCheck, Cpu, Headphones } from "lucide-react";
 import { useReveal } from "./useReveal";
+import { GlassCard } from "./GlassCard";
+import { RevealOnScroll } from "./RevealOnScroll";
 
 const items = [
   { Icon: Sparkles, t: "Premium quality", d: "Every component sourced and assembled to a single uncompromising standard." },
@@ -23,17 +25,16 @@ export function WhyUs() {
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-          {items.map((i) => (
-            <div
-              key={i.t}
-              className="bg-background rounded-3xl border border-border p-8 hover:shadow-lift hover:-translate-y-0.5 transition-all duration-300"
-            >
-              <div className="size-10 rounded-xl bg-tint-blue grid place-items-center mb-5">
-                <i.Icon className="size-5 text-primary" strokeWidth={2} />
-              </div>
-              <h3 className="text-base font-semibold mb-2">{i.t}</h3>
-              <p className="text-sm text-muted-foreground leading-relaxed">{i.d}</p>
-            </div>
+          {items.map((it, idx) => (
+            <RevealOnScroll key={it.t} delay={idx * 80}>
+              <GlassCard tiltMax={4}>
+                <div className="size-10 rounded-xl bg-tint-blue grid place-items-center mb-5 transition-transform duration-500 group-hover:scale-110">
+                  <it.Icon className="size-5 text-primary" strokeWidth={2} />
+                </div>
+                <h3 className="text-base font-semibold mb-2">{it.t}</h3>
+                <p className="text-sm text-muted-foreground leading-relaxed">{it.d}</p>
+              </GlassCard>
+            </RevealOnScroll>
           ))}
         </div>
       </div>
