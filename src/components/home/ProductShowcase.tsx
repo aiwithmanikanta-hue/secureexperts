@@ -71,7 +71,7 @@ export function ProductShowcase() {
                 <div className="size-10 rounded-xl bg-tint-blue grid place-items-center mb-5 transition-transform duration-500 group-hover:scale-110 group-hover:-rotate-3">
                   <c.Icon className="size-5 text-primary" strokeWidth={2} />
                 </div>
-                <h3 className="text-lg font-semibold mb-2">{c.t}</h3>
+                <h3 className="text-lg font-semibold mb-0.5 leading-tight">{c.t}</h3>
                 <p className="text-sm text-muted-foreground leading-relaxed">{c.d}</p>
               </GlassCard>
             </RevealOnScroll>
