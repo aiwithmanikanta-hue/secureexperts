@@ -9,10 +9,10 @@ type Stat = {
 };
 
 const STATS: Stat[] = [
-  { value: 10000, suffix: "+", label: "Devices Installed" },
-  { value: 99.9, suffix: "%", decimals: 1, label: "Tracking Accuracy" },
-  { value: 24, suffix: "/7", label: "Live Monitoring" },
-  { value: 12, suffix: "+", label: "Years of Expertise" },
+  { value: 10000, suffix: "+", label: "Vehicles Tracked" },
+  { value: 500, suffix: "+", label: "Active Dealers" },
+  { value: 99.9, suffix: "%", decimals: 1, label: "GPS Accuracy" },
+  { value: 24, suffix: "/7", label: "Live Support" },
 ];
 
 function format(v: number, s: Stat) {
