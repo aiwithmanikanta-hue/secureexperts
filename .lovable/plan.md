@@ -1,54 +1,58 @@
-## Goal
-Add a premium, glassmorphic AI sales-assistant chatbot to the Secure Experts homepage that explains the VLTDAIS140, answers scripted FAQs, captures qualified leads into Lovable Cloud, and hands every lead off to WhatsApp `7337433351`.
+# Floating Action Buttons — WhatsApp + AI Chatbot
 
-## Architecture
+The site already has a Chatbot with a floating launcher (bottom-right) and a `openWhatsApp()` helper hitting `wa.me/917337433351`. We'll consolidate both buttons into a polished, animated stack that stays visible on every route.
 
-**Frontend (new files under `src/components/chatbot/`):**
-- `Chatbot.tsx` — root controller: floating launcher (bottom-right, breathing glow, soft-blue gradient), glass chat panel, open/close animation. Mounted globally in `__root.tsx` so it appears on every route.
-- `ChatLauncher.tsx` — round bot button with floating + breathing-glow animation.
-- `ChatPanel.tsx` — glass card (frosted white, soft-blue accents, Apple-style spring open), header with "Secure Experts AI" + status dot, scrollable message list, typing indicator, quick-action chip rail, composer.
-- `Message.tsx` — user vs bot bubble styling, elegant fade/slide-in.
-- `QuickActions.tsx` — the 6 quick-reply chips.
-- `ProductCard.tsx` — VLTDAIS140 card (image, description, feature checklist, action buttons) rendered inline as a bot message.
-- `BrochureCard.tsx` — flyer/gallery/spec card with Download PDF + WhatsApp buttons (placeholders until files arrive).
-- `LeadForm.tsx` — inline conversational form (Name → Phone → City → Quantity/Requirement), one field at a time with validation (zod).
-- `FaqEngine.ts` — keyword-matched scripted answers for the 8 FAQs + escalation fallback ("Would you like to speak with a specialist?" → WhatsApp / Callback buttons).
-- `whatsapp.ts` — builds the prefilled WhatsApp URL for `7337433351` and opens it.
-- `chatbotMachine.ts` — small state reducer for flows: idle → product / brochure / pricing / demo / faq / escalation.
+## What gets built
 
-**Backend:**
-- Enable Lovable Cloud.
-- Migration: `leads` table — `id uuid pk`, `name text`, `phone text`, `city text`, `requirement text`, `source text default 'chatbot'`, `created_at timestamptz default now()`. RLS enabled. Grants: `INSERT` to `anon` + `authenticated` (public form), `SELECT/ALL` to `service_role` only (no public read of PII). Policy: `INSERT WITH CHECK (true)`; no SELECT policy.
-- `src/lib/leads.functions.ts` — `submitLead` server fn: zod-validate, insert via `supabaseAdmin` (loaded inside handler), return `{ ok: true }`. Client calls this, then opens WhatsApp.
+1. **New `FloatingActions` component** (`src/components/chatbot/FloatingActions.tsx`) — owns both FABs and renders them in a fixed bottom-right stack.
+2. **AI Chatbot FAB** (top of stack)
+   - Robot icon (lucide `Bot`), white + soft-blue glassmorphism, primary glow.
+   - Idle: gentle float + breathing pulse + soft notification ping dot.
+   - Hover: scale 1.08, glow ring expands, icon does a tiny wave (rotate keyframes).
+   - Tooltip on hover: "Ask our AI Assistant".
+   - Click: opens the existing Chatbot panel (lift `open` state into `FloatingActions` and pass it to `Chatbot`).
+   - Every 15s: pop-in speech bubble cycling through ["Click Me!", "Ask Me Anything!", "Need Product Details?", "Want Pricing?", "Download Brochure"], auto-hides after 4s. Pauses while chatbot is open or tab hidden.
+3. **WhatsApp FAB** (below chatbot button, 20px gap)
+   - Official WhatsApp SVG glyph in a green (#25D366) circular button, glass ring, soft shadow + green glow.
+   - Idle: floating + breathing pulse.
+   - Hover: scale 1.08, shadow/glow expansion, tooltip "Chat on WhatsApp".
+   - Click: `openWhatsApp("Hi Secure Experts, I'd like to know more about your GPS tracking solutions.")` + ripple animation.
+4. **Chatbot refactor** (`src/components/chatbot/Chatbot.tsx`)
+   - Remove the internal launcher button (lines ~205-218).
+   - Accept `open` / `onOpenChange` props; keep panel open/close animation but driven from outside.
+   - Panel entry: scale-in + blur expansion (already mostly there; tune duration/easing).
+5. **Mount in `__root.tsx`** — replace the existing `<Chatbot />` with `<FloatingActions />` which internally renders both FABs and the Chatbot panel.
+6. **Animations in `src/styles.css`** — add `@keyframes` for `float-soft`, `breathe-glow-green`, `wave`, `bubble-pop`, `ripple`; expose as `@utility` classes so we can apply them via className without bespoke `<style>` blocks.
 
-## Conversation Flows
+## Layout
 
-1. **Welcome** — auto-shows greeting + 6 quick actions.
-2. **📦 View Product** → ProductCard with Flyer / Brochure / Contact Expert buttons.
-3. **📄 View Flyer / Brochure** → BrochureCard with Download PDF + WhatsApp.
-4. **💰 Pricing** → LeadForm(name, phone, city, quantity) → submit → "✅ Thank you" → auto-open WhatsApp with prefilled "🚨 New Website Lead…" message.
-5. **🚀 Demo** → LeadForm(name, phone, city) → same confirm + WhatsApp.
-6. **📱 WhatsApp** → directly opens WhatsApp chat with greeting message.
-7. **❓ Ask a Question** → free-text → `FaqEngine` keyword match → scripted answer; on no-match → escalation buttons (WhatsApp Expert / Request Callback).
+```text
+              ┌──────────────────────┐
+              │  speech bubble (15s) │ ← pops in to the left of bot FAB
+              └─────────┬────────────┘
+                        │
+                    ╭───┴───╮
+                    │  🤖   │  ← AI chatbot FAB (top)
+                    ╰───────╯
+                      20px
+                    ╭───────╮
+                    │  ✆   │  ← WhatsApp FAB (bottom)
+                    ╰───────╯
+```
 
-## Design
+Both FABs sit at `fixed bottom-6 right-6 z-50` inside a vertical flex stack.
 
-- Position: `fixed bottom-6 right-6 z-50`.
-- Launcher: 56px circle, white/light-blue gradient, breathing `box-shadow` glow (reuses existing `breathe` keyframe), floats via `float-y`.
-- Panel: 380×560 (mobile: full-width sheet), `glass-card` utility, rounded-3xl, soft shadow-lift, spring open (scale 0.95→1 + opacity).
-- Bot bubble: white surface + soft border; user bubble: `bg-primary text-primary-foreground`.
-- Typing indicator: 3 dots with stagger.
-- Respects `prefers-reduced-motion`.
+## Technical notes
 
-## Files Touched
+- All colors come from existing tokens; the WhatsApp green is added as `--color-whatsapp: oklch(...)` in `src/styles.css` so we can use `bg-whatsapp` / `ring-whatsapp`.
+- Speech-bubble timer uses `setInterval(15000)` + `setTimeout(4000)` to hide, cleared on unmount, paused when `open` is true.
+- Tooltips are inline (no Radix dep) — small absolutely-positioned `<span>` revealed on `group-hover`.
+- Accessibility: each FAB has `aria-label`, `title`, and visible focus ring; speech bubble is `aria-hidden` (decorative).
+- No new dependencies; uses existing `lucide-react` (`Bot`, `X`) and inline SVG for the WhatsApp glyph.
 
-- New: 10 chatbot files under `src/components/chatbot/`, `src/lib/leads.functions.ts`, 1 migration.
-- Edit: `src/routes/__root.tsx` (mount `<Chatbot />` once).
-- No changes to existing homepage sections.
+## Files touched
 
-## Out of Scope (this turn)
-
-- Real brochure PDF/flyer image — placeholders wired with TODO; swap when files arrive.
-- Admin dashboard UI to view leads (DB only for now).
-- Email/CRM notifications.
-- True AI replies (scripted-only per your choice).
+- add: `src/components/chatbot/FloatingActions.tsx`
+- edit: `src/components/chatbot/Chatbot.tsx` (controlled open state, remove inline launcher)
+- edit: `src/routes/__root.tsx` (swap `Chatbot` → `FloatingActions`)
+- edit: `src/styles.css` (keyframes + utilities + whatsapp color token)
