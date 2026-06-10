@@ -1,6 +1,7 @@
 import { Nav } from "./Nav";
 import { Hero } from "./Hero";
 import { ProductShowcase } from "./ProductShowcase";
+import { Stats } from "./Stats";
 import { Features } from "./Features";
 import { ProductBenefits } from "./ProductBenefits";
 import { WhyUs } from "./WhyUs";
@@ -20,6 +21,7 @@ export function Home() {
       <Nav />
       <main>
         <Hero />
+        <Stats />
         <ProductShowcase />
         <Features />
         <ProductBenefits />
