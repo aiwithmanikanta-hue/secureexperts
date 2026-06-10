@@ -1,0 +1,52 @@
+import { useEffect, useState } from "react";
+
+const menu = [
+  { label: "Home", href: "#home" },
+  { label: "Product", href: "#product" },
+  { label: "Features", href: "#features" },
+  { label: "Specifications", href: "#specs" },
+  { label: "About", href: "#about" },
+  { label: "Contact", href: "#contact" },
+];
+
+export function Nav() {
+  const [scrolled, setScrolled] = useState(false);
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 8);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  return (
+    <nav
+      className={`fixed top-0 inset-x-0 z-50 transition-all duration-300 ${
+        scrolled
+          ? "bg-background/75 backdrop-blur-xl border-b border-border"
+          : "bg-background/40 backdrop-blur-sm border-b border-transparent"
+      }`}
+    >
+      <div className="max-w-6xl mx-auto px-6 h-16 grid grid-cols-[auto_1fr_auto] items-center gap-6">
+        <a href="#home" className="flex items-center gap-2 shrink-0">
+          <span className="size-7 rounded-full bg-foreground grid place-items-center">
+            <span className="size-2 rounded-full bg-background" />
+          </span>
+          <span className="font-semibold tracking-tight text-[15px]">Secure Experts</span>
+        </a>
+        <div className="hidden md:flex justify-center gap-8 text-[13px] text-muted-foreground">
+          {menu.map((m) => (
+            <a key={m.label} href={m.href} className="hover:text-foreground transition-colors">
+              {m.label}
+            </a>
+          ))}
+        </div>
+        <a
+          href="#cta"
+          className="px-4 py-2 rounded-full bg-foreground text-background text-[13px] font-medium hover:bg-foreground/90 transition-all duration-300 shrink-0"
+        >
+          Get Quote
+        </a>
+      </div>
+    </nav>
+  );
+}

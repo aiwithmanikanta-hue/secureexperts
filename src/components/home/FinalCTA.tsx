@@ -1,0 +1,43 @@
+import { ArrowRight } from "lucide-react";
+import { useReveal } from "./useReveal";
+
+export function FinalCTA() {
+  const r = useReveal();
+  return (
+    <section id="cta" className="relative py-32 px-6">
+      <div ref={r} className="reveal max-w-5xl mx-auto">
+        <div className="relative surface-4 rounded-[40px] border border-border px-8 py-20 sm:p-24 text-center overflow-hidden">
+          <div className="absolute -top-32 left-1/2 -translate-x-1/2 size-[600px] bg-primary/10 rounded-full blur-3xl pointer-events-none" />
+          <div className="absolute inset-0 dot-grid opacity-30 pointer-events-none" />
+          <div className="relative">
+            <div className="inline-flex px-3 py-1 rounded-full bg-background border border-border text-[12px] text-muted-foreground mb-6">
+              Get Started
+            </div>
+            <h2 className="text-4xl md:text-6xl font-semibold leading-[1.05] mb-5 text-balance">
+              Upgrade your security<br className="sm:hidden" />{" "}
+              <span className="text-muted-foreground">with BLTDAS140.</span>
+            </h2>
+            <p className="text-muted-foreground text-lg max-w-xl mx-auto mb-10 leading-relaxed">
+              Take control with a product built for trust, performance, and absolute precision.
+            </p>
+            <div className="flex flex-wrap justify-center gap-3">
+              <a
+                href="#contact"
+                className="group px-6 py-3 rounded-full bg-foreground text-background text-sm font-medium hover:scale-[1.02] transition-transform inline-flex items-center gap-2 shadow-soft"
+              >
+                Contact Secure Experts
+                <ArrowRight className="size-4 group-hover:translate-x-0.5 transition-transform" />
+              </a>
+              <a
+                href="#product"
+                className="px-6 py-3 rounded-full bg-background border border-border text-foreground text-sm font-medium hover:bg-muted transition-colors"
+              >
+                Buy Now
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
