@@ -23,8 +23,8 @@ export function ProductShowcase() {
         </div>
 
         {/* Bento */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          <div ref={tilt} className="tilt-card md:col-span-2 md:row-span-2 surface-1 rounded-3xl border border-border p-8 sm:p-12 relative overflow-hidden group hover:shadow-lift">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:items-start">
+          <div ref={tilt} className="tilt-card md:col-span-2 surface-1 rounded-3xl border border-border p-8 sm:p-12 relative overflow-hidden group hover:shadow-lift">
             <div className="absolute -top-24 -right-24 size-72 rounded-full bg-primary/10 blur-3xl pointer-events-none ambient-blob" />
             <div className="relative aspect-[4/3] rounded-2xl bg-muted overflow-hidden group/img">
               <span
@@ -49,6 +49,7 @@ export function ProductShowcase() {
             </div>
           </div>
 
+          <div className="flex flex-col gap-4">
           {[
             {
               Icon: MapPin,
@@ -76,6 +77,7 @@ export function ProductShowcase() {
               </GlassCard>
             </RevealOnScroll>
           ))}
+          </div>
         </div>
       </div>
     </section>
