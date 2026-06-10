@@ -21,7 +21,7 @@ export function SiteFooter() {
                 <a
                   key={i}
                   href="#"
-                  className="size-9 rounded-full bg-background border border-border grid place-items-center text-muted-foreground hover:text-primary hover:border-primary/30 transition-colors"
+                  className="size-9 rounded-full bg-background border border-border grid place-items-center text-muted-foreground hover:text-primary hover:border-primary/30 hover:-translate-y-0.5 transition-all duration-300"
                 >
                   <Icon className="size-4" strokeWidth={1.75} />
                 </a>

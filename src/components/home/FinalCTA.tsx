@@ -1,5 +1,6 @@
 import { ArrowRight } from "lucide-react";
 import { useReveal } from "./useReveal";
+import { MagneticButton } from "./MagneticButton";
 
 export function FinalCTA() {
   const r = useReveal();
@@ -29,19 +30,13 @@ export function FinalCTA() {
               Take control with a product built for trust, performance, and absolute precision.
             </p>
             <div className="flex flex-wrap justify-center gap-3">
-              <a
-                href="#contact"
-                className="group breathe-glow px-6 py-3 rounded-full bg-foreground text-background text-sm font-medium hover:scale-[1.02] transition-transform inline-flex items-center gap-2"
-              >
+              <MagneticButton href="#contact" variant="primary" glow>
                 Contact Secure Experts
-                <ArrowRight className="size-4 group-hover:translate-x-0.5 transition-transform" />
-              </a>
-              <a
-                href="#product"
-                className="px-6 py-3 rounded-full bg-background border border-border text-foreground text-sm font-medium hover:bg-muted transition-colors"
-              >
+                <ArrowRight className="size-4" />
+              </MagneticButton>
+              <MagneticButton href="#product" variant="secondary">
                 Buy Now
-              </a>
+              </MagneticButton>
             </div>
           </div>
         </div>

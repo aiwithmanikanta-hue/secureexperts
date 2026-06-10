@@ -1,6 +1,8 @@
 import heroImg from "@/assets/bltdas140-hero.jpg";
 import { ArrowRight, Radio, ShieldCheck, Headphones, Satellite, Signal, BatteryFull } from "lucide-react";
 import { useEffect, useRef } from "react";
+import { MagneticButton } from "./MagneticButton";
+import { SignalWaves } from "./SignalWaves";
 
 export function Hero() {
   const stageRef = useRef<HTMLDivElement | null>(null);
@@ -104,19 +106,13 @@ export function Hero() {
           className="flex flex-wrap justify-center gap-3 mb-20"
           style={{ animation: "reveal-up 0.9s 0.15s cubic-bezier(0.16,1,0.3,1) both" }}
         >
-          <a
-            href="#product"
-            className="group px-6 py-3 rounded-full bg-foreground text-background text-sm font-medium hover:scale-[1.02] transition-transform inline-flex items-center gap-2 shadow-soft"
-          >
+          <MagneticButton href="#product" variant="primary" glow>
             Explore Product
-            <ArrowRight className="size-4 group-hover:translate-x-0.5 transition-transform" />
-          </a>
-          <a
-            href="#contact"
-            className="px-6 py-3 rounded-full bg-card border border-border text-foreground text-sm font-medium hover:bg-muted transition-colors"
-          >
+            <ArrowRight className="size-4" />
+          </MagneticButton>
+          <MagneticButton href="#contact" variant="secondary">
             Contact Sales
-          </a>
+          </MagneticButton>
         </div>
 
         {/* Floating product showcase with cursor parallax + info cards */}
@@ -126,6 +122,9 @@ export function Hero() {
           style={{ animation: "reveal-up 1s 0.2s cubic-bezier(0.16,1,0.3,1) both" }}
         >
           <div className="absolute -inset-12 rounded-[40px] bg-primary/10 blur-3xl pointer-events-none ambient-blob" />
+
+          {/* GPS signal waves */}
+          <SignalWaves />
 
           {/* Connection lines SVG */}
           <svg

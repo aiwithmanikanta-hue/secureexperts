@@ -2,6 +2,9 @@ import showcaseImg from "@/assets/bltdas140-showcase.jpg";
 import { useReveal } from "./useReveal";
 import { useTilt } from "./useTilt";
 import { MapPin, Layers, Lock } from "lucide-react";
+import { GlassCard } from "./GlassCard";
+import { ParallaxImage } from "./ParallaxImage";
+import { RevealOnScroll } from "./RevealOnScroll";
 
 export function ProductShowcase() {
   const r1 = useReveal();
@@ -23,17 +26,16 @@ export function ProductShowcase() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           <div ref={tilt} className="tilt-card md:col-span-2 md:row-span-2 surface-1 rounded-3xl border border-border p-8 sm:p-12 relative overflow-hidden group hover:shadow-lift">
             <div className="absolute -top-24 -right-24 size-72 rounded-full bg-primary/10 blur-3xl pointer-events-none ambient-blob" />
-            <div className="relative aspect-[4/3] rounded-2xl overflow-hidden bg-muted">
-              <img
-                src={showcaseImg}
-                alt="BLTDAS140 detail"
-                width={1280}
-                height={1024}
-                loading="lazy"
-                className="w-full h-full object-cover scale-100 group-hover:scale-[1.02] transition-transform duration-1000"
-              />
-            </div>
-            <div className="mt-8">
+            <ParallaxImage
+              src={showcaseImg}
+              alt="BLTDAS140 detail"
+              width={1280}
+              height={1024}
+              loading="lazy"
+              wrapperClassName="relative aspect-[4/3] rounded-2xl bg-muted"
+              className="w-full h-full object-cover"
+            />
+            <div className="relative mt-8">
               <p className="text-[12px] text-muted-foreground mb-2">BLTDAS140</p>
               <h3 className="text-2xl md:text-3xl font-semibold leading-tight max-w-md">
                 Precision tracking, engineered for everyday confidence.
@@ -57,17 +59,16 @@ export function ProductShowcase() {
               t: "Secure",
               d: "AES-256 encrypted telemetry, hardware key isolation.",
             },
-          ].map((c) => (
-            <div
-              key={c.t}
-              className="surface-1 rounded-3xl border border-border p-8 hover:shadow-lift hover:-translate-y-0.5 transition-all duration-300 group"
-            >
-              <div className="size-10 rounded-xl bg-tint-blue grid place-items-center mb-5 group-hover:scale-110 transition-transform">
-                <c.Icon className="size-5 text-primary" strokeWidth={2} />
-              </div>
-              <h3 className="text-lg font-semibold mb-2">{c.t}</h3>
-              <p className="text-sm text-muted-foreground leading-relaxed">{c.d}</p>
-            </div>
+          ].map((c, i) => (
+            <RevealOnScroll key={c.t} delay={i * 90}>
+              <GlassCard tiltMax={5}>
+                <div className="size-10 rounded-xl bg-tint-blue grid place-items-center mb-5 transition-transform duration-500 group-hover:scale-110 group-hover:-rotate-3">
+                  <c.Icon className="size-5 text-primary" strokeWidth={2} />
+                </div>
+                <h3 className="text-lg font-semibold mb-2">{c.t}</h3>
+                <p className="text-sm text-muted-foreground leading-relaxed">{c.d}</p>
+              </GlassCard>
+            </RevealOnScroll>
           ))}
         </div>
       </div>

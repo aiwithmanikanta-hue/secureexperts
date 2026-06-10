@@ -1,5 +1,7 @@
 import { ShieldCheck, Users, Lock, Headphones } from "lucide-react";
 import { useReveal } from "./useReveal";
+import { GlassCard } from "./GlassCard";
+import { RevealOnScroll } from "./RevealOnScroll";
 
 const reviews = [
   {
@@ -41,34 +43,32 @@ export function Trust() {
         </div>
 
         <div className="grid md:grid-cols-3 gap-4 mb-12">
-          {reviews.map((rv) => (
-            <figure
-              key={rv.a}
-              className="bg-background rounded-3xl border border-border p-8 hover:shadow-lift transition-all duration-300"
-            >
-              <blockquote className="text-base text-foreground leading-relaxed mb-8">
-                “{rv.q}”
-              </blockquote>
-              <figcaption className="flex items-center gap-3 pt-5 border-t border-border">
-                <div className="size-10 rounded-full bg-gradient-to-br from-muted to-secondary border border-border" />
-                <div>
-                  <div className="text-sm font-medium text-foreground">{rv.a}</div>
-                  <div className="text-xs text-muted-foreground">{rv.r}</div>
-                </div>
-              </figcaption>
-            </figure>
+          {reviews.map((rv, i) => (
+            <RevealOnScroll key={rv.a} delay={i * 110}>
+              <GlassCard tiltMax={4} className="!p-8">
+                <blockquote className="text-base text-foreground leading-relaxed mb-8">
+                  &ldquo;{rv.q}&rdquo;
+                </blockquote>
+                <figcaption className="flex items-center gap-3 pt-5 border-t border-border">
+                  <div className="size-10 rounded-full bg-gradient-to-br from-muted to-secondary border border-border" />
+                  <div>
+                    <div className="text-sm font-medium text-foreground">{rv.a}</div>
+                    <div className="text-xs text-muted-foreground">{rv.r}</div>
+                  </div>
+                </figcaption>
+              </GlassCard>
+            </RevealOnScroll>
           ))}
         </div>
 
         <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-          {badges.map((b) => (
-            <div
-              key={b.t}
-              className="bg-background rounded-2xl border border-border p-5 flex items-center gap-3"
-            >
-              <b.Icon className="size-4 text-primary shrink-0" strokeWidth={2} />
-              <span className="text-sm font-medium">{b.t}</span>
-            </div>
+          {badges.map((b, i) => (
+            <RevealOnScroll key={b.t} delay={i * 70}>
+              <div className="bg-background rounded-2xl border border-border p-5 flex items-center gap-3 transition-all duration-300 hover:scale-[1.03] hover:shadow-soft hover:border-primary/30">
+                <b.Icon className="size-4 text-primary shrink-0" strokeWidth={2} />
+                <span className="text-sm font-medium">{b.t}</span>
+              </div>
+            </RevealOnScroll>
           ))}
         </div>
       </div>
