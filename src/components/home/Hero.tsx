@@ -3,6 +3,7 @@ import { ArrowRight, Radio, ShieldCheck, Headphones, Satellite, Signal, BatteryF
 import { useEffect, useRef } from "react";
 import { MagneticButton } from "./MagneticButton";
 import { SignalWaves } from "./SignalWaves";
+import { Typewriter } from "./Typewriter";
 
 export function Hero() {
   const stageRef = useRef<HTMLDivElement | null>(null);
@@ -93,6 +94,20 @@ export function Hero() {
           Advanced GPS Security<br className="hidden sm:block" />{" "}
           <span className="text-muted-foreground">for the Modern World.</span>
         </h1>
+
+        <div
+          className="mb-6 text-lg sm:text-xl md:text-2xl font-medium text-foreground/90 min-h-[1.6em]"
+          style={{ animation: "reveal-up 0.9s 0.08s cubic-bezier(0.16,1,0.3,1) both" }}
+        >
+          <Typewriter
+            phrases={[
+              "Advanced GPS Tracking.",
+              "Intelligent Fleet Monitoring.",
+              "Fuel Monitoring Solutions.",
+              "Real-Time Vehicle Security.",
+            ]}
+          />
+        </div>
 
         <p
           className="max-w-xl mx-auto text-lg text-muted-foreground leading-relaxed mb-10 text-pretty"

@@ -26,15 +26,21 @@ export function ProductShowcase() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           <div ref={tilt} className="tilt-card md:col-span-2 md:row-span-2 surface-1 rounded-3xl border border-border p-8 sm:p-12 relative overflow-hidden group hover:shadow-lift">
             <div className="absolute -top-24 -right-24 size-72 rounded-full bg-primary/10 blur-3xl pointer-events-none ambient-blob" />
-            <ParallaxImage
-              src={showcaseImg}
-              alt="VLTDAIS140 detail"
-              width={1280}
-              height={1024}
-              loading="lazy"
-              wrapperClassName="relative aspect-[4/3] rounded-2xl bg-muted"
-              className="w-full h-full object-cover"
-            />
+            <div className="relative aspect-[4/3] rounded-2xl bg-muted overflow-hidden group/img">
+              <span
+                aria-hidden
+                className="pointer-events-none absolute inset-y-0 -left-1/2 w-1/2 z-10 bg-gradient-to-r from-transparent via-white/40 to-transparent -translate-x-full transition-transform duration-[1100ms] ease-out group-hover/img:translate-x-[300%]"
+              />
+              <ParallaxImage
+                src={showcaseImg}
+                alt="VLTDAIS140 detail"
+                width={1280}
+                height={1024}
+                loading="lazy"
+                wrapperClassName="absolute inset-0"
+                className="w-full h-full object-cover transition-transform duration-[900ms] ease-out group-hover/img:scale-[1.05]"
+              />
+            </div>
             <div className="relative mt-8">
               <p className="text-[12px] text-muted-foreground mb-2">VLTDAIS140</p>
               <h3 className="text-2xl md:text-3xl font-semibold leading-tight max-w-md">
