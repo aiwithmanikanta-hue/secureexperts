@@ -78,14 +78,21 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Lovable App" },
-      { name: "description", content: "Lovable Generated Project" },
+      { title: "Secureexperts" },
+      { name: "description", content: "Advanced tracking technology built to protect, monitor, and optimize your operations.
+Trusted solutions for smarter fleet management and vehicle security." },
       { name: "author", content: "Lovable" },
-      { property: "og:title", content: "Lovable App" },
-      { property: "og:description", content: "Lovable Generated Project" },
+      { property: "og:title", content: "Secureexperts" },
+      { property: "og:description", content: "Advanced tracking technology built to protect, monitor, and optimize your operations.
+Trusted solutions for smarter fleet management and vehicle security." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
       { name: "twitter:site", content: "@Lovable" },
+      { name: "twitter:title", content: "Secureexperts" },
+      { name: "twitter:description", content: "Advanced tracking technology built to protect, monitor, and optimize your operations.
+Trusted solutions for smarter fleet management and vehicle security." },
+      { property: "og:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/bdqG3y9EaJXX4S6TrCqSzG7CqwQ2/social-images/social-1781111125647-WhatsApp_Image_2026-06-09_at_11.19.40_AM.webp" },
+      { name: "twitter:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/bdqG3y9EaJXX4S6TrCqSzG7CqwQ2/social-images/social-1781111125647-WhatsApp_Image_2026-06-09_at_11.19.40_AM.webp" },
     ],
     links: [
       {
