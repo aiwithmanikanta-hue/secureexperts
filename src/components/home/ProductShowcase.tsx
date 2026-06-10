@@ -1,9 +1,11 @@
 import showcaseImg from "@/assets/bltdas140-showcase.jpg";
 import { useReveal } from "./useReveal";
+import { useTilt } from "./useTilt";
 import { MapPin, Layers, Lock } from "lucide-react";
 
 export function ProductShowcase() {
   const r1 = useReveal();
+  const tilt = useTilt<HTMLDivElement>(4);
   return (
     <section id="product" className="relative py-32 px-6">
       <div ref={r1} className="reveal max-w-6xl mx-auto">
@@ -19,8 +21,8 @@ export function ProductShowcase() {
 
         {/* Bento */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          <div className="md:col-span-2 md:row-span-2 surface-1 rounded-3xl border border-border p-8 sm:p-12 relative overflow-hidden group hover:shadow-lift transition-all duration-500">
-            <div className="absolute -top-24 -right-24 size-72 rounded-full bg-primary/8 blur-3xl pointer-events-none" />
+          <div ref={tilt} className="tilt-card md:col-span-2 md:row-span-2 surface-1 rounded-3xl border border-border p-8 sm:p-12 relative overflow-hidden group hover:shadow-lift">
+            <div className="absolute -top-24 -right-24 size-72 rounded-full bg-primary/10 blur-3xl pointer-events-none ambient-blob" />
             <div className="relative aspect-[4/3] rounded-2xl overflow-hidden bg-muted">
               <img
                 src={showcaseImg}
