@@ -10,17 +10,6 @@ import { FinalCTA } from "./FinalCTA";
 import { SiteFooter } from "./SiteFooter";
 import { AmbientBackground } from "./AmbientBackground";
 import { IntroOverlay } from "./IntroOverlay";
-import { LiveTrackingDemo } from "./LiveTrackingDemo";
-import { MonitoringDashboard } from "./MonitoringDashboard";
-import { Comparison } from "./Comparison";
-import { Industries } from "./Industries";
-import { LaunchVideo } from "./LaunchVideo";
-import { Metrics } from "./Metrics";
-import { Pricing } from "./Pricing";
-import { TrustedBy } from "./TrustedBy";
-import { BeforeAfter } from "./BeforeAfter";
-import { LeadGen } from "./LeadGen";
-import { AIAssistant } from "./AIAssistant";
 
 export function Home() {
   return (
@@ -36,20 +25,9 @@ export function Home() {
         <WhyUs />
         <Specs />
         <Trust />
-        <LiveTrackingDemo />
-        <MonitoringDashboard />
-        <Comparison />
-        <Industries />
-        <LaunchVideo />
-        <Metrics />
-        <Pricing />
-        <TrustedBy />
-        <BeforeAfter />
-        <LeadGen />
         <FinalCTA />
       </main>
       <SiteFooter />
-      <AIAssistant />
     </div>
   );
 }
