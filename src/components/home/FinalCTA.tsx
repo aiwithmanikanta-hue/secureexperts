@@ -24,7 +24,7 @@ export function FinalCTA() {
             </div>
             <h2 className="text-4xl md:text-6xl font-semibold leading-[1.05] mb-5 text-balance">
               Upgrade your security<br className="sm:hidden" />{" "}
-              <span className="text-muted-foreground">with BLTDAS140.</span>
+              <span className="text-muted-foreground">with VLTDAIS140.</span>
             </h2>
             <p className="text-muted-foreground text-lg max-w-xl mx-auto mb-10 leading-relaxed">
               Take control with a product built for trust, performance, and absolute precision.

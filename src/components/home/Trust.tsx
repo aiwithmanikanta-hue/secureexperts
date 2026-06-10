@@ -5,7 +5,7 @@ import { RevealOnScroll } from "./RevealOnScroll";
 
 const reviews = [
   {
-    q: "The precision of the BLTDAS140 is unmatched. In our sector, a ten-meter margin is unacceptable.",
+    q: "The precision of the VLTDAIS140 is unmatched. In our sector, a ten-meter margin is unacceptable.",
     a: "Marcus Thorne",
     r: "Director of Logistics, Aerotech",
   },

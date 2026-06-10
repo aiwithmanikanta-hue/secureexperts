@@ -1,4 +1,4 @@
-import heroImg from "@/assets/bltdas140-hero.jpg";
+import heroImg from "@/assets/vltdais140-hero.jpg";
 import { ArrowRight, Radio, ShieldCheck, Headphones, Satellite, Signal, BatteryFull } from "lucide-react";
 import { useEffect, useRef } from "react";
 import { MagneticButton } from "./MagneticButton";
@@ -83,7 +83,7 @@ export function Hero() {
           style={{ animation: "reveal-up 0.8s cubic-bezier(0.16,1,0.3,1) both" }}
         >
           <span className="size-1.5 rounded-full bg-primary" />
-          Introducing the BLTDAS140
+          Introducing the VLTDAIS140
         </div>
 
         <h1
@@ -162,7 +162,7 @@ export function Hero() {
             />
             <img
               src={heroImg}
-              alt="BLTDAS140 GPS tracking device by Secure Experts"
+              alt="VLTDAIS140 GPS tracking device by Secure Experts"
               width={1024}
               height={1024}
               className="relative w-full max-w-md mx-auto aspect-square object-cover rounded-2xl"
