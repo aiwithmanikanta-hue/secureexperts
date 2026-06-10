@@ -13,8 +13,10 @@ function Stat({ v, l, format }: typeof STATS[number]) {
   const { ref, value } = useCountUp(v, 1800);
   return (
     <div className="group relative rounded-2xl border border-border bg-background/70 backdrop-blur-xl p-7 text-center transition-all duration-500 hover:-translate-y-1 hover:shadow-lift hover:border-primary/30">
-      <div ref={ref} className="text-4xl md:text-5xl font-semibold tabular-nums tracking-tight">
+      <div className="text-4xl md:text-5xl font-semibold tabular-nums tracking-tight">
+        <span ref={ref}>
         {format(value)}
+        </span>
       </div>
       <div className="mt-2 text-sm text-muted-foreground">{l}</div>
       <span aria-hidden className="pointer-events-none absolute inset-x-6 top-0 h-px bg-gradient-to-r from-transparent via-primary/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
