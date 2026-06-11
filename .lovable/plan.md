@@ -1,58 +1,66 @@
-# Floating Action Buttons — WhatsApp + AI Chatbot
+# Products Page + Detail Pages
 
-The site already has a Chatbot with a floating launcher (bottom-right) and a `openWhatsApp()` helper hitting `wa.me/917337433351`. We'll consolidate both buttons into a polished, animated stack that stays visible on every route.
+Build a luxury, light-themed Products section showcasing the three Secure Experts devices, plus an individual detail page per product.
 
-## What gets built
+## Routes (file-based, TanStack Start)
 
-1. **New `FloatingActions` component** (`src/components/chatbot/FloatingActions.tsx`) — owns both FABs and renders them in a fixed bottom-right stack.
-2. **AI Chatbot FAB** (top of stack)
-   - Robot icon (lucide `Bot`), white + soft-blue glassmorphism, primary glow.
-   - Idle: gentle float + breathing pulse + soft notification ping dot.
-   - Hover: scale 1.08, glow ring expands, icon does a tiny wave (rotate keyframes).
-   - Tooltip on hover: "Ask our AI Assistant".
-   - Click: opens the existing Chatbot panel (lift `open` state into `FloatingActions` and pass it to `Chatbot`).
-   - Every 15s: pop-in speech bubble cycling through ["Click Me!", "Ask Me Anything!", "Need Product Details?", "Want Pricing?", "Download Brochure"], auto-hides after 4s. Pauses while chatbot is open or tab hidden.
-3. **WhatsApp FAB** (below chatbot button, 20px gap)
-   - Official WhatsApp SVG glyph in a green (#25D366) circular button, glass ring, soft shadow + green glow.
-   - Idle: floating + breathing pulse.
-   - Hover: scale 1.08, shadow/glow expansion, tooltip "Chat on WhatsApp".
-   - Click: `openWhatsApp("Hi Secure Experts, I'd like to know more about your GPS tracking solutions.")` + ripple animation.
-4. **Chatbot refactor** (`src/components/chatbot/Chatbot.tsx`)
-   - Remove the internal launcher button (lines ~205-218).
-   - Accept `open` / `onOpenChange` props; keep panel open/close animation but driven from outside.
-   - Panel entry: scale-in + blur expansion (already mostly there; tune duration/easing).
-5. **Mount in `__root.tsx`** — replace the existing `<Chatbot />` with `<FloatingActions />` which internally renders both FABs and the Chatbot panel.
-6. **Animations in `src/styles.css`** — add `@keyframes` for `float-soft`, `breathe-glow-green`, `wave`, `bubble-pop`, `ripple`; expose as `@utility` classes so we can apply them via className without bespoke `<style>` blocks.
-
-## Layout
-
-```text
-              ┌──────────────────────┐
-              │  speech bubble (15s) │ ← pops in to the left of bot FAB
-              └─────────┬────────────┘
-                        │
-                    ╭───┴───╮
-                    │  🤖   │  ← AI chatbot FAB (top)
-                    ╰───────╯
-                      20px
-                    ╭───────╮
-                    │  ✆   │  ← WhatsApp FAB (bottom)
-                    ╰───────╯
+```
+src/routes/products.tsx                          -> /products (listing + hero)
+src/routes/products.vltd-4g-device.tsx           -> /products/vltd-4g-device
+src/routes/products.vltd-2g-device.tsx           -> /products/vltd-2g-device
+src/routes/products.v5-basic-gps-device.tsx      -> /products/v5-basic-gps-device
 ```
 
-Both FABs sit at `fixed bottom-6 right-6 z-50` inside a vertical flex stack.
+Each route gets its own `head()` with distinct title / description / og tags. Reuse the existing `Nav`, `SiteFooter`, `AmbientBackground`, and `FloatingActions` (WhatsApp + chatbot) for consistent shell.
 
-## Technical notes
+Add "Products" link to the existing `Nav` menu pointing to `/products` (replacing the current `#product` anchor on the home page).
 
-- All colors come from existing tokens; the WhatsApp green is added as `--color-whatsapp: oklch(...)` in `src/styles.css` so we can use `bg-whatsapp` / `ring-whatsapp`.
-- Speech-bubble timer uses `setInterval(15000)` + `setTimeout(4000)` to hide, cleared on unmount, paused when `open` is true.
-- Tooltips are inline (no Radix dep) — small absolutely-positioned `<span>` revealed on `group-hover`.
-- Accessibility: each FAB has `aria-label`, `title`, and visible focus ring; speech bubble is `aria-hidden` (decorative).
-- No new dependencies; uses existing `lucide-react` (`Bot`, `X`) and inline SVG for the WhatsApp glyph.
+## Shared data + helpers
 
-## Files touched
+`src/components/products/catalog.ts` — single source of truth:
+- `slug`, `name`, `tagline`, `badge` ("Recommended" | "Value Choice" | "Starter"), `summary`, `highlights[]`, `overview` (2–3 paragraphs), `features[{icon,title,desc}]` (6), `specs[{label,value}]`, `useCases[]`, `faqs[{q,a}]`, `image` (asset).
+- `buildProductWhatsAppMessage(name)` → "Hello Secure Experts, I am interested in {name}. Please share details, pricing, and demo information." Uses existing `openWhatsApp` from `src/components/chatbot/whatsapp.ts`.
 
-- add: `src/components/chatbot/FloatingActions.tsx`
-- edit: `src/components/chatbot/Chatbot.tsx` (controlled open state, remove inline launcher)
-- edit: `src/routes/__root.tsx` (swap `Chatbot` → `FloatingActions`)
-- edit: `src/styles.css` (keyframes + utilities + whatsapp color token)
+Product images: generate 3 premium product renders (light background, soft shadow) via image generation and store as CDN assets:
+- `src/assets/product-vltd-4g.png.asset.json`
+- `src/assets/product-vltd-2g.png.asset.json`
+- `src/assets/product-v5-basic.png.asset.json`
+
+## Components
+
+`src/components/products/`
+- `ProductsHero.tsx` — typing-animation headline (reuses existing `Typewriter`), subheadline, 2-line brand statement, "Talk on WhatsApp" + "Request Demo" CTAs, soft animated blur background.
+- `ProductGrid.tsx` — responsive 3-column grid (1-col mobile, 2-col md, 3-col lg). Flagship (VLTD 4G) spans wider on lg via grid layout.
+- `ProductCard.tsx` — image with light sweep, badge pill, name, short description, 4 highlights (check icons), "View Details" link (uses `<Link to>`), WhatsApp quick-action button. Uses existing `GlassCard` + `useTilt` for subtle 3D tilt + hover lift + border glow.
+- `ProductDetailHero.tsx` — name, floating product image, summary, WhatsApp + Request Demo buttons.
+- `ProductOverview.tsx` — paragraphs + benefit cards.
+- `ProductFeatures.tsx` — 6 feature cards w/ lucide icons, hover lift.
+- `ProductSpecs.tsx` — clean two-column spec list in glass cards.
+- `ProductUseCases.tsx` — chip/card grid of vehicle/customer types.
+- `ProductComparison.tsx` — table comparing all 3 products on key dimensions, highlighting the current product's column.
+- `ProductFAQ.tsx` — accordion (shadcn `accordion` already in project) covering install / tracking / WhatsApp / warranty / usage.
+- `ProductCTA.tsx` — final band with WhatsApp + Get Quote + Book Demo buttons.
+
+Each detail route composes: `Nav` → `ProductDetailHero` → `ProductOverview` → `ProductFeatures` → `ProductSpecs` → `ProductUseCases` → `ProductComparison` → `ProductFAQ` → `ProductCTA` → `SiteFooter`. Reuses `RevealOnScroll`, `MagneticButton`, `ParallaxImage`, `useCountUp`, existing animation utilities.
+
+## Visual system
+
+- Background: `bg-background` (existing off-white token), generous spacing, rounded-3xl cards, soft shadows via existing `shadow-lift`.
+- Accent: existing primary blue tokens. No new color tokens needed.
+- WhatsApp buttons: emerald (matches existing `FloatingActions` styling).
+- Typography: existing Inter stack. Large display headings, tracking-tight.
+- All section reveals via `RevealOnScroll`; card tilt via `useTilt`; light sweep via existing pattern in `GlassCard` / `ParallaxImage`.
+
+## WhatsApp integration
+
+Every CTA labeled "WhatsApp" or "Talk on WhatsApp" calls `openWhatsApp(buildProductWhatsAppMessage(product.name))`. The fixed bottom-right floating WhatsApp button remains via existing `FloatingActions` in `__root.tsx`.
+
+## Nav update
+
+`src/components/home/Nav.tsx`: change the "Products" entry from `#product` (in-page anchor) to a real `<Link to="/products">`. Keep other entries as-is (they're home-page anchors). On non-home routes, anchor links route back to `/#section`.
+
+## Out of scope
+
+- No backend changes; no new tables.
+- No changes to existing home sections beyond the nav link.
+- No dark theme variant — light theme only as specified.
