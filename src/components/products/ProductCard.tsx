@@ -1,4 +1,4 @@
-import { Link } from "@tanstack/react-router";
+import { Link } from "react-router-dom";
 import { Check, ArrowRight } from "lucide-react";
 import { useTilt } from "@/components/home/useTilt";
 import { WhatsAppButton } from "./WhatsAppButton";
@@ -29,8 +29,7 @@ export function ProductCard({ product, featured }: { product: Product; featured?
 
       {/* Image */}
       <Link
-        to="/products/$slug"
-        params={{ slug: product.slug }}
+        to={`/products/${product.slug}`}
         className="relative block aspect-[4/3] overflow-hidden"
       >
         {/* soft ambient glow behind product */}
@@ -81,8 +80,7 @@ export function ProductCard({ product, featured }: { product: Product; featured?
 
         <div className="mt-7 flex flex-wrap items-center gap-3 pt-1">
           <Link
-            to="/products/$slug"
-            params={{ slug: product.slug }}
+            to={`/products/${product.slug}`}
             className="group/btn inline-flex h-11 items-center gap-1.5 rounded-full bg-foreground px-5 text-sm font-medium text-background shadow-soft transition-all duration-300 hover:scale-[1.03] hover:shadow-lift"
           >
             View Details
