@@ -1,6 +1,7 @@
 import { ArrowRight } from "lucide-react";
 import { useReveal } from "./useReveal";
 import { MagneticButton } from "./MagneticButton";
+import { WhatsAppButton } from "@/components/products/WhatsAppButton";
 
 export function FinalCTA() {
   const r = useReveal();
@@ -34,8 +35,11 @@ export function FinalCTA() {
                 Contact Secure Experts
                 <ArrowRight className="size-4" />
               </MagneticButton>
-              <MagneticButton href="#product" variant="secondary">
-                Buy Now
+              <WhatsAppButton productName="Secure Experts GPS Solutions" size="lg">
+                Chat on WhatsApp
+              </WhatsAppButton>
+              <MagneticButton href="/products" variant="secondary">
+                View Products
               </MagneticButton>
             </div>
           </div>
