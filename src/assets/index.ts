@@ -1,9 +1,10 @@
-import logo from "./logo/secure-experts-logo.png";
-import vltd4g from "./products/product-vltd-4g.png";
-import vltd2g from "./products/product-vltd-2g.png";
-import v5Basic from "./products/product-v5-basic.png";
-import whatsappIcon from "./icons/whatsapp-icon.png";
-import heroDevice from "./backgrounds/vltdais140-hero.png";
-import showcaseDevice from "./gallery/vltdais140-showcase.png";
-
-export { logo, vltd4g, vltd2g, v5Basic, whatsappIcon, heroDevice, showcaseDevice };
+// All media is served from /public/assets so the exported project is fully
+// portable: works on localhost, Vercel, Netlify, and any static host with no
+// dependency on Lovable CDN or external storage.
+export const logo = "/assets/logo/secure-experts-logo.png";
+export const vltd4g = "/assets/products/product-vltd-4g.png";
+export const vltd2g = "/assets/products/product-vltd-2g.png";
+export const v5Basic = "/assets/products/product-v5-basic.png";
+export const whatsappIcon = "/assets/icons/whatsapp-icon.png";
+export const heroDevice = "/assets/backgrounds/vltdais140-hero.png";
+export const showcaseDevice = "/assets/gallery/vltdais140-showcase.png";
