@@ -1,5 +1,4 @@
 import { useEffect, useRef, useState, type FormEvent, type ReactNode } from "react";
-import { useServerFn } from "@tanstack/react-start";
 import {
   X,
   Send,
@@ -17,7 +16,6 @@ import {
   Zap,
 } from "lucide-react";
 import { heroDevice as productImg, logo as logoUrl } from "@/assets";
-import { submitLead } from "@/lib/leads.functions";
 import { buildLeadMessage, openWhatsApp } from "./whatsapp";
 import { answerFaq } from "./FaqEngine";
 
@@ -50,7 +48,6 @@ export function Chatbot({
   const [flow, setFlow] = useState<Flow>({ kind: "idle" });
   const scrollRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
-  const submitLeadFn = useServerFn(submitLead);
 
   // greet on first open
   useEffect(() => {
@@ -162,19 +159,6 @@ export function Chatbot({
       } else {
         setFlow({ kind: "idle" });
         setTyping(true);
-        try {
-          await submitLeadFn({
-            data: {
-              name: next.name,
-              phone: next.phone,
-              city: next.city,
-              requirement: isDemo ? "Demo request" : next.requirement || "Pricing enquiry",
-              source: isDemo ? "chatbot-demo" : "chatbot-pricing",
-            },
-          });
-        } catch (err) {
-          console.error(err);
-        }
         setTyping(false);
         pushBot(
           <div className="space-y-2">

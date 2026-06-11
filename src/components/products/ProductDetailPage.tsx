@@ -1,4 +1,4 @@
-import { Link } from "@tanstack/react-router";
+import { Link } from "react-router-dom";
 import {
   Satellite,
   Signal,
@@ -239,8 +239,7 @@ export function ProductDetailPage({ product }: { product: Product }) {
                         >
                           <td className="p-5 align-top">
                             <Link
-                              to="/products/$slug"
-                              params={{ slug: p.slug }}
+                              to={`/products/${p.slug}`}
                               className="font-semibold text-foreground hover:text-primary transition-colors"
                             >
                               {p.name}
