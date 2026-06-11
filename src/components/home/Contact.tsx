@@ -12,8 +12,8 @@ const PRODUCTS = [
   "Custom Requirement",
 ];
 
-const OFFICE_QUERY = encodeURIComponent("Hyderabad, Telangana, India");
-const MAP_EMBED = `https://www.google.com/maps?q=${OFFICE_QUERY}&output=embed`;
+const OFFICE_QUERY = encodeURIComponent("GJWW+GJ5 Payakapuram, Andhra Pradesh, India");
+const MAP_EMBED = `https://www.google.com/maps?q=${OFFICE_QUERY}&output=embed&z=16`;
 const MAP_DIRECTIONS = `https://www.google.com/maps/dir/?api=1&destination=${OFFICE_QUERY}`;
 const PHONE_PRIMARY = "+917337433351";
 
@@ -253,7 +253,7 @@ export function Contact() {
 
               <div className="mt-7 space-y-5">
                 <InfoRow icon={<MapPin className="size-4" />} label="Office">
-                  Hyderabad, Telangana, India
+                  GJWW+GJ5 Payakapuram,<br />Andhra Pradesh, India
                 </InfoRow>
                 <InfoRow icon={<Phone className="size-4" />} label="Phone">
                   <a href="tel:+917337433351" className="hover:text-primary transition-colors">
@@ -306,15 +306,16 @@ export function Contact() {
               <iframe
                 title="Secure Experts office location"
                 src={MAP_EMBED}
-                className="w-full h-[260px] rounded-2xl border-0"
+                className="w-full h-[320px] rounded-2xl border-0"
                 loading="lazy"
+                allowFullScreen
                 referrerPolicy="no-referrer-when-downgrade"
               />
               <a
                 href={MAP_DIRECTIONS}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="mt-3 mb-1 mx-1 inline-flex items-center gap-2 text-sm font-medium text-primary hover:gap-3 transition-all duration-300"
+                className="mt-3 mb-1 mx-1 inline-flex items-center gap-2 h-11 px-5 rounded-2xl bg-primary text-primary-foreground text-sm font-medium shadow-[0_10px_24px_-10px_rgba(10,132,255,0.55)] transition-all duration-300 hover:scale-[1.02] hover:shadow-[0_14px_30px_-10px_rgba(10,132,255,0.7)]"
               >
                 <Navigation className="size-4" />
                 Get Directions
