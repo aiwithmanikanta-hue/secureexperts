@@ -34,7 +34,7 @@ export function ProductShowcase() {
               />
               <ParallaxImage
                 src={showcaseImg}
-                alt="VLTDAIS140 detail"
+                alt="Detailed view of the VLTDAIS140 tracking device chassis"
                 width={1280}
                 height={1024}
                 loading="lazy"
