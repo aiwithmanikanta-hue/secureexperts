@@ -1,4 +1,4 @@
-import vltd4gAsset from "@/assets/product-vltd-4g.jpg.asset.json";
+import vltd4gAsset from "@/assets/product-vltd-4g.png.asset.json";
 import vltd2gAsset from "@/assets/product-vltd-2g.jpg.asset.json";
 import v5BasicImg from "@/assets/product-v5-basic.jpg";
 import { openWhatsApp } from "@/components/chatbot/whatsapp";
