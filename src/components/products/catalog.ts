@@ -1,5 +1,5 @@
 import vltd4gAsset from "@/assets/product-vltd-4g.jpg.asset.json";
-import vltd2gImg from "@/assets/product-vltd-2g.jpg";
+import vltd2gAsset from "@/assets/product-vltd-2g.jpg.asset.json";
 import v5BasicImg from "@/assets/product-v5-basic.jpg";
 import { openWhatsApp } from "@/components/chatbot/whatsapp";
 
@@ -86,7 +86,7 @@ export const PRODUCTS: Product[] = [
     badgeTone: "emerald",
     summary:
       "A reliable, budget-friendly VLTD for essential real-time tracking, geofencing, and trip history — purpose-built for operators who want dependable visibility without the flagship price.",
-    image: vltd2gImg,
+    image: vltd2gAsset.url,
     highlights: [
       "Real-time location tracking",
       "Stable 2G connectivity",
