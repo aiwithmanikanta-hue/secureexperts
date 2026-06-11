@@ -18,10 +18,16 @@ export function SiteFooter() {
               high-value personal protection.
             </p>
             <div className="flex gap-2 mt-6">
-              {[Linkedin, Twitter, Instagram, Mail].map((Icon, i) => (
+              {([
+                { Icon: Linkedin, href: "#", label: "LinkedIn" },
+                { Icon: Twitter, href: "#", label: "Twitter" },
+                { Icon: Instagram, href: "#", label: "Instagram" },
+                { Icon: Mail, href: "mailto:info@secureexperts.in", label: "Email Secure Experts" },
+              ]).map(({ Icon, href, label }) => (
                 <a
-                  key={i}
-                  href="#"
+                  key={label}
+                  href={href}
+                  aria-label={label}
                   className="size-9 rounded-full bg-background border border-border grid place-items-center text-muted-foreground hover:text-primary hover:border-primary/30 hover:-translate-y-0.5 transition-all duration-300"
                 >
                   <Icon className="size-4" strokeWidth={1.75} />
@@ -48,7 +54,7 @@ export function SiteFooter() {
           <div>
             <h4 className="text-sm font-medium mb-5 text-foreground">Contact</h4>
             <ul className="space-y-3 text-sm text-muted-foreground">
-              <li>support@secureexperts.com</li>
+              <li><a href="mailto:info@secureexperts.in" className="hover:text-foreground transition-colors">info@secureexperts.in</a></li>
               <li>+1 (800) 555-0140</li>
               <li>London · Singapore · Dubai</li>
             </ul>
