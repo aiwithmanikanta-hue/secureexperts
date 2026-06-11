@@ -81,10 +81,13 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { name: "viewport", content: "width=device-width, initial-scale=1" },
       { title: "Secure Experts — Securing Every Mile" },
       { name: "description", content: "Premium GPS tracking and vehicle security solutions for fleets, vehicles, and high-value assets." },
+      { name: "keywords", content: "GPS tracking, AIS 140, vehicle tracking, fleet tracking, fuel monitoring, VLTD, VLTDAIS140, Secure Experts" },
+      { name: "theme-color", content: "#0a84ff" },
       { name: "author", content: "Secure Experts" },
       { property: "og:title", content: "Secure Experts — Securing Every Mile" },
       { property: "og:description", content: "Premium GPS tracking and vehicle security solutions." },
       { property: "og:type", content: "website" },
+      { property: "og:site_name", content: "Secure Experts" },
       { name: "twitter:card", content: "summary" },
       { name: "twitter:title", content: "Secure Experts — Securing Every Mile" },
       { name: "twitter:description", content: "Premium GPS tracking and vehicle security solutions." },
@@ -101,6 +104,27 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       {
         rel: "stylesheet",
         href: "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap",
+      },
+    ],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          name: "Secure Experts",
+          url: "https://secureexperts.lovable.app",
+          logo: "https://secureexperts.lovable.app/favicon.ico",
+          description:
+            "Premium GPS tracking, AIS 140 compliance, and vehicle security solutions for fleets and high-value assets.",
+          contactPoint: {
+            "@type": "ContactPoint",
+            telephone: "+91-73374-33351",
+            email: "info@secureexperts.in",
+            contactType: "customer service",
+            areaServed: "IN",
+          },
+        }),
       },
     ],
   }),
