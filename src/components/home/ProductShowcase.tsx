@@ -1,4 +1,5 @@
-import showcaseImg from "@/assets/vltdais140-showcase.png";
+import showcaseAsset from "@/assets/vltdais140-showcase.png.asset.json";
+const showcaseImg = showcaseAsset.url;
 import { useReveal } from "./useReveal";
 import { useTilt } from "./useTilt";
 import { MapPin, Layers, Lock } from "lucide-react";
