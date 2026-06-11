@@ -1,6 +1,6 @@
 import vltd4gAsset from "@/assets/product-vltd-4g.png.asset.json";
 import vltd2gAsset from "@/assets/product-vltd-2g.jpg.asset.json";
-import v5BasicImg from "@/assets/product-v5-basic.jpg";
+import v5BasicAsset from "@/assets/product-v5-basic.png.asset.json";
 import { openWhatsApp } from "@/components/chatbot/whatsapp";
 
 export type ProductSlug =
@@ -139,7 +139,7 @@ export const PRODUCTS: Product[] = [
     badgeTone: "slate",
     summary:
       "A compact, easy-to-install GPS tracker for everyday vehicle security — perfect for cars, bikes, and personal vehicles that need dependable live tracking without fleet complexity.",
-    image: v5BasicImg,
+    image: v5BasicAsset.url,
     highlights: [
       "Compact, discreet design",
       "Live GPS tracking",
