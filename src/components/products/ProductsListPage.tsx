@@ -41,7 +41,7 @@ export function ProductsListPage() {
 
         {/* Trust bar */}
         <section className="px-6 pb-24">
-          <div className="mx-auto max-w-6xl rounded-3xl border border-border bg-white/70 backdrop-blur-xl p-8 md:p-10 shadow-soft">
+          <div className="mx-auto max-w-6xl rounded-3xl glass-premium p-8 md:p-10">
             <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
               {trust.map(({ icon: Icon, label }) => (
                 <div key={label} className="flex items-center gap-3 text-sm text-foreground/80">
