@@ -1,4 +1,5 @@
-import heroImg from "@/assets/vltdais140-hero.png";
+import heroAsset from "@/assets/vltdais140-hero.png.asset.json";
+const heroImg = heroAsset.url;
 import { ArrowRight, Radio, ShieldCheck, Headphones, Satellite, Signal, BatteryFull } from "lucide-react";
 import { useEffect, useRef } from "react";
 import { MagneticButton } from "./MagneticButton";
