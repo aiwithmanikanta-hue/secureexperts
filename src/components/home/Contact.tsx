@@ -14,7 +14,7 @@ const PRODUCTS = [
 
 const OFFICE_QUERY = encodeURIComponent("GJWW+GJ5 Payakapuram, Andhra Pradesh, India");
 const MAP_EMBED = `https://www.google.com/maps?q=${OFFICE_QUERY}&output=embed&z=16`;
-const MAP_DIRECTIONS = `https://www.google.com/maps/dir/?api=1&destination=${OFFICE_QUERY}`;
+const MAP_DIRECTIONS = "https://maps.app.goo.gl/MoYx6jpsij9tdppz7";
 const PHONE_PRIMARY = "+917337433351";
 
 type FormState = {
@@ -302,20 +302,36 @@ export function Contact() {
               </div>
             </div>
 
-            <div className="relative rounded-[28px] border border-border bg-white/80 backdrop-blur-xl p-3 shadow-[0_20px_60px_-30px_rgba(17,17,17,0.18)] overflow-hidden">
-              <iframe
-                title="Secure Experts office location"
-                src={MAP_EMBED}
-                className="w-full h-[320px] rounded-2xl border-0"
-                loading="lazy"
-                allowFullScreen
-                referrerPolicy="no-referrer-when-downgrade"
-              />
+          </div>
+        </div>
+
+        {/* Full-width Map Section */}
+        <div className="mt-20">
+          <div className="text-center mb-8">
+            <h3 className="text-3xl md:text-4xl font-semibold tracking-tight">Visit Our Office</h3>
+            <p className="mt-3 text-muted-foreground max-w-xl mx-auto">
+              We're here to help. Visit our office or get directions instantly.
+            </p>
+          </div>
+          <div className="group relative rounded-[20px] border border-border bg-white/80 backdrop-blur-xl p-3 shadow-[0_20px_60px_-30px_rgba(17,17,17,0.18)] overflow-hidden transition-all duration-500 hover:-translate-y-1 hover:shadow-[0_30px_80px_-30px_rgba(10,132,255,0.35)]">
+            <iframe
+              title="Secure Experts office location"
+              src={MAP_EMBED}
+              className="w-full h-[300px] md:h-[450px] rounded-[16px] border-0"
+              loading="lazy"
+              allowFullScreen
+              referrerPolicy="no-referrer-when-downgrade"
+            />
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 p-4">
+              <div className="text-sm">
+                <p className="font-semibold text-foreground">Secure Experts Headquarters</p>
+                <p className="text-muted-foreground">GJWW+GJ5 Payakapuram, Andhra Pradesh, India</p>
+              </div>
               <a
                 href={MAP_DIRECTIONS}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="mt-3 mb-1 mx-1 inline-flex items-center gap-2 h-11 px-5 rounded-2xl bg-primary text-primary-foreground text-sm font-medium shadow-[0_10px_24px_-10px_rgba(10,132,255,0.55)] transition-all duration-300 hover:scale-[1.02] hover:shadow-[0_14px_30px_-10px_rgba(10,132,255,0.7)]"
+                className="inline-flex items-center justify-center gap-2 h-12 px-6 rounded-2xl bg-primary text-primary-foreground text-sm font-medium shadow-[0_10px_24px_-10px_rgba(10,132,255,0.55)] transition-all duration-300 hover:scale-[1.03] hover:shadow-[0_18px_36px_-12px_rgba(10,132,255,0.7)]"
               >
                 <Navigation className="size-4" />
                 Get Directions
