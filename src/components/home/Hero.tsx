@@ -4,6 +4,7 @@ import { useEffect, useRef } from "react";
 import { MagneticButton } from "./MagneticButton";
 import { SignalWaves } from "./SignalWaves";
 import { Typewriter } from "./Typewriter";
+import { WhatsAppButton } from "@/components/products/WhatsAppButton";
 
 export function Hero() {
   const stageRef = useRef<HTMLDivElement | null>(null);
@@ -121,10 +122,13 @@ export function Hero() {
           className="flex flex-wrap justify-center gap-3 mb-20"
           style={{ animation: "reveal-up 0.9s 0.15s cubic-bezier(0.16,1,0.3,1) both" }}
         >
-          <MagneticButton href="#product" variant="primary" glow>
-            Explore Product
+          <MagneticButton href="/products" variant="primary" glow>
+            Explore Products
             <ArrowRight className="size-4" />
           </MagneticButton>
+          <WhatsAppButton productName="Secure Experts GPS Solutions" size="lg">
+            Chat on WhatsApp
+          </WhatsAppButton>
           <MagneticButton href="#contact" variant="secondary">
             Contact Sales
           </MagneticButton>
