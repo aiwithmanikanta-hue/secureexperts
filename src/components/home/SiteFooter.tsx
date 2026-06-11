@@ -55,7 +55,7 @@ export function SiteFooter() {
             <h4 className="text-sm font-medium mb-5 text-foreground">Contact</h4>
             <ul className="space-y-3 text-sm text-muted-foreground">
               <li><a href="mailto:info@secureexperts.in" className="hover:text-foreground transition-colors">info@secureexperts.in</a></li>
-              <li>+1 (800) 555-0140</li>
+              <li><a href="tel:+917337433351" className="hover:text-foreground transition-colors">+91 733 743 3351</a></li>
               <li>London · Singapore · Dubai</li>
             </ul>
           </div>
