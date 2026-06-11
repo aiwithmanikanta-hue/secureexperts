@@ -170,9 +170,9 @@ export function Hero() {
             <img
               src={heroImg}
               alt="VLTDAIS140 GPS tracking device by Secure Experts"
-              width={1024}
+              width={1488}
               height={1024}
-              className="relative w-full max-w-md mx-auto aspect-square object-cover rounded-2xl"
+              className="relative w-full max-w-2xl mx-auto h-auto object-contain rounded-2xl"
             />
           </div>
 
