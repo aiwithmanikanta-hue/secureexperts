@@ -85,19 +85,24 @@ export function ProductDetailPage({ product }: { product: Product }) {
             </RevealOnScroll>
 
             <RevealOnScroll delay={150}>
-              <div className="relative aspect-square rounded-[2.5rem] bg-gradient-to-br from-white via-[var(--tint-sky)] to-[var(--tint-blue)] border border-border shadow-lift overflow-hidden">
+              <div className="relative aspect-square overflow-hidden">
+                {/* ambient glow */}
+                <span
+                  aria-hidden
+                  className="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 size-3/4 rounded-full bg-primary/15 blur-3xl"
+                />
                 <img
                   src={product.image}
                   alt={product.name}
                   width={1024}
                   height={1024}
-                  className="absolute inset-0 size-full object-contain p-12"
+                  className="absolute inset-0 size-full object-contain p-12 product-float"
                   style={{ animation: "float-y 6s ease-in-out infinite" }}
                 />
+                {/* floor reflection */}
                 <span
                   aria-hidden
-                  className="pointer-events-none absolute inset-y-0 -left-1/3 w-1/3 bg-gradient-to-r from-transparent via-white/40 to-transparent skew-x-[-15deg]"
-                  style={{ animation: "shimmer 6s ease-in-out infinite" }}
+                  className="pointer-events-none absolute inset-x-16 bottom-8 h-4 rounded-[50%] bg-foreground/20 blur-lg opacity-60"
                 />
               </div>
             </RevealOnScroll>

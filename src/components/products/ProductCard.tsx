@@ -16,8 +16,8 @@ export function ProductCard({ product, featured }: { product: Product; featured?
   return (
     <div
       ref={ref}
-      className={`group tilt-card relative flex flex-col rounded-3xl border border-border bg-white/80 backdrop-blur-xl overflow-hidden transition-[box-shadow,border-color,transform] duration-500 hover:shadow-lift hover:border-primary/30 hover:-translate-y-1 ${
-        featured ? "ring-1 ring-primary/15" : ""
+      className={`group tilt-card glass-premium relative flex flex-col rounded-3xl overflow-hidden hover:-translate-y-1.5 ${
+        featured ? "ring-1 ring-primary/10" : ""
       }`}
     >
       {/* Badge */}
@@ -31,13 +31,23 @@ export function ProductCard({ product, featured }: { product: Product; featured?
       <Link
         to="/products/$slug"
         params={{ slug: product.slug }}
-        className="relative block aspect-[4/3] overflow-hidden bg-gradient-to-br from-white via-[var(--tint-sky)] to-[var(--tint-blue)]"
+        className="relative block aspect-[4/3] overflow-hidden"
       >
+        {/* soft ambient glow behind product */}
+        <span
+          aria-hidden
+          className="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 size-3/4 rounded-full bg-primary/10 blur-3xl"
+        />
         <img
           src={product.image}
           alt={product.name}
           loading="lazy"
-          className="absolute inset-0 size-full object-contain p-8 transition-transform duration-[1100ms] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.06]"
+          className="absolute inset-0 size-full object-contain p-8 product-float transition-transform duration-[1100ms] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.03]"
+        />
+        {/* subtle floor reflection */}
+        <span
+          aria-hidden
+          className="pointer-events-none absolute inset-x-8 bottom-3 h-3 rounded-[50%] bg-foreground/15 blur-md opacity-60"
         />
         {/* light sweep */}
         <span
