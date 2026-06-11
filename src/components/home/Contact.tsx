@@ -12,8 +12,8 @@ const PRODUCTS = [
   "Custom Requirement",
 ];
 
-const OFFICE_QUERY = encodeURIComponent("Hyderabad, Telangana, India");
-const MAP_EMBED = `https://www.google.com/maps?q=${OFFICE_QUERY}&output=embed`;
+const OFFICE_QUERY = encodeURIComponent("GJWW+GJ5 Payakapuram, Andhra Pradesh, India");
+const MAP_EMBED = `https://www.google.com/maps?q=${OFFICE_QUERY}&output=embed&z=16`;
 const MAP_DIRECTIONS = `https://www.google.com/maps/dir/?api=1&destination=${OFFICE_QUERY}`;
 const PHONE_PRIMARY = "+917337433351";
 
