@@ -29,7 +29,7 @@ export const Route = createFileRoute("/")({
           "@context": "https://schema.org",
           "@type": "Product",
           name: "VLTDAIS140",
-          image: `https://secureexperts.lovable.app${heroImg}`,
+          image: heroImg,
           description:
             "AIS 140-compliant intelligent GPS tracking device with real-time tracking, instant alerts, route monitoring, and AES-256 encrypted telemetry for fleets and high-value assets.",
           brand: {

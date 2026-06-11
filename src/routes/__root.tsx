@@ -114,7 +114,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
           "@type": "Organization",
           name: "Secure Experts",
           url: "https://secureexperts.lovable.app",
-          logo: "https://secureexperts.lovable.app/favicon.ico",
+          logo: logoUrl,
           description:
             "Premium GPS tracking, AIS 140 compliance, and vehicle security solutions for fleets and high-value assets.",
           contactPoint: {
