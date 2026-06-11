@@ -16,7 +16,8 @@ import {
   ShieldCheck,
   Zap,
 } from "lucide-react";
-import productImg from "@/assets/vltdais140-hero.png";
+import productAsset from "@/assets/vltdais140-hero.png.asset.json";
+const productImg = productAsset.url;
 import logoAsset from "@/assets/secure-experts-logo.png.asset.json";
 import { submitLead } from "@/lib/leads.functions";
 import { buildLeadMessage, openWhatsApp } from "./whatsapp";
