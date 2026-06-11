@@ -1,4 +1,4 @@
-import vltd4gImg from "@/assets/product-vltd-4g.jpg";
+import vltd4gAsset from "@/assets/product-vltd-4g.jpg.asset.json";
 import vltd2gImg from "@/assets/product-vltd-2g.jpg";
 import v5BasicImg from "@/assets/product-v5-basic.jpg";
 import { openWhatsApp } from "@/components/chatbot/whatsapp";
@@ -33,7 +33,7 @@ export const PRODUCTS: Product[] = [
     badgeTone: "primary",
     summary:
       "Premium flagship VLTD designed for advanced vehicle tracking, compliance-ready monitoring, and uninterrupted live visibility on next-gen 4G networks.",
-    image: vltd4gImg,
+    image: vltd4gAsset.url,
     highlights: [
       "GPS-based real-time tracking",
       "4G connectivity with 2G fallback",
