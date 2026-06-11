@@ -1,6 +1,6 @@
 import heroAsset from "@/assets/vltdais140-hero.png.asset.json";
 const heroImg = heroAsset.url;
-import { ArrowRight, Radio, ShieldCheck, Headphones, Satellite, Signal, BatteryFull } from "lucide-react";
+import { ArrowRight, Radio, ShieldCheck, Headphones } from "lucide-react";
 import { useEffect, useRef } from "react";
 import { MagneticButton } from "./MagneticButton";
 import { SignalWaves } from "./SignalWaves";
@@ -9,9 +9,6 @@ import { Typewriter } from "./Typewriter";
 export function Hero() {
   const stageRef = useRef<HTMLDivElement | null>(null);
   const deviceRef = useRef<HTMLDivElement | null>(null);
-  const cardARef = useRef<HTMLDivElement | null>(null);
-  const cardBRef = useRef<HTMLDivElement | null>(null);
-  const cardCRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     const stage = stageRef.current;
@@ -35,12 +32,6 @@ export function Hero() {
       if (d) {
         d.style.transform = `perspective(1400px) rotateX(${(-my * 5).toFixed(2)}deg) rotateY(${(mx * 6).toFixed(2)}deg) translate3d(${(mx * 8).toFixed(2)}px, ${(my * 8).toFixed(2)}px, 0)`;
       }
-      const a = cardARef.current;
-      if (a) a.style.transform = `translate3d(${(mx * -18).toFixed(2)}px, ${(my * -14).toFixed(2)}px, 0)`;
-      const b = cardBRef.current;
-      if (b) b.style.transform = `translate3d(${(mx * 20).toFixed(2)}px, ${(my * -10).toFixed(2)}px, 0)`;
-      const c = cardCRef.current;
-      if (c) c.style.transform = `translate3d(${(mx * 16).toFixed(2)}px, ${(my * 18).toFixed(2)}px, 0)`;
     };
 
     stage.addEventListener("mousemove", onMove);
