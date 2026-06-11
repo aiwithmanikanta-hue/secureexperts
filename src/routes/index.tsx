@@ -23,6 +23,23 @@ export const Route = createFileRoute("/")({
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:image", content: heroImg },
     ],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "Product",
+          name: "VLTDAIS140",
+          image: `https://secureexperts.lovable.app${heroImg}`,
+          description:
+            "AIS 140-compliant intelligent GPS tracking device with real-time tracking, instant alerts, route monitoring, and AES-256 encrypted telemetry for fleets and high-value assets.",
+          brand: {
+            "@type": "Brand",
+            name: "Secure Experts",
+          },
+        }),
+      },
+    ],
   }),
   component: Home,
 });

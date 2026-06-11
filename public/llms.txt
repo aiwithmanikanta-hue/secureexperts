@@ -1,0 +1,9 @@
+# Secure Experts
+
+> Premium GPS tracking and vehicle security solutions, including the VLTDAIS140 AIS 140-compliant device for fleets, vehicles, and high-value assets.
+
+## Pages
+
+- [Home](/): Overview of Secure Experts and the VLTDAIS140 GPS tracking device.
+- [Products](/products): Catalog of GPS tracking and vehicle security products.
+- [VLTDAIS140](/products/vltdais140): AIS 140-compliant intelligent GPS tracking system with real-time tracking, alerts, and route monitoring.

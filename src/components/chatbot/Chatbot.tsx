@@ -382,7 +382,7 @@ function ProductCard({
   return (
     <div className="space-y-3">
       <div className="overflow-hidden rounded-xl border border-border bg-gradient-to-br from-[var(--tint-sky)] to-white">
-        <img src={productImg} alt="VLTDAIS140" className="mx-auto h-32 w-auto object-contain" />
+        <img src={productImg} alt="VLTDAIS140 intelligent GPS tracking system" className="mx-auto h-32 w-auto object-contain" />
       </div>
       <div>
         <p className="text-[11px] uppercase tracking-wider text-muted-foreground">VLTDAIS140</p>
@@ -425,11 +425,11 @@ function BrochureCard({ download = false }: { download?: boolean }) {
     <div className="space-y-3">
       <div className="grid grid-cols-2 gap-2">
         <div className="aspect-[3/4] overflow-hidden rounded-lg border border-border bg-gradient-to-br from-[var(--tint-blue)] to-white p-3">
-          <img src={productImg} alt="Flyer" className="h-full w-full object-contain" />
+          <img src={productImg} alt="VLTDAIS140 product brochure preview" className="h-full w-full object-contain" />
         </div>
         <div className="space-y-2">
           <div className="aspect-square overflow-hidden rounded-lg border border-border bg-gradient-to-br from-white to-[var(--tint-sky)] p-2">
-            <img src={productImg} alt="Gallery" className="h-full w-full object-contain" />
+            <img src={productImg} alt="VLTDAIS140 product gallery image" className="h-full w-full object-contain" />
           </div>
           <div className="rounded-lg border border-border bg-white p-2 text-[11px] leading-snug">
             <p className="font-semibold text-foreground">Specs</p>
