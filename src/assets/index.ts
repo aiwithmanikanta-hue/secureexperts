@@ -1,15 +1,9 @@
-import logoAsset from "./logo/secure-experts-logo.png.asset.json";
-import vltd4gAsset from "./products/product-vltd-4g.png.asset.json";
-import vltd2gAsset from "./products/product-vltd-2g.png.asset.json";
-import v5BasicAsset from "./products/product-v5-basic.png.asset.json";
-import whatsappIconAsset from "./icons/whatsapp-icon.png.asset.json";
-import heroAsset from "./banners/vltdais140-hero.png.asset.json";
-import showcaseAsset from "./banners/vltdais140-showcase.png.asset.json";
+import logo from "./logo/secure-experts-logo.png";
+import vltd4g from "./products/product-vltd-4g.png";
+import vltd2g from "./products/product-vltd-2g.png";
+import v5Basic from "./products/product-v5-basic.png";
+import whatsappIcon from "./icons/whatsapp-icon.png";
+import heroDevice from "./backgrounds/vltdais140-hero.png";
+import showcaseDevice from "./gallery/vltdais140-showcase.png";
 
-export const logo = logoAsset.url;
-export const vltd4g = vltd4gAsset.url;
-export const vltd2g = vltd2gAsset.url;
-export const v5Basic = v5BasicAsset.url;
-export const whatsappIcon = whatsappIconAsset.url;
-export const heroDevice = heroAsset.url;
-export const showcaseDevice = showcaseAsset.url;
+export { logo, vltd4g, vltd2g, v5Basic, whatsappIcon, heroDevice, showcaseDevice };
