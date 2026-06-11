@@ -16,9 +16,7 @@ import {
   ShieldCheck,
   Zap,
 } from "lucide-react";
-import productAsset from "@/assets/vltdais140-hero.png.asset.json";
-const productImg = productAsset.url;
-import logoAsset from "@/assets/secure-experts-logo.png.asset.json";
+import { heroDevice as productImg, logo as logoUrl } from "@/assets";
 import { submitLead } from "@/lib/leads.functions";
 import { buildLeadMessage, openWhatsApp } from "./whatsapp";
 import { answerFaq } from "./FaqEngine";
@@ -223,7 +221,7 @@ export function Chatbot({
           <div className="relative flex items-center gap-3 border-b border-border/60 bg-gradient-to-br from-white to-[var(--tint-sky)] px-4 py-3.5">
             <div className="relative grid size-10 place-items-center rounded-2xl bg-white ring-1 ring-primary/15 shadow-soft overflow-hidden">
               <img
-                src={logoAsset.url}
+                src={logoUrl}
                 alt="Secure Experts"
                 className="size-9 object-contain"
                 draggable={false}

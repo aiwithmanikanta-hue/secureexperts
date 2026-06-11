@@ -1,6 +1,4 @@
-import vltd4gAsset from "@/assets/product-vltd-4g.png.asset.json";
-import vltd2gAsset from "@/assets/product-vltd-2g.png.asset.json";
-import v5BasicAsset from "@/assets/product-v5-basic.png.asset.json";
+import { vltd4g, vltd2g, v5Basic } from "@/assets";
 import { openWhatsApp } from "@/components/chatbot/whatsapp";
 
 export type ProductSlug =
@@ -33,7 +31,7 @@ export const PRODUCTS: Product[] = [
     badgeTone: "primary",
     summary:
       "Premium flagship VLTD designed for advanced vehicle tracking, compliance-ready monitoring, and uninterrupted live visibility on next-gen 4G networks.",
-    image: vltd4gAsset.url,
+    image: vltd4g,
     highlights: [
       "GPS-based real-time tracking",
       "4G connectivity with 2G fallback",
@@ -86,7 +84,7 @@ export const PRODUCTS: Product[] = [
     badgeTone: "emerald",
     summary:
       "A reliable, budget-friendly VLTD for essential real-time tracking, geofencing, and trip history — purpose-built for operators who want dependable visibility without the flagship price.",
-    image: vltd2gAsset.url,
+    image: vltd2g,
     highlights: [
       "Real-time location tracking",
       "Stable 2G connectivity",
@@ -139,7 +137,7 @@ export const PRODUCTS: Product[] = [
     badgeTone: "slate",
     summary:
       "A compact, easy-to-install GPS tracker for everyday vehicle security — perfect for cars, bikes, and personal vehicles that need dependable live tracking without fleet complexity.",
-    image: v5BasicAsset.url,
+    image: v5Basic,
     highlights: [
       "Compact, discreet design",
       "Live GPS tracking",
