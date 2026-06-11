@@ -1,87 +1,79 @@
+## Diagnostic summary
 
-## Context
+### Current media files found
 
-The site has exactly **7 images**, all already stored as Lovable CDN `.asset.json` pointers in `src/assets/` and imported cleanly across the codebase. There are no external URLs, no broken refs, no duplicates, no `public/` images, and no unused assets.
+| File | Exists | Current usage |
+|---|---:|---|
+| `public/favicon.ico` | Yes | Browser favicon only |
+| `src/assets/logo/secure-experts-logo.png` | Yes | `Logo.tsx`, chatbot header, root favicon/apple touch icon, Organization JSON-LD |
+| `src/assets/products/product-vltd-4g.png` | Yes | Product catalog: VLTD 4G |
+| `src/assets/products/product-vltd-2g.png` | Yes | Product catalog: VLTD 2G |
+| `src/assets/products/product-v5-basic.png` | Yes | Product catalog: V5 Basic |
+| `src/assets/icons/whatsapp-icon.png` | Yes | `WhatsAppButton.tsx` |
+| `src/assets/backgrounds/vltdais140-hero.png` | Yes | Home hero, chatbot product cards, home route OG/Twitter/JSON-LD image |
+| `src/assets/gallery/vltdais140-showcase.png` | Yes | Home product showcase |
 
-```
-src/assets/
-├── product-v5-basic.png.asset.json
-├── product-vltd-2g.png.asset.json
-├── product-vltd-4g.png.asset.json
-├── secure-experts-logo.png.asset.json
-├── vltdais140-hero.png.asset.json
-├── vltdais140-showcase.png.asset.json
-└── whatsapp-icon.png.asset.json
-```
+### Broken/dependency findings
 
-So the real, useful work here is **organization + a single import point** — not re-downloading binaries to disk (which would bloat the repo and lose CDN delivery).
+- No current code references to `.asset.json` were found, but the dev server log still contains stale `.asset.json` transform errors from earlier asset moves.
+- No `images.lovable.dev`, `/__l5e/assets-v1`, or other Lovable-hosted media references were found in active source files.
+- No case-collision asset filenames were found.
+- No video files currently exist in `src` or `public`; therefore there are no video references to repair unless assets are added later.
+- Media is still imported from `src/assets`, while the requested portable structure is `public/assets/...`.
+- `@` alias is provided by the Lovable TanStack Vite config; `vite.config.ts` does not override it. I’ll keep the code independent of asset aliasing by using public `/assets/...` URLs for media.
 
-## What I'll do
+## Repair plan
 
-### 1. Reorganize pointers into subfolders
+1. **Create the portable asset structure**
+   ```text
+   public/assets/logo/
+   public/assets/products/
+   public/assets/backgrounds/
+   public/assets/icons/
+   public/assets/gallery/
+   public/assets/videos/
+   ```
 
-```
-src/assets/
-├── logo/
-│   └── secure-experts-logo.png.asset.json
-├── products/
-│   ├── product-vltd-4g.png.asset.json
-│   ├── product-vltd-2g.png.asset.json
-│   └── product-v5-basic.png.asset.json
-├── icons/
-│   └── whatsapp-icon.png.asset.json
-└── banners/
-    ├── vltdais140-hero.png.asset.json
-    └── vltdais140-showcase.png.asset.json
-```
+2. **Move/copy every existing media file into `public/assets`**
+   - `secure-experts-logo.png` → `public/assets/logo/secure-experts-logo.png`
+   - `product-vltd-4g.png` → `public/assets/products/product-vltd-4g.png`
+   - `product-vltd-2g.png` → `public/assets/products/product-vltd-2g.png`
+   - `product-v5-basic.png` → `public/assets/products/product-v5-basic.png`
+   - `whatsapp-icon.png` → `public/assets/icons/whatsapp-icon.png`
+   - `vltdais140-hero.png` → `public/assets/backgrounds/vltdais140-hero.png`
+   - `vltdais140-showcase.png` → `public/assets/gallery/vltdais140-showcase.png`
+   - Keep `public/favicon.ico` as-is unless replacing it is needed.
 
-Empty folders (`gallery/`, `backgrounds/`, `misc/`) — I'll skip them; empty dirs don't exist in git and add noise. Easy to create later when needed.
+3. **Replace asset imports with stable local public paths**
+   - Rewrite `src/assets/index.ts` to export constants like:
+     ```ts
+     export const logo = "/assets/logo/secure-experts-logo.png";
+     export const vltd4g = "/assets/products/product-vltd-4g.png";
+     ```
+   - This avoids Vite transform/cache issues for image modules and works after ZIP download on localhost, Vercel, Netlify, and static hosts.
 
-### 2. Create a central barrel
+4. **Remove obsolete source asset binaries**
+   - Delete migrated files from `src/assets/...` after references are rebuilt.
+   - Leave `src/assets/index.ts` as the single asset manifest used by the app.
+   - Remove empty `src/assets` subfolders if they remain empty.
 
-`src/assets/index.ts` re-exports every image URL as a named string:
+5. **Audit and fix code references**
+   - Confirm all JSX `<img>` sources resolve through the asset manifest or `/assets/...` paths.
+   - Confirm root metadata, Open Graph, Twitter image, JSON-LD, chatbot, product cards, hero, and showcase use the repaired paths.
+   - Confirm there are no `.asset.json`, Lovable CDN, temporary preview URL, missing import, or invalid relative media paths.
 
-```ts
-import logoAsset from "./logo/secure-experts-logo.png.asset.json";
-import vltd4gAsset from "./products/product-vltd-4g.png.asset.json";
-// ...
-export const logo = logoAsset.url;
-export const vltd4g = vltd4gAsset.url;
-export const vltd2g = vltd2gAsset.url;
-export const v5Basic = v5BasicAsset.url;
-export const whatsappIcon = whatsappIconAsset.url;
-export const heroDevice = heroAsset.url;
-export const showcaseDevice = showcaseAsset.url;
-```
+6. **Verify case sensitivity and Vite alias**
+   - Re-scan actual filenames vs references exactly.
+   - Confirm `@` still resolves through the existing Vite config; if asset references no longer depend on `@/assets/...` image imports, localhost portability is less fragile.
 
-### 3. Update every call site to import from the barrel
+7. **Validate runtime and production behavior**
+   - Run the available project checks after implementation.
+   - Restart the dev server to clear stale Vite module cache.
+   - Use browser/preview diagnostics to check for 404 media requests and console errors.
 
-Files touched:
-- `src/routes/__root.tsx`
-- `src/routes/index.tsx`
-- `src/components/home/Logo.tsx`
-- `src/components/home/Hero.tsx`
-- `src/components/home/ProductShowcase.tsx`
-- `src/components/chatbot/Chatbot.tsx`
-- `src/components/products/WhatsAppButton.tsx`
-- `src/components/products/catalog.ts`
+## Final report I’ll provide after implementation
 
-New shape everywhere:
-```ts
-import { logo, heroDevice, vltd4g } from "@/assets";
-<img src={logo} alt="..." />
-```
-
-### 4. Verify
-
-Build + load the preview to confirm every image renders and no console/network 404s appear.
-
-## What I will NOT do (and why)
-
-- **Won't download CDN images into the repo as local binaries.** That's the opposite of how Lovable serves assets — it would bloat the repo, slow git, and drop CDN edge caching.
-- **Won't convert PNG → WebP.** Images are served from CDN, not bundled. A WebP pass would require re-uploading each image as a new asset and is a separate optimization task — happy to do it as a follow-up if you confirm.
-- **Won't create empty `gallery/`, `backgrounds/`, `misc/` folders** — git doesn't track empty dirs and they just add clutter until something actually goes in them.
-
-## Result
-
-One import location (`@/assets`), assets grouped by purpose, zero broken refs, zero unused pointers. Confirm and I'll execute.
+- Every repaired asset path.
+- Where each asset is used.
+- Confirmation that no Lovable CDN or `.asset.json` references remain.
+- Confirmation of localhost/export-safe path strategy.
