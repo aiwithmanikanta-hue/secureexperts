@@ -259,10 +259,6 @@ export function Contact() {
                   <a href="tel:+917337433351" className="hover:text-primary transition-colors">
                     +91 73374 33351
                   </a>
-                  <span className="text-muted-foreground/60"> · </span>
-                  <a href="tel:+914000000000" className="hover:text-primary transition-colors">
-                    040-XXXXXXXX
-                  </a>
                 </InfoRow>
                 <InfoRow icon={<Mail className="size-4" />} label="Email">
                   <a href="mailto:info@secureexperts.in" className="hover:text-primary transition-colors">
