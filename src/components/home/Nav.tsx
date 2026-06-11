@@ -1,14 +1,15 @@
 import { useEffect, useState } from "react";
+import { Link } from "@tanstack/react-router";
 import { MagneticButton } from "./MagneticButton";
 import { Logo } from "./Logo";
 
 const menu = [
-  { label: "Home", href: "#home" },
-  { label: "Product", href: "#product" },
-  { label: "Features", href: "#features" },
-  { label: "Specifications", href: "#specs" },
-  { label: "About", href: "#about" },
-  { label: "Contact", href: "#contact" },
+  { label: "Home", href: "/" },
+  { label: "Products", href: "/products" },
+  { label: "Features", href: "/#features" },
+  { label: "Specifications", href: "/#specs" },
+  { label: "About", href: "/#about" },
+  { label: "Contact", href: "/#contact" },
 ];
 
 export function Nav() {
@@ -29,13 +30,13 @@ export function Nav() {
       }`}
     >
       <div className="max-w-6xl mx-auto px-6 h-16 grid grid-cols-[auto_1fr_auto] items-center gap-6">
-        <a
-          href="#home"
+        <Link
+          to="/"
           aria-label="Secure Experts — Home"
           className="logo-reveal logo-hover flex items-center shrink-0"
         >
           <Logo priority className="h-10 md:h-14 w-auto" />
-        </a>
+        </Link>
         <div className="hidden md:flex justify-center gap-8 text-[13px] text-muted-foreground">
           {menu.map((m) => (
             <a
@@ -47,7 +48,7 @@ export function Nav() {
             </a>
           ))}
         </div>
-        <MagneticButton href="#cta" variant="primary" className="!px-4 !py-2 !text-[13px] shrink-0">
+        <MagneticButton href="/#cta" variant="primary" className="!px-4 !py-2 !text-[13px] shrink-0">
           Get Quote
         </MagneticButton>
       </div>
