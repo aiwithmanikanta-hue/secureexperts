@@ -83,8 +83,7 @@ export function Hero() {
           className="text-[42px] sm:text-6xl md:text-7xl lg:text-[88px] font-semibold leading-[1.02] text-foreground mb-7 text-balance"
           style={{ animation: "reveal-up 0.9s 0.05s cubic-bezier(0.16,1,0.3,1) both" }}
         >
-          Advanced GPS Security<br className="hidden sm:block" />{" "}
-          <span className="text-muted-foreground">for the Modern World.</span>
+          VLTD Advanced GPS Security for a Connected World
         </h1>
 
         <div
