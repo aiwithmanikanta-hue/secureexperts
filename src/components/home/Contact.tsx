@@ -14,7 +14,7 @@ const PRODUCTS = [
 
 const OFFICE_QUERY = encodeURIComponent("GJWW+GJ5 Payakapuram, Andhra Pradesh, India");
 const MAP_EMBED = `https://www.google.com/maps?q=${OFFICE_QUERY}&output=embed&z=16`;
-const MAP_DIRECTIONS = `https://www.google.com/maps/dir/?api=1&destination=${OFFICE_QUERY}`;
+const MAP_DIRECTIONS = "https://maps.app.goo.gl/MoYx6jpsij9tdppz7";
 const PHONE_PRIMARY = "+917337433351";
 
 type FormState = {
