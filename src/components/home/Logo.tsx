@@ -1,4 +1,4 @@
-import logoAsset from "@/assets/secure-experts-logo.png.asset.json";
+import { logo } from "@/assets";
 
 type LogoProps = {
   className?: string;
@@ -14,7 +14,7 @@ type LogoProps = {
 export function Logo({ className = "", style, alt = "Secure Experts — Securing Every Mile", priority }: LogoProps) {
   return (
     <img
-      src={logoAsset.url}
+      src={logo}
       alt={alt}
       loading={priority ? "eager" : "lazy"}
       decoding="async"

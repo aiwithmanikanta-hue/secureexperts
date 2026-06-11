@@ -1,6 +1,4 @@
-import vltd4gAsset from "@/assets/product-vltd-4g.png.asset.json";
-import vltd2gAsset from "@/assets/product-vltd-2g.png.asset.json";
-import v5BasicAsset from "@/assets/product-v5-basic.png.asset.json";
+import { vltd4g, vltd2g, v5Basic } from "@/assets";
 import { openWhatsApp } from "@/components/chatbot/whatsapp";
 
 export type ProductSlug =

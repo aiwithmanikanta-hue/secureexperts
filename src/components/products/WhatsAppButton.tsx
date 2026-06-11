@@ -1,6 +1,6 @@
 import type { ButtonHTMLAttributes, ReactNode } from "react";
 import { openProductWhatsApp } from "./catalog";
-import whatsappIcon from "@/assets/whatsapp-icon.png.asset.json";
+import { whatsappIcon } from "@/assets";
 
 type Props = ButtonHTMLAttributes<HTMLButtonElement> & {
   productName: string;
@@ -43,7 +43,7 @@ export function WhatsAppButton({
       aria-label={`Chat on WhatsApp about ${productName}`}
       {...rest}
     >
-      <img src={whatsappIcon.url} alt="" aria-hidden className="size-5 shrink-0" />
+      <img src={whatsappIcon} alt="" aria-hidden className="size-5 shrink-0" />
       <span className="relative">{children ?? "Talk on WhatsApp"}</span>
     </button>
   );

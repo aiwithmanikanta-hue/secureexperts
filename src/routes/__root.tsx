@@ -12,7 +12,7 @@ import { useEffect, type ReactNode } from "react";
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 import { FloatingActions } from "../components/chatbot/FloatingActions";
-import logoAsset from "../assets/secure-experts-logo.png.asset.json";
+import { logo as logoUrl } from "@/assets";
 
 function NotFoundComponent() {
   return (
