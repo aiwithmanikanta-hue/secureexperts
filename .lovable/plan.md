@@ -1,79 +1,26 @@
-## Diagnostic summary
+## Asset audit result
 
-### Current media files found
+I scanned the project and the asset wiring is already in the exact state your requirements describe. No repair is needed.
 
-| File | Exists | Current usage |
-|---|---:|---|
-| `public/favicon.ico` | Yes | Browser favicon only |
-| `src/assets/logo/secure-experts-logo.png` | Yes | `Logo.tsx`, chatbot header, root favicon/apple touch icon, Organization JSON-LD |
-| `src/assets/products/product-vltd-4g.png` | Yes | Product catalog: VLTD 4G |
-| `src/assets/products/product-vltd-2g.png` | Yes | Product catalog: VLTD 2G |
-| `src/assets/products/product-v5-basic.png` | Yes | Product catalog: V5 Basic |
-| `src/assets/icons/whatsapp-icon.png` | Yes | `WhatsAppButton.tsx` |
-| `src/assets/backgrounds/vltdais140-hero.png` | Yes | Home hero, chatbot product cards, home route OG/Twitter/JSON-LD image |
-| `src/assets/gallery/vltdais140-showcase.png` | Yes | Home product showcase |
+### What exists in `public/assets/`
+- `logo/secure-experts-logo.png`
+- `products/product-vltd-4g.png`, `product-vltd-2g.png`, `product-v5-basic.png`
+- `icons/whatsapp-icon.png`
+- `backgrounds/vltdais140-hero.png`
+- `gallery/vltdais140-showcase.png`
+- `videos/` (empty placeholder)
 
-### Broken/dependency findings
+### `src/assets/index.ts` exports only absolute `/assets/...` strings
+Every consumer (`Logo`, `Hero`, `ProductShowcase`, `Chatbot`, `WhatsAppButton`, product catalog) imports from this index, so all `<img src>` paths resolve to `/assets/...` at runtime — portable to localhost, Vercel, Netlify, and cPanel.
 
-- No current code references to `.asset.json` were found, but the dev server log still contains stale `.asset.json` transform errors from earlier asset moves.
-- No `images.lovable.dev`, `/__l5e/assets-v1`, or other Lovable-hosted media references were found in active source files.
-- No case-collision asset filenames were found.
-- No video files currently exist in `src` or `public`; therefore there are no video references to repair unless assets are added later.
-- Media is still imported from `src/assets`, while the requested portable structure is `public/assets/...`.
-- `@` alias is provided by the Lovable TanStack Vite config; `vite.config.ts` does not override it. I’ll keep the code independent of asset aliasing by using public `/assets/...` URLs for media.
+### No broken references remain
+Grep across `src/` found zero Lovable CDN URLs, zero `__l5e` paths, zero `.asset.json` imports, and zero external image hosts. The only `lovable.app` strings left are the canonical site URL in SEO metadata (`__root.tsx`, `sitemap.xml.ts`) — those are intentional and unrelated to image loading.
 
-## Repair plan
+### Proposed plan
+Since there is nothing to fix, I propose one of:
 
-1. **Create the portable asset structure**
-   ```text
-   public/assets/logo/
-   public/assets/products/
-   public/assets/backgrounds/
-   public/assets/icons/
-   public/assets/gallery/
-   public/assets/videos/
-   ```
+1. **No-op / confirm only** — exit with this audit as the report. Recommended.
+2. **Add a verification script** — drop a small `scripts/verify-assets.mjs` that walks `src/` for `/assets/...` references and asserts each file exists in `public/assets/`, runnable via `npm run verify:assets`. Useful as a pre-export sanity check.
+3. **If you are still seeing a specific missing image locally**, tell me which one (filename + page) and I will trace that single path. A blanket re-repair would only re-do what's already correct.
 
-2. **Move/copy every existing media file into `public/assets`**
-   - `secure-experts-logo.png` → `public/assets/logo/secure-experts-logo.png`
-   - `product-vltd-4g.png` → `public/assets/products/product-vltd-4g.png`
-   - `product-vltd-2g.png` → `public/assets/products/product-vltd-2g.png`
-   - `product-v5-basic.png` → `public/assets/products/product-v5-basic.png`
-   - `whatsapp-icon.png` → `public/assets/icons/whatsapp-icon.png`
-   - `vltdais140-hero.png` → `public/assets/backgrounds/vltdais140-hero.png`
-   - `vltdais140-showcase.png` → `public/assets/gallery/vltdais140-showcase.png`
-   - Keep `public/favicon.ico` as-is unless replacing it is needed.
-
-3. **Replace asset imports with stable local public paths**
-   - Rewrite `src/assets/index.ts` to export constants like:
-     ```ts
-     export const logo = "/assets/logo/secure-experts-logo.png";
-     export const vltd4g = "/assets/products/product-vltd-4g.png";
-     ```
-   - This avoids Vite transform/cache issues for image modules and works after ZIP download on localhost, Vercel, Netlify, and static hosts.
-
-4. **Remove obsolete source asset binaries**
-   - Delete migrated files from `src/assets/...` after references are rebuilt.
-   - Leave `src/assets/index.ts` as the single asset manifest used by the app.
-   - Remove empty `src/assets` subfolders if they remain empty.
-
-5. **Audit and fix code references**
-   - Confirm all JSX `<img>` sources resolve through the asset manifest or `/assets/...` paths.
-   - Confirm root metadata, Open Graph, Twitter image, JSON-LD, chatbot, product cards, hero, and showcase use the repaired paths.
-   - Confirm there are no `.asset.json`, Lovable CDN, temporary preview URL, missing import, or invalid relative media paths.
-
-6. **Verify case sensitivity and Vite alias**
-   - Re-scan actual filenames vs references exactly.
-   - Confirm `@` still resolves through the existing Vite config; if asset references no longer depend on `@/assets/...` image imports, localhost portability is less fragile.
-
-7. **Validate runtime and production behavior**
-   - Run the available project checks after implementation.
-   - Restart the dev server to clear stale Vite module cache.
-   - Use browser/preview diagnostics to check for 404 media requests and console errors.
-
-## Final report I’ll provide after implementation
-
-- Every repaired asset path.
-- Where each asset is used.
-- Confirmation that no Lovable CDN or `.asset.json` references remain.
-- Confirmation of localhost/export-safe path strategy.
+Please pick 1, 2, or share the specific failing image so the next step is targeted.
