@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://secureexperts.lovable.app/sitemap.xml
