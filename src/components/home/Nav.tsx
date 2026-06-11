@@ -6,10 +6,8 @@ import { Logo } from "./Logo";
 const menu = [
   { label: "Home", href: "/" },
   { label: "Products", href: "/products" },
-  { label: "Features", href: "/#features" },
-  { label: "Specifications", href: "/#specs" },
-  { label: "About", href: "/#about" },
-  { label: "Contact", href: "/#contact" },
+  { label: "About Us", href: "/#about" },
+  { label: "Contact Us", href: "/#contact" },
 ];
 
 export function Nav() {
