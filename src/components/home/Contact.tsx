@@ -6,8 +6,8 @@ import { Logo } from "./Logo";
 
 const PRODUCTS = [
   "VLTDAIS140 GPS Tracking System",
-  "Fuel Sensor",
-  "VLTDAIS140 + Fuel Sensor",
+  "ITALON Fuel Sensor",
+  "VLTDAIS140 + ITALON Fuel Sensor",
   "Fleet Tracking Solution",
   "Custom Requirement",
 ];
