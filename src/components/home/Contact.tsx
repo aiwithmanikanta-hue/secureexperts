@@ -111,7 +111,7 @@ export function Contact() {
   return (
     <section
       id="contact"
-      className="relative py-32 px-6"
+      className="relative py-20 sm:py-28 md:py-32 px-4 sm:px-6"
       style={{ background: "#F4F7F8" }}
     >
       <div ref={reveal} className="reveal max-w-7xl mx-auto">
@@ -127,11 +127,11 @@ export function Contact() {
           </p>
         </div>
 
-        <div className="grid lg:grid-cols-[1.15fr_1fr] gap-8 items-start">
+        <div className="grid lg:grid-cols-[1.15fr_1fr] gap-6 sm:gap-8 items-start">
           {/* LEFT — Form */}
           <form
             onSubmit={onSubmit}
-            className="relative rounded-[28px] border border-border bg-white/80 backdrop-blur-xl p-8 md:p-10 shadow-[0_20px_60px_-30px_rgba(10,132,255,0.25)]"
+            className="relative rounded-[24px] sm:rounded-[28px] border border-border bg-white/80 backdrop-blur-xl p-6 sm:p-8 md:p-10 shadow-[0_20px_60px_-30px_rgba(10,132,255,0.25)] order-1"
           >
             <h3 className="text-2xl font-semibold tracking-tight mb-1">
               Get in Touch with Secure Experts
@@ -155,6 +155,8 @@ export function Contact() {
                 <input
                   id="phone"
                   type="tel"
+                  inputMode="tel"
+                  autoComplete="tel"
                   className={inputCls}
                   placeholder="+91 XXXXXXXXXX"
                   value={form.phone}
@@ -166,6 +168,8 @@ export function Contact() {
                 <input
                   id="email"
                   type="email"
+                  inputMode="email"
+                  autoComplete="email"
                   className={inputCls}
                   placeholder="you@company.com"
                   value={form.email}
@@ -238,8 +242,8 @@ export function Contact() {
           </form>
 
           {/* RIGHT — Info + Map */}
-          <div className="space-y-6">
-            <div className="relative rounded-[28px] border border-border bg-white/80 backdrop-blur-xl p-8 shadow-[0_20px_60px_-30px_rgba(17,17,17,0.18)]">
+          <div className="space-y-6 order-2">
+            <div className="relative rounded-[24px] sm:rounded-[28px] border border-border bg-white/80 backdrop-blur-xl p-6 sm:p-8 shadow-[0_20px_60px_-30px_rgba(17,17,17,0.18)]">
               <div className="mb-5 flex items-center">
                 <Logo className="h-14 w-auto logo-hover" />
               </div>
@@ -306,7 +310,7 @@ export function Contact() {
         </div>
 
         {/* Full-width Map Section */}
-        <div className="mt-20">
+        <div className="mt-14 sm:mt-20">
           <div className="text-center mb-8">
             <h3 className="text-3xl md:text-4xl font-semibold tracking-tight">Visit Our Office</h3>
             <p className="mt-3 text-muted-foreground max-w-xl mx-auto">
@@ -317,7 +321,7 @@ export function Contact() {
             <iframe
               title="Secure Experts office location"
               src={MAP_EMBED}
-              className="w-full h-[300px] md:h-[450px] rounded-[16px] border-0"
+              className="w-full aspect-[4/3] sm:aspect-auto sm:h-[450px] rounded-[16px] border-0"
               loading="lazy"
               allowFullScreen
               referrerPolicy="no-referrer-when-downgrade"

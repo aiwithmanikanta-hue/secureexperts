@@ -41,7 +41,7 @@ export function Hero() {
   }, []);
 
   return (
-    <section id="home" className="relative pt-36 pb-28 px-6 overflow-hidden">
+    <section id="home" className="relative pt-28 sm:pt-36 pb-20 sm:pb-28 px-4 sm:px-6 overflow-hidden">
       {/* Background washes */}
       <div className="absolute inset-0 -z-10 dot-grid opacity-50" />
       <div className="absolute inset-x-0 top-0 -z-10 h-[600px] bg-gradient-to-b from-tint-blue/40 via-background to-background pointer-events-none" />
@@ -108,14 +108,14 @@ export function Hero() {
         </p>
 
         <div
-          className="flex flex-wrap justify-center gap-3 mb-20"
+          className="flex flex-col sm:flex-row sm:flex-wrap justify-center gap-3 mb-16 sm:mb-20 w-full max-w-sm sm:max-w-none mx-auto"
           style={{ animation: "reveal-up 0.9s 0.15s cubic-bezier(0.16,1,0.3,1) both" }}
         >
-          <MagneticButton href="#product" variant="primary" glow>
+          <MagneticButton href="#product" variant="primary" glow className="w-full sm:w-auto !min-h-[48px]">
             Explore Product
             <ArrowRight className="size-4" />
           </MagneticButton>
-          <MagneticButton href="#contact" variant="secondary">
+          <MagneticButton href="#contact" variant="secondary" className="w-full sm:w-auto !min-h-[48px]">
             Contact Sales
           </MagneticButton>
         </div>
