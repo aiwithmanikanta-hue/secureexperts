@@ -226,7 +226,7 @@ export const PRODUCTS: Product[] = [
   },
   {
     slug: "fuel-sensor",
-    name: "Fuel Sensor",
+    name: "ITALON Fuel Sensor",
     tagline: "Digital fuel monitoring & theft detection",
     badge: "Add-on",
     badgeTone: "emerald",
@@ -240,9 +240,9 @@ export const PRODUCTS: Product[] = [
       "Detailed consumption analytics",
     ],
     overview: [
-      "The Secure Experts Fuel Sensor is a digital capacitive sensor mounted directly into the fuel tank, giving you a precise, real-time view of how much fuel each vehicle has at any moment.",
+      "The Secure Experts ITALON Fuel Sensor is a digital capacitive sensor mounted directly into the fuel tank, giving you a precise, real-time view of how much fuel each vehicle has at any moment.",
       "Integrated with the Secure Experts tracking platform, every drop, refill, and abnormal drain is logged and alerted — so theft and pilferage stop being invisible costs.",
-      "From single trucks to large mixed fleets, the Fuel Sensor turns fuel into a measurable, reportable line item you can finally control.",
+      "From single trucks to large mixed fleets, the ITALON Fuel Sensor turns fuel into a measurable, reportable line item you can finally control.",
     ],
     features: [
       { icon: "Signal", title: "Live Fuel Level", desc: "Continuous tank-level monitoring streamed to your dashboard." },
@@ -270,7 +270,7 @@ export const PRODUCTS: Product[] = [
       "Generators",
     ],
     faqs: [
-      { q: "Do I need a tracking device to use the Fuel Sensor?", a: "Yes — the Fuel Sensor integrates with our VLTD devices and the Secure Experts platform to deliver live data and alerts." },
+      { q: "Do I need a tracking device to use the ITALON Fuel Sensor?", a: "Yes — the ITALON Fuel Sensor integrates with our VLTD devices and the Secure Experts platform to deliver live data and alerts." },
       { q: "How accurate are the readings?", a: "Capacitive sensing delivers high accuracy across the full tank range, calibrated per vehicle during installation." },
       { q: "Will it detect siphoning?", a: "Yes. Sudden, abnormal drops trigger instant fuel theft alerts on the dashboard and WhatsApp." },
       { q: "Can I track fuel across multiple vehicles?", a: "Absolutely — fleet-level dashboards summarise consumption, refills, and losses across every connected vehicle." },
