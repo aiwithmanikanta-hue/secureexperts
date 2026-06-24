@@ -7,7 +7,7 @@ import { Logo } from "./Logo";
 const menu = [
   { label: "Home", href: "/" },
   { label: "Products", href: "/products" },
-  { label: "About Us", href: "/#about" },
+  { label: "About Us", href: "/about" },
   { label: "Contact Us", href: "/#contact" },
 ];
 
@@ -51,7 +51,9 @@ export function Nav() {
                 ? pathname === "/"
                 : m.href === "/products"
                   ? pathname.startsWith("/products")
-                  : false;
+                  : m.href === "/about"
+                    ? pathname.startsWith("/about")
+                    : false;
             return (
               <a
                 key={m.label}
