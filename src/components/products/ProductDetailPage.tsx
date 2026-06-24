@@ -26,7 +26,8 @@ import { RevealOnScroll } from "@/components/home/RevealOnScroll";
 import { MagneticButton } from "@/components/home/MagneticButton";
 import { GlassCard } from "@/components/home/GlassCard";
 import { WhatsAppButton } from "./WhatsAppButton";
-import { PRODUCTS, type Product } from "./catalog";
+import { PRODUCTS, openProductQuoteWhatsApp, type Product } from "./catalog";
+import { FileText } from "lucide-react";
 
 const iconMap: Record<string, typeof Satellite> = {
   Satellite,
@@ -78,7 +79,16 @@ export function ProductDetailPage({ product }: { product: Product }) {
                 <WhatsAppButton productName={product.name} size="lg">
                   Talk on WhatsApp
                 </WhatsAppButton>
-                <MagneticButton href="/#contact" variant="primary" className="!h-12 !px-6 !text-[15px]">
+                <button
+                  type="button"
+                  onClick={() => openProductQuoteWhatsApp(product.name)}
+                  className="inline-flex h-12 items-center gap-2 rounded-full bg-foreground px-6 text-[15px] font-medium text-background shadow-soft transition-all duration-300 hover:scale-[1.03] hover:shadow-lift"
+                  aria-label={`Request a quote for ${product.name}`}
+                >
+                  <FileText className="size-4" strokeWidth={1.75} />
+                  Request Quote
+                </button>
+                <MagneticButton href="/#contact" variant="secondary" className="!h-12 !px-6 !text-[15px]">
                   Request Demo
                 </MagneticButton>
               </div>
