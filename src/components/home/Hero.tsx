@@ -1,5 +1,5 @@
 import { heroDevice as heroImg } from "@/assets";
-import { ArrowRight, Radio, ShieldCheck, Headphones } from "lucide-react";
+import { ArrowRight, Radio, ShieldCheck, Headphones, Satellite, Fuel, Lock, MapPin } from "lucide-react";
 import { useEffect, useRef } from "react";
 import { MagneticButton } from "./MagneticButton";
 import { SignalWaves } from "./SignalWaves";
@@ -173,6 +173,39 @@ export function Hero() {
               className="relative w-full max-w-2xl mx-auto h-auto object-contain rounded-2xl"
             />
           </div>
+
+          {/* Live status widget */}
+          <div
+            aria-hidden
+            className="hidden md:flex absolute top-4 right-4 items-center gap-2 rounded-full bg-white/85 backdrop-blur-xl border border-white/70 px-3.5 py-2 text-[11px] font-medium text-foreground shadow-[0_10px_30px_-12px_rgba(10,132,255,0.35)]"
+            style={{ animation: "reveal-up 0.9s 0.6s cubic-bezier(0.16,1,0.3,1) both" }}
+          >
+            <span className="relative flex size-2">
+              <span className="absolute inset-0 rounded-full bg-emerald-500 opacity-60 animate-ping" />
+              <span className="relative size-2 rounded-full bg-emerald-500" />
+            </span>
+            Live · 24 satellites · 0.8 m accuracy
+          </div>
+
+          {/* Floating glass feature chips */}
+          {[
+            { Icon: Satellite, label: "Real-Time GPS", pos: "top-8 -left-2 md:-left-10", delay: 0.45, anim: "float-card-a 7s ease-in-out infinite" },
+            { Icon: Lock, label: "AES-256 Secure", pos: "top-1/3 -right-2 md:-right-12", delay: 0.6, anim: "float-card-b 8s ease-in-out infinite" },
+            { Icon: Fuel, label: "Fuel Monitoring", pos: "bottom-12 -left-2 md:-left-14", delay: 0.75, anim: "float-card-b 9s ease-in-out 1s infinite" },
+            { Icon: MapPin, label: "AIS 140 Ready", pos: "bottom-6 -right-2 md:-right-8", delay: 0.9, anim: "float-card-a 7.5s ease-in-out 0.5s infinite" },
+          ].map(({ Icon, label, pos, delay, anim }) => (
+            <div
+              key={label}
+              aria-hidden
+              className={`hidden md:flex absolute ${pos} z-10 items-center gap-2 rounded-2xl bg-white/85 backdrop-blur-xl border border-white/70 px-3.5 py-2.5 text-[12px] font-medium text-foreground shadow-[0_18px_40px_-18px_rgba(10,132,255,0.45)]`}
+              style={{ animation: `reveal-up 0.9s ${delay}s cubic-bezier(0.16,1,0.3,1) both, ${anim}` }}
+            >
+              <span className="grid size-7 place-items-center rounded-lg bg-tint-blue text-primary">
+                <Icon className="size-3.5" strokeWidth={2.2} />
+              </span>
+              {label}
+            </div>
+          ))}
 
           {/* Trust pills */}
           <ul className="mt-10 flex flex-wrap justify-center gap-3">
