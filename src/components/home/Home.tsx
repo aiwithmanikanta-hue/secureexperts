@@ -2,6 +2,7 @@ import { Nav } from "./Nav";
 import { Hero } from "./Hero";
 import { ProductShowcase } from "./ProductShowcase";
 import { Stats } from "./Stats";
+import { LiveTrackingDemo } from "./LiveTrackingDemo";
 import { Features } from "./Features";
 import { ProductBenefits } from "./ProductBenefits";
 import { WhyUs } from "./WhyUs";
@@ -21,6 +22,7 @@ export function Home() {
         <Hero />
         <Stats />
         <ProductShowcase />
+        <LiveTrackingDemo />
         <Features />
         <ProductBenefits />
         <WhyUs />
