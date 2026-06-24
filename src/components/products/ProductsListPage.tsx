@@ -27,7 +27,7 @@ export function ProductsListPage() {
         <section className="px-6 pb-20">
           <div className="mx-auto max-w-6xl">
             <div className="grid gap-7 lg:grid-cols-2">
-              <RevealOnScroll className="lg:row-span-2">
+              <RevealOnScroll>
                 <ProductCard product={flagship} featured />
               </RevealOnScroll>
               {rest.map((p, i) => (
