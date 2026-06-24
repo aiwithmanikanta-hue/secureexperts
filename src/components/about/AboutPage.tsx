@@ -43,7 +43,7 @@ function AboutHero() {
   const r = useReveal<HTMLDivElement>();
   const tilt = useTilt<HTMLDivElement>(6);
   return (
-    <section className="relative pt-32 pb-20 px-6 overflow-hidden">
+    <section className="relative pt-28 sm:pt-32 pb-16 sm:pb-20 px-4 sm:px-6 overflow-hidden">
       <div aria-hidden className="pointer-events-none absolute inset-0 -z-10">
         <div
           className="absolute -top-24 left-1/4 size-[42vw] rounded-full bg-primary/10 blur-[120px]"
@@ -54,13 +54,13 @@ function AboutHero() {
           style={{ animation: "aurora-drift 28s ease-in-out -8s infinite reverse" }}
         />
       </div>
-      <div className="max-w-6xl mx-auto grid lg:grid-cols-12 gap-12 items-center">
+      <div className="max-w-6xl mx-auto grid lg:grid-cols-12 gap-10 sm:gap-12 items-center">
         <div ref={r} className="reveal lg:col-span-7">
           <span className="inline-flex items-center gap-2 rounded-full border border-border bg-white/70 px-3.5 py-1.5 text-[11px] font-medium uppercase tracking-[0.18em] text-muted-foreground backdrop-blur-xl">
             <span className="size-1.5 rounded-full bg-primary animate-pulse" />
             About Secure Experts
           </span>
-          <h1 className="mt-6 text-4xl sm:text-5xl md:text-6xl font-semibold tracking-tight text-foreground leading-[1.05]">
+          <h1 className="mt-6 text-[32px] sm:text-5xl md:text-6xl font-semibold tracking-tight text-foreground leading-[1.05]">
             Empowering Smarter Vehicle{" "}
             <span className="text-muted-foreground">Security & Fleet Intelligence</span>
           </h1>
@@ -69,11 +69,11 @@ function AboutHero() {
             management solutions designed to help businesses and vehicle owners stay
             connected, protected, and in control.
           </p>
-          <div className="mt-9 flex flex-wrap items-center gap-3">
-            <WhatsAppButton productName="Secure Experts — About Page" size="lg">
+          <div className="mt-9 flex flex-col sm:flex-row sm:flex-wrap items-stretch sm:items-center gap-3">
+            <WhatsAppButton productName="Secure Experts — About Page" size="lg" className="w-full sm:w-auto">
               Talk on WhatsApp
             </WhatsAppButton>
-            <MagneticButton href="/#contact" variant="secondary" className="!h-12 !px-6 !text-[15px]">
+            <MagneticButton href="/#contact" variant="secondary" className="!h-12 !px-6 !text-[15px] w-full sm:w-auto">
               Contact Our Team
             </MagneticButton>
           </div>
@@ -81,7 +81,7 @@ function AboutHero() {
         <div className="lg:col-span-5">
           <div
             ref={tilt}
-            className="relative tilt-card rounded-[36px] border border-border bg-white/70 backdrop-blur-xl p-10 overflow-hidden shadow-lift"
+            className="relative tilt-card rounded-[28px] sm:rounded-[36px] border border-border bg-white/70 backdrop-blur-xl p-6 sm:p-10 overflow-hidden shadow-lift"
           >
             <div className="absolute inset-0 -z-10 dot-grid opacity-60" />
             <div className="absolute -top-16 -right-16 size-64 rounded-full bg-primary/15 blur-3xl" />
@@ -100,10 +100,10 @@ function AboutHero() {
 
 function WhoWeAre() {
   return (
-    <section className="relative py-24 px-6">
+    <section className="relative py-16 sm:py-24 px-4 sm:px-6">
       <div className="max-w-6xl mx-auto">
         <RevealOnScroll>
-          <div className="rounded-[32px] surface-2 border border-border p-10 md:p-16 grid md:grid-cols-12 gap-10">
+          <div className="rounded-[24px] sm:rounded-[32px] surface-2 border border-border p-6 sm:p-10 md:p-16 grid md:grid-cols-12 gap-8 md:gap-10">
             <div className="md:col-span-4">
               <div className="text-[11px] uppercase tracking-[0.2em] text-primary font-medium mb-3">
                 Our Story
@@ -151,8 +151,8 @@ function MissionVision() {
     },
   ];
   return (
-    <section className="relative py-20 px-6">
-      <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-6">
+    <section className="relative py-14 sm:py-20 px-4 sm:px-6">
+      <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-5 sm:gap-6">
         {items.map(({ Icon, label, body }, i) => (
           <RevealOnScroll key={label} delay={i * 80}>
             <GlassCard className="h-full">
@@ -179,7 +179,7 @@ function Solutions() {
     { Icon: Package, title: "Asset Tracking Solutions", body: "Track valuable equipment, machinery, and movable assets with precision." },
   ];
   return (
-    <section className="relative py-24 px-6">
+    <section className="relative py-16 sm:py-24 px-4 sm:px-6">
       <div className="max-w-6xl mx-auto">
         <RevealOnScroll className="text-center mb-14">
           <div className="text-[11px] uppercase tracking-[0.2em] text-primary font-medium mb-3">
@@ -223,7 +223,7 @@ function WhyChooseUs() {
     "Affordable Pricing",
   ];
   return (
-    <section className="relative py-24 px-6">
+    <section className="relative py-16 sm:py-24 px-4 sm:px-6">
       <div className="max-w-6xl mx-auto">
         <RevealOnScroll className="text-center mb-12">
           <div className="text-[11px] uppercase tracking-[0.2em] text-primary font-medium mb-3">
@@ -265,8 +265,8 @@ function IndustriesBento() {
     { Icon: Boxes, label: "Asset Management Companies", image: industryAssets, span: "lg:col-span-2" },
   ];
   return (
-    <section className="relative py-24 px-6">
-      <div className="max-w-6xl mx-auto">
+    <section className="relative py-16 sm:py-24">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6">
         <RevealOnScroll className="text-center mb-14">
           <div className="text-[11px] uppercase tracking-[0.2em] text-primary font-medium mb-3">
             Industries
@@ -275,7 +275,37 @@ function IndustriesBento() {
             Industries We Serve
           </h2>
         </RevealOnScroll>
-        <div className="grid grid-cols-2 lg:grid-cols-6 auto-rows-[200px] gap-4">
+        {/* Mobile: swipeable horizontal carousel. Desktop: bento grid. */}
+        <div className="md:hidden -mx-4 px-4 flex overflow-x-auto snap-x snap-mandatory gap-4 no-scrollbar pb-2">
+          {items.map(({ Icon, label, image }) => (
+            <div
+              key={label}
+              className="snap-center shrink-0 w-[78%] max-w-[320px] h-[260px] relative overflow-hidden rounded-3xl border border-border"
+            >
+              <img
+                src={image}
+                alt={`${label} — Indian vehicles served by Secure Experts`}
+                loading="lazy"
+                decoding="async"
+                width={1024}
+                height={1024}
+                className="absolute inset-0 h-full w-full object-cover"
+              />
+              <div aria-hidden className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/35 to-black/10" />
+              <div className="relative h-full p-5 flex flex-col justify-between">
+                <div className="size-11 rounded-2xl bg-white/85 text-primary grid place-items-center backdrop-blur-md shadow-sm">
+                  <Icon className="size-5" strokeWidth={1.75} />
+                </div>
+                <div className="text-base font-semibold tracking-tight text-white drop-shadow-sm">
+                  {label}
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+        <p className="md:hidden mt-3 text-center text-xs text-muted-foreground">Swipe to explore →</p>
+
+        <div className="hidden md:grid grid-cols-2 lg:grid-cols-6 auto-rows-[200px] gap-4">
           {items.map(({ Icon, label, image, span }, i) => (
             <RevealOnScroll
               key={label}
@@ -314,10 +344,10 @@ function IndustriesBento() {
 
 function Commitment() {
   return (
-    <section className="relative py-24 px-6">
+    <section className="relative py-16 sm:py-24 px-4 sm:px-6">
       <div className="max-w-5xl mx-auto">
         <RevealOnScroll>
-          <div className="relative surface-4 rounded-[36px] border border-border px-8 py-16 md:p-20 text-center overflow-hidden">
+          <div className="relative surface-4 rounded-[28px] sm:rounded-[36px] border border-border px-6 py-14 sm:px-8 sm:py-16 md:p-20 text-center overflow-hidden">
             <div
               aria-hidden
               className="absolute -top-24 left-1/2 -translate-x-1/2 size-[500px] rounded-full bg-primary/12 blur-3xl"
@@ -348,9 +378,9 @@ function Commitment() {
 function AboutCTA() {
   const r = useReveal<HTMLDivElement>();
   return (
-    <section className="relative py-28 px-6">
+    <section className="relative py-20 sm:py-28 px-4 sm:px-6">
       <div ref={r} className="reveal max-w-5xl mx-auto">
-        <div className="relative surface-2 rounded-[40px] border border-border px-8 py-20 sm:p-24 text-center overflow-hidden">
+        <div className="relative surface-2 rounded-[28px] sm:rounded-[40px] border border-border px-6 py-16 sm:px-8 sm:py-20 md:p-24 text-center overflow-hidden">
           <div
             className="absolute -top-40 left-1/2 -translate-x-1/2 size-[700px] bg-primary/15 rounded-full blur-3xl pointer-events-none"
             style={{ animation: "aurora-drift 18s ease-in-out infinite" }}
@@ -363,7 +393,7 @@ function AboutCTA() {
             <div className="inline-flex px-3 py-1 rounded-full bg-background border border-border text-[12px] text-muted-foreground mb-6">
               Get in Touch
             </div>
-            <h2 className="text-4xl md:text-6xl font-semibold leading-[1.05] mb-5 text-balance">
+            <h2 className="text-3xl sm:text-4xl md:text-6xl font-semibold leading-[1.05] mb-5 text-balance">
               Let's Build Smarter{" "}
               <span className="text-muted-foreground">Mobility Together.</span>
             </h2>
@@ -372,11 +402,11 @@ function AboutCTA() {
               provides the technology, expertise, and support needed to keep your
               operations connected, monitored, and secure.
             </p>
-            <div className="flex flex-wrap justify-center gap-3">
-              <WhatsAppButton productName="Secure Experts — About CTA" size="lg">
+            <div className="flex flex-col sm:flex-row sm:flex-wrap justify-center items-stretch sm:items-center gap-3">
+              <WhatsAppButton productName="Secure Experts — About CTA" size="lg" className="w-full sm:w-auto">
                 Talk on WhatsApp
               </WhatsAppButton>
-              <MagneticButton href="/#contact" variant="primary" glow>
+              <MagneticButton href="/#contact" variant="primary" glow className="w-full sm:w-auto">
                 Contact Our Team
                 <ArrowRight className="size-4" />
               </MagneticButton>
