@@ -1,10 +1,23 @@
-import { vltd4g, vltd2g, v5Basic } from "@/assets";
+import { vltd4g, vltd2g, v5Basic, fuelSensor, gpsSoftware } from "@/assets";
 import { openWhatsApp } from "@/components/chatbot/whatsapp";
 
 export type ProductSlug =
   | "vltd-4g-device"
   | "vltd-2g-device"
-  | "v5-basic-gps-device";
+  | "v5-basic-gps-device"
+  | "fuel-sensor"
+  | "gps-tracking-software";
+
+export type ProductDetails = {
+  deviceType: string;
+  technology: string;
+  workingCondition: string;
+  connectivity: string;
+  powerSupply: string;
+  installation: string;
+  accuracy?: string;
+  accessibility?: string[];
+};
 
 export type Product = {
   slug: ProductSlug;
@@ -20,6 +33,8 @@ export type Product = {
   specs: { label: string; value: string }[];
   useCases: string[];
   faqs: { q: string; a: string }[];
+  details: ProductDetails;
+  applications: string[];
 };
 
 export const PRODUCTS: Product[] = [
