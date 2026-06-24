@@ -24,9 +24,9 @@ export function ProductsListPage() {
         <ProductsHero />
 
         {/* Grid */}
-        <section className="px-6 pb-20">
+        <section className="px-4 sm:px-6 pb-16 sm:pb-20">
           <div className="mx-auto max-w-6xl">
-            <div className="grid gap-7 lg:grid-cols-2">
+            <div className="grid gap-5 sm:gap-7 lg:grid-cols-2">
               <RevealOnScroll>
                 <ProductCard product={flagship} featured />
               </RevealOnScroll>
@@ -40,8 +40,8 @@ export function ProductsListPage() {
         </section>
 
         {/* Trust bar */}
-        <section className="px-6 pb-24">
-          <div className="mx-auto max-w-6xl rounded-3xl glass-premium p-8 md:p-10">
+        <section className="px-4 sm:px-6 pb-20 sm:pb-24">
+          <div className="mx-auto max-w-6xl rounded-3xl glass-premium p-6 sm:p-8 md:p-10">
             <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
               {trust.map(({ icon: Icon, label }) => (
                 <div key={label} className="flex items-center gap-3 text-sm text-foreground/80">

@@ -48,7 +48,13 @@ export function FloatingActions() {
     <>
       <Chatbot open={open} onOpenChange={setOpen} />
 
-      <div className="fixed bottom-6 right-6 z-50 flex flex-col items-end gap-5">
+      <div
+        className="fixed z-50 flex flex-col items-end gap-4 sm:gap-5"
+        style={{
+          right: "max(1rem, env(safe-area-inset-right))",
+          bottom: "max(1rem, env(safe-area-inset-bottom))",
+        }}
+      >
         {/* AI Chatbot FAB */}
         <div className="group relative">
           {/* Attention speech bubble */}

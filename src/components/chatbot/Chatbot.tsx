@@ -195,10 +195,11 @@ export function Chatbot({
       {/* Panel */}
       {open && (
         <div
-          className="fixed bottom-24 right-4 z-50 flex w-[calc(100vw-2rem)] max-w-[400px] flex-col overflow-hidden rounded-3xl border border-white/60 bg-white/85 shadow-lift backdrop-blur-2xl sm:right-6"
+          className="fixed bottom-24 right-2 left-2 sm:left-auto z-50 flex w-auto sm:w-[calc(100vw-2rem)] max-w-none sm:max-w-[400px] flex-col overflow-hidden rounded-3xl border border-white/60 bg-white/85 shadow-lift backdrop-blur-2xl sm:right-6"
           style={{
-            height: "min(620px, calc(100vh - 8rem))",
+            height: "min(640px, calc(100dvh - 7rem))",
             animation: "scale-in 0.3s cubic-bezier(0.16,1,0.3,1)",
+            paddingBottom: "env(safe-area-inset-bottom)",
           }}
         >
           {/* Header */}
@@ -248,12 +249,12 @@ export function Chatbot({
               value={input}
               onChange={(e) => setInput(e.target.value)}
               placeholder={flow.kind === "lead" ? "Type your answer…" : "Ask a question…"}
-              className="flex-1 rounded-full border border-border bg-secondary/70 px-4 py-2 text-sm text-foreground placeholder:text-muted-foreground focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20"
+              className="flex-1 rounded-full border border-border bg-secondary/70 px-4 py-2.5 text-base sm:text-sm text-foreground placeholder:text-muted-foreground focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20 min-h-[44px]"
             />
             <button
               type="submit"
               aria-label="Send"
-              className="grid size-9 shrink-0 place-items-center rounded-full bg-primary text-primary-foreground transition-transform hover:scale-105 active:scale-95 disabled:opacity-50"
+              className="grid size-11 shrink-0 place-items-center rounded-full bg-primary text-primary-foreground transition-transform hover:scale-105 active:scale-95 disabled:opacity-50"
               disabled={!input.trim()}
             >
               <Send className="size-4" />

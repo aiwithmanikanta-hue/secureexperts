@@ -56,7 +56,7 @@ export function ProductCard({ product, featured }: { product: Product; featured?
       </Link>
 
       {/* Body */}
-      <div className="flex flex-1 flex-col p-7">
+      <div className="flex flex-1 flex-col p-5 sm:p-7">
         <p className="text-[11px] uppercase tracking-[0.18em] text-primary/80 font-semibold">
           {product.tagline}
         </p>
@@ -78,10 +78,10 @@ export function ProductCard({ product, featured }: { product: Product; featured?
           ))}
         </ul>
 
-        <div className="mt-7 flex flex-wrap items-center gap-3 pt-1">
+        <div className="mt-7 flex flex-col sm:flex-row sm:flex-wrap items-stretch sm:items-center gap-3 pt-1">
           <Link
             to={`/products/${product.slug}`}
-            className="group/btn inline-flex h-11 items-center gap-1.5 rounded-full bg-foreground px-5 text-sm font-medium text-background shadow-soft transition-all duration-300 hover:scale-[1.03] hover:shadow-lift"
+            className="group/btn inline-flex h-12 items-center justify-center gap-1.5 rounded-full bg-foreground px-5 text-sm font-medium text-background shadow-soft transition-all duration-300 hover:scale-[1.03] hover:shadow-lift w-full sm:w-auto"
           >
             View Details
             <ArrowRight className="size-4 transition-transform duration-300 group-hover/btn:translate-x-0.5" />
@@ -89,7 +89,7 @@ export function ProductCard({ product, featured }: { product: Product; featured?
           <button
             type="button"
             onClick={() => openProductQuoteWhatsApp(product.name)}
-            className="inline-flex h-11 items-center gap-1.5 rounded-full border border-border bg-white/80 px-5 text-sm font-medium text-foreground shadow-soft transition-all duration-300 hover:scale-[1.03] hover:border-primary/40 hover:text-primary"
+            className="inline-flex h-12 items-center justify-center gap-1.5 rounded-full border border-border bg-white/80 px-5 text-sm font-medium text-foreground shadow-soft transition-all duration-300 hover:scale-[1.03] hover:border-primary/40 hover:text-primary w-full sm:w-auto"
             aria-label={`Request a quote for ${product.name}`}
           >
             <FileText className="size-4" strokeWidth={1.75} />

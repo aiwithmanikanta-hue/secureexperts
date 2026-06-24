@@ -420,3 +420,33 @@
     transition-duration: 0.001ms !important;
   }
 }
+
+/* ---------- Mobile-first utilities ---------- */
+
+@utility no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  &::-webkit-scrollbar { display: none; }
+}
+
+/* Fluid typography helpers — replace fixed mobile font-sizes without
+   altering desktop hierarchy. */
+@utility text-fluid-hero {
+  font-size: clamp(2rem, 6vw + 0.5rem, 5.5rem);
+  line-height: 1.05;
+}
+@utility text-fluid-h2 {
+  font-size: clamp(1.75rem, 3.5vw + 0.5rem, 3rem);
+  line-height: 1.1;
+}
+@utility text-fluid-h3 {
+  font-size: clamp(1.25rem, 1.5vw + 0.75rem, 1.5rem);
+  line-height: 1.2;
+}
+
+/* Tone down heavy ambient animations on small screens to preserve FPS. */
+@media (max-width: 640px) {
+  .ambient-blob { animation-duration: 28s; }
+  /* Disable the shimmer sweep on phones — pure decoration, costly to repaint. */
+  [style*="shimmer"] { animation: none !important; }
+}
