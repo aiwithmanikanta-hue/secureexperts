@@ -26,7 +26,7 @@ export function ProductsListPage() {
         {/* Grid */}
         <section className="px-6 pb-20">
           <div className="mx-auto max-w-6xl">
-            <div className="grid gap-7 lg:grid-cols-2">
+            <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
               <RevealOnScroll>
                 <ProductCard product={flagship} featured />
               </RevealOnScroll>
