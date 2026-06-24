@@ -1,154 +1,176 @@
 
-## Important caveat (read first)
+# Secure Experts — Premium Experience Redesign
 
-The Lovable preview/build pipeline is wired around TanStack Start via `@lovable.dev/vite-tanstack-config`. After this migration:
-
-- **Lovable's in-editor preview may behave differently** — the preview server expects a TanStack Start app. It will still load (it's a Vite project), but Lovable-internal features tied to SSR (sitemap server route, `head()` meta) will be removed.
-- **The exported ZIP will work perfectly on cPanel / any static host** — which is your actual goal.
-- **No backend** — all `createServerFn` / Supabase / `src/lib/leads.functions.ts` / `src/integrations/supabase/*` / `src/server.ts` / `src/start.ts` are deleted. Forms only open WhatsApp.
-- **SEO meta tags** move to `react-helmet-async` (client-injected). Initial HTML will be a generic shell — crawlers that execute JS will still see correct titles.
-- **Visual / behavioral output: unchanged.** Every component in `src/components/**` is plain React and ports 1:1.
+Keep intact: brand colors, logo, typography family, product copy, product info, WhatsApp-only contact behavior (no backend).
+Transform: layout system, motion language, depth, interactions, presentation quality — Apple / Linear / Stripe / Arc / Tesla feel.
 
 ---
 
-## Target structure
+## 1. Foundations (no color/font changes)
+
+- Add a motion + depth layer to `src/styles.css` only (no token color changes):
+  - Glass tokens: `--glass-bg`, `--glass-border`, `--glass-blur`, `--shadow-float`, `--shadow-lift`, `--ring-glow`.
+  - Easing tokens: `--ease-premium: cubic-bezier(0.16,1,0.3,1)`, `--ease-soft: cubic-bezier(0.22,1,0.36,1)`.
+  - Keyframes: `float-y`, `float-x`, `pulse-ring`, `aurora-drift`, `shimmer-slow`, `reveal-up`, `reveal-mask`, `cursor-blink`, `bob`, `signal`.
+- Add `prefers-reduced-motion` guards in every animation utility.
+- Add a global `AmbientBackground` upgrade: mesh gradient + 3 blurred aurora blobs + dot-grid, fixed behind content (using existing brand hues only).
+
+## 2. Motion + interaction primitives (new hooks/components)
+
+New in `src/components/fx/`:
+- `useMagnetic.ts` — magnetic button hover (already partial in home; promote and reuse).
+- `useTilt.ts` — 3D tilt for cards (promote existing).
+- `useParallax.ts` — scroll-based translate/scale for hero product + sections.
+- `useReveal.ts` — IntersectionObserver staggered reveal.
+- `useCursorSpotlight.ts` — radial gradient that follows cursor inside a container.
+- `Marquee.tsx`, `GlassCard.tsx`, `FloatingBadge.tsx`, `PulseRing.tsx`, `SignalWaves.tsx`, `CountUp.tsx`, `Typewriter.tsx` (consolidate existing + add missing).
+
+All built with CSS + RAF — no new heavy deps. Optional: add `framer-motion` only if needed for scroll-linked sequences; default is CSS/RAF to stay light.
+
+## 3. Hero — Floating Product Showcase
+
+Rebuild `Hero.tsx`:
+- Centerpiece: VLTDAIS140 image floating with subtle bob + cursor parallax + soft glow.
+- Around it:
+  - 3 concentric `PulseRing`s (GPS signal).
+  - 4 floating glass feature chips: "Real-Time GPS", "AES-256 Secure", "AIS 140 Certified", "Fuel Monitoring".
+  - Connection-line SVG paths from chips to device, animated dash.
+  - Live status widget (top-right of stage): "● Live · 24 satellites · 0.8m accuracy".
+- Headline: keep copy; layer `Typewriter` rotating: Advanced GPS Tracking → Fleet Intelligence → Fuel Monitoring Solutions → Real-Time Vehicle Security.
+- CTAs: magnetic "Explore Product" + "Talk on WhatsApp".
+- Scroll cue at bottom.
+
+## 4. Scroll storytelling
+
+- Section transitions use mask-reveal + stagger.
+- Hero product scales 1 → 0.92 and fades slightly as user scrolls into next section (scroll-linked via `useParallax`).
+- Each section enters from a different axis (up / left / right) at low amplitude (8–24px) for premium feel.
+- Sticky "product journey" rail between Hero and Features: 3 progress dots that light up as feature cards reveal.
+
+## 5. Bento sections
+
+Refactor `Features`, `ProductBenefits`, `WhyUs`, `Specs` into bento grids:
 
 ```text
-src/
-  main.tsx                  # Vite entry (replaces src/start.ts + src/server.ts)
-  App.tsx                   # <BrowserRouter> + <Routes> + <FloatingActions>
-  index.css                 # renamed from src/styles.css (import path update)
-  pages/
-    Home.tsx                # wraps <Home /> from components/home + Helmet
-    Products.tsx            # wraps <ProductsListPage /> + Helmet
-    ProductDetail.tsx       # reads useParams() slug, renders <ProductDetailPage />
-    NotFound.tsx
-  components/               # UNCHANGED — all existing files kept as-is
-    home/**                 # Hero, Nav, Contact, Footer, etc. (no edits)
-    products/**             # ProductCard, catalog, WhatsAppButton (no edits)
-    chatbot/**              # FloatingActions, Chatbot, whatsapp.ts (no edits)
-    ui/**                   # shadcn (no edits)
-  assets/
-    index.ts                # UNCHANGED — already uses /assets/... strings
-  hooks/use-mobile.tsx      # UNCHANGED
-  lib/utils.ts              # UNCHANGED (cn helper)
-public/
-  assets/**                 # UNCHANGED — all images/videos already here
-  index.html                # NEW — Vite SPA shell with #root div
-  _redirects                # NEW — `/* /index.html 200` (SPA fallback for static hosts)
-
-index.html                  # NEW — Vite entry HTML at project root
-vite.config.ts              # REPLACED — plain Vite + @vitejs/plugin-react
-package.json                # REWRITTEN — TanStack/Supabase deps removed, react-router-dom + react-helmet-async added
-tsconfig.json               # UPDATED — remove TanStack-specific options
++---------------------+-----------+
+|  Large feature       |  Stat    |
+|  (live map preview)  |  card    |
++----------+-----------+----------+
+|  Spec    |  Feature  |  Quote   |
+|  card    |  card     |  card    |
++----------+-----------+----------+
+|  Wide highlight card (encryption)|
++----------------------------------+
 ```
 
-## Files to delete
+- Mix card sizes; no repeating 3-column rows.
+- All cards use new `GlassCard` (blur, soft border, hover tilt + lift + border glow + light sweep).
 
-- `src/routes/` (entire folder — `__root.tsx`, `index.tsx`, `products.tsx`, `products.$slug.tsx`, `sitemap[.]xml.ts`, `README.md`)
-- `src/routeTree.gen.ts`
-- `src/router.tsx`
-- `src/server.ts`, `src/start.ts`
-- `src/integrations/supabase/` (entire folder)
-- `src/lib/api/example.functions.ts`
-- `src/lib/config.server.ts`
-- `src/lib/leads.functions.ts`
-- `src/lib/error-capture.ts`, `src/lib/error-page.ts`, `src/lib/lovable-error-reporting.ts` (SSR-error-handling specific; replaced with a simple React `ErrorBoundary` in `App.tsx`)
-- `supabase/` (entire folder)
-- `.lovable/` (Lovable scaffolding, optional cleanup)
+## 6. Interactive demo strip (new section)
 
-## Files to create
+Lightweight "Live Tracking" mock between ProductShowcase and Features:
+- Faux dashboard panel (glass) with:
+  - Animated SVG map (existing styling, no map SDK).
+  - Moving vehicle dot on a polyline route.
+  - Side panel: speed, fuel %, ignition, geofence — values tick subtly.
+- Pure CSS/SVG + small RAF loop. No backend, no Mapbox.
 
-1. **`index.html`** — root Vite shell:
-   - `<title>`, meta tags (default SEO), `<link rel="icon" href="/assets/logo/secure-experts-logo.png">`
-   - Google Fonts `<link>` (Inter + JetBrains Mono) — moved from `__root.tsx`
-   - JSON-LD Organization script — moved from `__root.tsx`
-   - `<div id="root"></div>` + `<script type="module" src="/src/main.tsx">`
+## 7. Stats section
 
-2. **`src/main.tsx`** — `ReactDOM.createRoot(...).render(<HelmetProvider><BrowserRouter><App /></BrowserRouter></HelmetProvider>)` + `import './index.css'`
+Replace static numbers with `CountUp` triggered on scroll:
+- 10,000+ Devices Installed
+- 99.9% Tracking Accuracy
+- 500+ Business Clients
+- 24/7 Support
+Glass cards, large display numerals, subtle gradient underline.
 
-3. **`src/App.tsx`** — React Router routes:
-   ```text
-   /                  → <Home />
-   /products          → <Products />
-   /products/:slug    → <ProductDetail />
-   *                  → <NotFound />
-   ```
-   Renders `<FloatingActions />` outside `<Routes>` so chatbot/WhatsApp button is global.
+## 8. Products list + detail
 
-4. **`src/pages/Home.tsx`** — `<Helmet>` (title, og, JSON-LD Product) + `<Home />` from `@/components/home/Home`. Meta content copied verbatim from current `src/routes/index.tsx`.
+`ProductsListPage`:
+- Bento grid: featured product spans 2 cols, others 1 col.
+- Each `ProductCard`: floating product image, hover tilt, quick specs row appears on hover, magnetic CTA, glow ring.
 
-5. **`src/pages/Products.tsx`** — `<Helmet>` + `<ProductsListPage />`. Meta from `src/routes/products.tsx`.
+`ProductDetailPage` ("product launch" feel):
+- Split hero: large floating image left, sticky info right (name, tagline, key specs, WhatsApp CTA).
+- Scroll sections: Highlights bento → Specs table (glass) → Use cases → Final CTA.
+- Subtle scroll-driven image parallax.
 
-6. **`src/pages/ProductDetail.tsx`** — `useParams<{ slug: string }>()`, validate against `PRODUCTS` from `@/components/products/catalog`, render `<ProductDetailPage product={...} />` or `<Navigate to="/products" />` if invalid. `<Helmet>` derived from product.
+## 9. Buttons + forms
 
-7. **`src/pages/NotFound.tsx`** — copy markup from `__root.tsx`'s `NotFoundComponent`, swap `<Link>` import to `react-router-dom`.
+- `MagneticButton` everywhere (primary + secondary variants, keep brand color).
+- Inputs in `Contact`: floating labels, soft focus glow ring, smooth border transition.
+- All focus states keyboard-accessible (`focus-visible` ring).
 
-8. **`public/_redirects`** — `/* /index.html 200` (Netlify-style; also works on most static hosts; for cPanel add `.htaccess` too — see below).
+## 10. Floating actions (WhatsApp + Chatbot)
 
-9. **`public/.htaccess`** — Apache/cPanel SPA fallback:
-   ```text
-   RewriteEngine On
-   RewriteBase /
-   RewriteRule ^index\.html$ - [L]
-   RewriteCond %{REQUEST_FILENAME} !-f
-   RewriteCond %{REQUEST_FILENAME} !-d
-   RewriteRule . /index.html [L]
-   ```
+`FloatingActions` (bottom-right stack):
+- WhatsApp FAB: soft brand-color pulse, hover glow, tooltip "💬 Talk to an Expert".
+- Chatbot FAB: premium robot icon (lucide `Bot` styled inside glass circle, gentle bob).
+  - Every 15s, speech bubble rotates: "🤖 Need product details?" → "🤖 Ask me anything" → "🤖 Want pricing?".
+  - Smooth fade/slide in-out, pauses on hover, respects reduced-motion, dismissible.
+- Both stay above all content, mobile-safe (respect safe-area-inset).
 
-10. **`vite.config.ts`** — replace with plain Vite:
-    ```ts
-    import { defineConfig } from 'vite';
-    import react from '@vitejs/plugin-react';
-    import tailwindcss from '@tailwindcss/vite';
-    import path from 'path';
-    export default defineConfig({
-      plugins: [react(), tailwindcss()],
-      resolve: { alias: { '@': path.resolve(__dirname, './src') } },
-    });
-    ```
+## 11. Contact section
 
-## Component edits (minimal, mechanical)
+Two-column premium layout:
+- Left: glass form (Name, Company, Phone, Message) → on submit opens prefilled WhatsApp (no backend, matches current behavior).
+- Right: stacked glass cards — Office details, WhatsApp CTA, embedded static map image with overlay pin + pulse.
 
-These are the ONLY files inside `src/components/**` that need touching, because they import from TanStack Router:
+## 12. Navigation
 
-- Search `src/components/**` for `@tanstack/react-router` and replace `Link` with `react-router-dom`'s `Link` (prop is the same: `to`). Replace `useNavigate` / `useRouter` calls if any.
-- Replace any `useLoaderData` / `useParams` from TanStack with `react-router-dom` equivalents (only `ProductDetailPage` likely affected — but it receives `product` as a prop in the new wrapper, so no change inside the component itself).
-- Remove `@/integrations/supabase/*` imports from `Contact.tsx` (current Contact.tsx already only uses WhatsApp — confirmed clean).
+- Glass nav with scroll-state: transparent at top, blurred glass after 24px scroll.
+- Active link indicator slides between items.
+- Mobile: full-screen glass drawer with staggered link reveal.
 
-I'll grep these on entry to build mode and patch them in one batch.
+## 13. Footer
 
-## package.json changes
+- Layered: large brand mark watermark, 3-column links, fine print, subtle aurora glow.
 
-**Remove:** `@tanstack/react-router`, `@tanstack/react-start`, `@tanstack/router-plugin`, `@tanstack/react-query`, `@supabase/supabase-js`, `@lovable.dev/vite-tanstack-config`, `nitro`.
+## 14. Mobile
 
-**Add:** `react-router-dom@^6`, `react-helmet-async@^2`.
+- All bento grids collapse to single-column with preserved size hierarchy.
+- Tap targets ≥ 44px, FABs respect `env(safe-area-inset-bottom)`.
+- Reduce motion amplitude on small screens; disable tilt under 768px.
 
-**Keep:** all Radix UI, lucide-react, tailwindcss, tailwind-merge, clsx, class-variance-authority, sonner, vaul, embla-carousel-react, react-hook-form, zod, etc.
+## 15. Performance / quality bar
 
-**Scripts:** `dev: "vite"`, `build: "vite build"`, `preview: "vite preview"`.
+- All animations RAF + transform/opacity only.
+- Lazy-load below-the-fold heavy sections.
+- Images: explicit width/height, `loading="lazy"` except hero.
+- No new heavy deps unless needed; if scroll sequencing requires it, add `framer-motion` only.
 
-## What stays pixel-identical
+---
 
-- All Tailwind classes & `src/styles.css` tokens → unchanged
-- All `src/components/home/**` (Hero, Nav, Contact, Stats, ProductShowcase, Features, ProductBenefits, WhyUs, Specs, Trust, FinalCTA, SiteFooter, AmbientBackground, animations, useReveal, useTilt, etc.)
-- All `src/components/products/**` (ProductCard, ProductDetailPage, ProductsHero, catalog, WhatsAppButton)
-- All `src/components/chatbot/**` (Chatbot, FloatingActions, FaqEngine, whatsapp.ts)
-- All `src/components/ui/**` (shadcn)
-- All `public/assets/**` (logo, product images, hero/showcase, WhatsApp icon, videos)
+## Files touched (high level)
 
-## Validation after build mode runs
+Edit:
+- `src/styles.css` — tokens, keyframes, glass utilities.
+- `src/components/home/*` — Hero, Nav, ProductShowcase, Features, ProductBenefits, WhyUs, Specs, Stats, Trust, FinalCTA, Contact, SiteFooter, AmbientBackground.
+- `src/components/products/ProductsListPage.tsx`, `ProductCard.tsx`, `ProductDetailPage.tsx`, `ProductsHero.tsx`.
+- `src/components/chatbot/Chatbot.tsx`, `FloatingActions.tsx`.
 
-1. `bun install` succeeds with new deps.
-2. `bun run build` succeeds → produces `dist/index.html` + `dist/assets/`.
-3. Preview at `/`, `/products`, `/products/vltd-4g`, `/products/vltd-2g`, `/products/v5-basic`, `/contact` (anchor on home).
-4. Verify: logo renders, WhatsApp button opens correct URL, chatbot opens, contact form opens WhatsApp on submit, all product images load, hero animations play.
-5. Verify direct deep-link refresh works (relies on `_redirects` / `.htaccess` on host; in Vite dev server React Router handles it natively).
+Add:
+- `src/components/fx/` (motion primitives + GlassCard, PulseRing, Typewriter, CountUp, Marquee, FloatingBadge, SignalWaves consolidated).
+- `src/components/home/LiveTrackingDemo.tsx`.
+- `src/components/home/ScrollProgressRail.tsx`.
 
-## Out of scope (per your "no changes" rule)
+Remove: none (refactor in place).
 
-- No redesign, no UI tweaks, no animation changes, no color/typography changes.
-- No new features. No removed features (other than the unused server fns).
-- Sitemap.xml.ts deletion is the one tradeoff — if you want a sitemap, I'll generate a static `public/sitemap.xml` with the 5 known URLs.
+## Out of scope (per user)
 
-Confirm and I'll execute. Once you approve, I'll do the migration in one batch: delete TanStack files, create the new entry/router/pages, patch component imports, rewrite `package.json` and `vite.config.ts`, install deps, and verify the build.
+- No color/logo/typography family changes.
+- No copy/product info changes.
+- No backend (forms still open WhatsApp).
+- No 3D libs / WebGL — premium feel via CSS, SVG, RAF.
+
+## Rollout
+
+Single pass, section by section in this order so preview stays usable:
+1. Tokens + AmbientBackground + motion primitives
+2. Nav + Hero
+3. Stats + LiveTrackingDemo
+4. Bento refactor (Features → Specs)
+5. Products list + detail
+6. Contact + Footer
+7. FloatingActions (WhatsApp + Chatbot upgrades)
+8. Mobile polish + reduced-motion pass
