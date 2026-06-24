@@ -91,12 +91,6 @@ function AboutHero() {
               className="w-full h-auto product-float"
               loading="eager"
             />
-            <img
-              src={fuelSensor}
-              alt="Fuel monitoring sensor"
-              className="absolute -bottom-6 -left-6 w-32 h-auto opacity-90"
-              style={{ animation: "float-y 7s ease-in-out -2s infinite" }}
-            />
           </div>
         </div>
       </div>
