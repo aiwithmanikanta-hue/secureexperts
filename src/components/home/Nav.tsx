@@ -3,6 +3,7 @@ import { Link, useLocation } from "react-router-dom";
 import { Menu, X } from "lucide-react";
 import { MagneticButton } from "./MagneticButton";
 import { Logo } from "./Logo";
+import { openWhatsApp } from "@/components/chatbot/whatsapp";
 
 const menu = [
   { label: "Home", href: "/" },
@@ -36,7 +37,7 @@ export function Nav() {
           : "bg-background/40 backdrop-blur-sm border-b border-transparent"
       }`}
     >
-      <div className="max-w-6xl mx-auto px-6 h-16 grid grid-cols-[auto_1fr_auto] items-center gap-6">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 h-16 grid grid-cols-[auto_1fr_auto] items-center gap-4 sm:gap-6">
         <Link
           to="/"
           aria-label="Secure Experts — Home"
@@ -87,13 +88,15 @@ export function Nav() {
         className={`md:hidden fixed inset-0 z-40 transition-opacity duration-300 ${open ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"}`}
       >
         <div className="absolute inset-0 bg-background/95 backdrop-blur-2xl" onClick={() => setOpen(false)} />
-        <div className="relative pt-24 px-8 flex flex-col gap-1">
+        <div
+          className={`relative pt-24 px-6 flex flex-col gap-1 h-full transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] ${open ? "translate-x-0" : "translate-x-8"}`}
+        >
           {menu.map((m, i) => (
             <a
               key={m.label}
               href={m.href}
               onClick={() => setOpen(false)}
-              className="block py-4 text-3xl font-semibold tracking-tight text-foreground border-b border-border"
+              className="block py-5 text-3xl font-semibold tracking-tight text-foreground border-b border-border min-h-[56px]"
               style={{
                 animation: open
                   ? `reveal-up 0.5s ${0.05 + i * 0.07}s cubic-bezier(0.16,1,0.3,1) both`
@@ -103,13 +106,29 @@ export function Nav() {
               {m.label}
             </a>
           ))}
-          <a
-            href="/#cta"
-            onClick={() => setOpen(false)}
-            className="mt-8 inline-flex h-12 items-center justify-center rounded-full bg-foreground text-background font-medium text-sm shadow-soft"
-          >
-            Get Quote
-          </a>
+          <div className="mt-8 flex flex-col gap-3">
+            <a
+              href="/#cta"
+              onClick={() => setOpen(false)}
+              className="inline-flex h-14 items-center justify-center rounded-full bg-foreground text-background font-medium text-base shadow-soft"
+            >
+              Get Quote
+            </a>
+            <button
+              type="button"
+              onClick={() => {
+                setOpen(false);
+                openWhatsApp("Hi Secure Experts, I'd like to know more about your GPS tracking solutions.");
+              }}
+              className="inline-flex h-14 items-center justify-center gap-2 rounded-full text-white font-medium text-base shadow-soft"
+              style={{ background: "linear-gradient(135deg,#25D366,#128C7E)" }}
+            >
+              <svg viewBox="0 0 32 32" className="size-5" fill="currentColor" aria-hidden>
+                <path d="M16.001 3.2C8.93 3.2 3.2 8.93 3.2 16c0 2.26.6 4.47 1.73 6.41L3.2 28.8l6.55-1.71A12.78 12.78 0 0 0 16 28.8C23.07 28.8 28.8 23.07 28.8 16S23.07 3.2 16.001 3.2Zm0 23.2c-1.93 0-3.83-.52-5.49-1.5l-.39-.23-3.89 1.02 1.04-3.79-.25-.4A10.4 10.4 0 1 1 26.4 16c0 5.74-4.66 10.4-10.4 10.4Z" />
+              </svg>
+              Chat on WhatsApp
+            </button>
+          </div>
         </div>
       </div>
     </>

@@ -49,7 +49,7 @@ export function ProductDetailPage({ product }: { product: Product }) {
       <Nav />
       <main>
         {/* Breadcrumb */}
-        <div className="pt-28 px-6">
+        <div className="pt-24 sm:pt-28 px-4 sm:px-6">
           <div className="mx-auto max-w-6xl flex items-center gap-2 text-xs text-muted-foreground">
             <Link to="/" className="hover:text-foreground transition-colors">Home</Link>
             <ChevronRight className="size-3" />
@@ -60,13 +60,13 @@ export function ProductDetailPage({ product }: { product: Product }) {
         </div>
 
         {/* Hero */}
-        <section className="px-6 pt-10 pb-20">
-          <div className="mx-auto max-w-6xl grid lg:grid-cols-2 gap-12 items-center">
-            <RevealOnScroll>
+        <section className="px-4 sm:px-6 pt-8 sm:pt-10 pb-16 sm:pb-20">
+          <div className="mx-auto max-w-6xl grid lg:grid-cols-2 gap-8 sm:gap-12 items-center">
+            <RevealOnScroll className="order-2 lg:order-1">
               <span className="inline-flex items-center rounded-full bg-primary/10 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.18em] text-primary">
                 {product.badge}
               </span>
-              <h1 className="mt-4 text-4xl sm:text-5xl font-semibold tracking-tight text-foreground">
+              <h1 className="mt-4 text-3xl sm:text-4xl md:text-5xl font-semibold tracking-tight text-foreground">
                 {product.name}
               </h1>
               <p className="mt-3 text-[15px] uppercase tracking-[0.18em] text-muted-foreground">
@@ -75,26 +75,26 @@ export function ProductDetailPage({ product }: { product: Product }) {
               <p className="mt-6 text-base sm:text-lg leading-relaxed text-foreground/75 max-w-xl">
                 {product.summary}
               </p>
-              <div className="mt-8 flex flex-wrap items-center gap-3">
-                <WhatsAppButton productName={product.name} size="lg">
+              <div className="mt-8 flex flex-col sm:flex-row sm:flex-wrap items-stretch sm:items-center gap-3">
+                <WhatsAppButton productName={product.name} size="lg" className="w-full sm:w-auto">
                   Talk on WhatsApp
                 </WhatsAppButton>
                 <button
                   type="button"
                   onClick={() => openProductQuoteWhatsApp(product.name)}
-                  className="inline-flex h-12 items-center gap-2 rounded-full bg-foreground px-6 text-[15px] font-medium text-background shadow-soft transition-all duration-300 hover:scale-[1.03] hover:shadow-lift"
+                  className="inline-flex h-12 items-center justify-center gap-2 rounded-full bg-foreground px-6 text-[15px] font-medium text-background shadow-soft transition-all duration-300 hover:scale-[1.03] hover:shadow-lift w-full sm:w-auto"
                   aria-label={`Request a quote for ${product.name}`}
                 >
                   <FileText className="size-4" strokeWidth={1.75} />
                   Request Quote
                 </button>
-                <MagneticButton href="/#contact" variant="secondary" className="!h-12 !px-6 !text-[15px]">
+                <MagneticButton href="/#contact" variant="secondary" className="!h-12 !px-6 !text-[15px] w-full sm:w-auto">
                   Request Demo
                 </MagneticButton>
               </div>
             </RevealOnScroll>
 
-            <RevealOnScroll delay={150}>
+            <RevealOnScroll delay={150} className="order-1 lg:order-2">
               <div className="relative aspect-square overflow-hidden">
                 {/* ambient glow */}
                 <span
@@ -106,7 +106,7 @@ export function ProductDetailPage({ product }: { product: Product }) {
                   alt={product.name}
                   width={1024}
                   height={1024}
-                  className="absolute inset-0 size-full object-contain p-12 product-float"
+                  className="absolute inset-0 size-full object-contain p-6 sm:p-12 product-float"
                   style={{ animation: "float-y 6s ease-in-out infinite" }}
                 />
                 {/* floor reflection */}
