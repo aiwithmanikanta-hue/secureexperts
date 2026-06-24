@@ -119,6 +119,74 @@ export function ProductDetailPage({ product }: { product: Product }) {
           </div>
         </section>
 
+        {/* Product Details (labeled spec sheet) */}
+        <section className="px-6 pb-16">
+          <div className="mx-auto max-w-6xl">
+            <RevealOnScroll>
+              <div className="rounded-3xl border border-border bg-white/80 backdrop-blur-xl shadow-soft p-6 sm:p-8">
+                <p className="text-[11px] uppercase tracking-[0.2em] text-primary font-semibold">Product Details</p>
+                <h2 className="mt-2 text-2xl sm:text-3xl font-semibold tracking-tight">
+                  At a glance
+                </h2>
+                <dl className="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-x-10 gap-y-6">
+                  {[
+                    ["Device Type", product.details.deviceType],
+                    ["Technology", product.details.technology],
+                    ["Working Condition", product.details.workingCondition],
+                    ["Connectivity", product.details.connectivity],
+                    ["Power Supply", product.details.powerSupply],
+                    ["Installation", product.details.installation],
+                    ...(product.details.accuracy ? [["Tracking Accuracy", product.details.accuracy]] : []),
+                  ].map(([label, value]) => (
+                    <div key={label as string} className="flex flex-col gap-1 border-b border-border/60 pb-4 sm:border-0 sm:pb-0">
+                      <dt className="text-[11px] uppercase tracking-[0.18em] text-muted-foreground font-semibold">
+                        {label}
+                      </dt>
+                      <dd className="text-[15px] font-medium text-foreground leading-snug">
+                        {value}
+                      </dd>
+                    </div>
+                  ))}
+                  {product.details.accessibility && (
+                    <div className="sm:col-span-2 flex flex-col gap-2">
+                      <dt className="text-[11px] uppercase tracking-[0.18em] text-muted-foreground font-semibold">
+                        Accessibility
+                      </dt>
+                      <dd className="flex flex-wrap gap-2">
+                        {product.details.accessibility.map((a) => (
+                          <span
+                            key={a}
+                            className="inline-flex items-center gap-1.5 rounded-full bg-primary/10 px-3 py-1 text-xs font-medium text-primary"
+                          >
+                            <Check className="size-3" strokeWidth={3} /> {a}
+                          </span>
+                        ))}
+                      </dd>
+                    </div>
+                  )}
+                </dl>
+
+                <div className="mt-8 border-t border-border pt-6">
+                  <p className="text-[11px] uppercase tracking-[0.18em] text-muted-foreground font-semibold">
+                    Suitable For
+                  </p>
+                  <div className="mt-3 flex flex-wrap gap-2">
+                    {product.applications.map((a) => (
+                      <span
+                        key={a}
+                        className="inline-flex items-center gap-2 rounded-full border border-border bg-white/60 px-4 py-1.5 text-sm font-medium text-foreground/80"
+                      >
+                        <span className="size-1.5 rounded-full bg-primary" />
+                        {a}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </RevealOnScroll>
+          </div>
+        </section>
+
         {/* Overview */}
         <section className="px-6 py-20 surface-2 border-y border-border">
           <div className="mx-auto max-w-6xl">
@@ -320,9 +388,14 @@ export function ProductDetailPage({ product }: { product: Product }) {
               <WhatsAppButton productName={product.name} size="lg">
                 Talk to Secure Experts
               </WhatsAppButton>
-              <MagneticButton href="/#contact" variant="primary" className="!h-12 !px-6 !text-[15px]">
-                Get a Quote
-              </MagneticButton>
+              <button
+                type="button"
+                onClick={() => openProductQuoteWhatsApp(product.name)}
+                className="inline-flex h-12 items-center gap-2 rounded-full bg-foreground px-6 text-[15px] font-medium text-background shadow-soft transition-all duration-300 hover:scale-[1.03] hover:shadow-lift"
+              >
+                <FileText className="size-4" strokeWidth={1.75} />
+                Request Quote
+              </button>
               <MagneticButton href="/#contact" variant="secondary" className="!h-12 !px-6 !text-[15px]">
                 Book a Demo
               </MagneticButton>
