@@ -29,6 +29,15 @@ import { useReveal } from "@/components/home/useReveal";
 import { useTilt } from "@/components/home/useTilt";
 import { WhatsAppButton } from "@/components/products/WhatsAppButton";
 import { v5Basic, fuelSensor } from "@/assets";
+import industryLogistics from "@/assets/industries/logistics.jpg";
+import industrySchool from "@/assets/industries/school.jpg";
+import industryFuelTanker from "@/assets/industries/fuel-tanker.jpg";
+import industryConstruction from "@/assets/industries/construction.jpg";
+import industryDelivery from "@/assets/industries/delivery.jpg";
+import industryCorporate from "@/assets/industries/corporate.jpg";
+import industryIndustrial from "@/assets/industries/industrial.jpg";
+import industryGovernment from "@/assets/industries/government.jpg";
+import industryAssets from "@/assets/industries/assets.jpg";
 
 function AboutHero() {
   const r = useReveal<HTMLDivElement>();
@@ -251,15 +260,15 @@ function WhyChooseUs() {
 
 function IndustriesBento() {
   const items = [
-    { Icon: Truck, label: "Logistics & Transportation", span: "lg:col-span-2 lg:row-span-2" },
-    { Icon: Bus, label: "School Transportation", span: "lg:col-span-2" },
-    { Icon: Droplets, label: "Fuel Tankers", span: "lg:col-span-2" },
-    { Icon: HardHat, label: "Construction Companies", span: "lg:col-span-2" },
-    { Icon: PackageCheck, label: "Delivery Services", span: "lg:col-span-2" },
-    { Icon: Building2, label: "Corporate Fleets", span: "lg:col-span-2" },
-    { Icon: Cog, label: "Industrial Vehicles", span: "lg:col-span-2" },
-    { Icon: Landmark, label: "Government Organizations", span: "lg:col-span-2" },
-    { Icon: Boxes, label: "Asset Management Companies", span: "lg:col-span-2" },
+    { Icon: Truck, label: "Logistics & Transportation", image: industryLogistics, span: "lg:col-span-2 lg:row-span-2" },
+    { Icon: Bus, label: "School Transportation", image: industrySchool, span: "lg:col-span-2" },
+    { Icon: Droplets, label: "Fuel Tankers", image: industryFuelTanker, span: "lg:col-span-2" },
+    { Icon: HardHat, label: "Construction Companies", image: industryConstruction, span: "lg:col-span-2" },
+    { Icon: PackageCheck, label: "Delivery Services", image: industryDelivery, span: "lg:col-span-2" },
+    { Icon: Building2, label: "Corporate Fleets", image: industryCorporate, span: "lg:col-span-2" },
+    { Icon: Cog, label: "Industrial Vehicles", image: industryIndustrial, span: "lg:col-span-2" },
+    { Icon: Landmark, label: "Government Organizations", image: industryGovernment, span: "lg:col-span-2" },
+    { Icon: Boxes, label: "Asset Management Companies", image: industryAssets, span: "lg:col-span-2" },
   ];
   return (
     <section className="relative py-24 px-6">
@@ -272,23 +281,33 @@ function IndustriesBento() {
             Industries We Serve
           </h2>
         </RevealOnScroll>
-        <div className="grid grid-cols-2 lg:grid-cols-6 auto-rows-[160px] gap-4">
-          {items.map(({ Icon, label, span }, i) => (
+        <div className="grid grid-cols-2 lg:grid-cols-6 auto-rows-[200px] gap-4">
+          {items.map(({ Icon, label, image, span }, i) => (
             <RevealOnScroll
               key={label}
               delay={i * 50}
               className={`col-span-2 ${span}`}
             >
-              <div className="group relative h-full overflow-hidden rounded-3xl border border-border bg-white/70 backdrop-blur-xl p-6 flex flex-col justify-between transition-all duration-500 hover:-translate-y-1 hover:shadow-lift hover:border-primary/25">
+              <div className="group relative h-full overflow-hidden rounded-3xl border border-border transition-all duration-500 hover:-translate-y-1 hover:shadow-lift hover:border-primary/25">
+                <img
+                  src={image}
+                  alt={`${label} — Indian vehicles served by Secure Experts`}
+                  loading="lazy"
+                  width={1024}
+                  height={1024}
+                  className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                />
                 <div
                   aria-hidden
-                  className="absolute -top-12 -right-12 size-40 rounded-full bg-primary/10 blur-2xl opacity-60 group-hover:opacity-100 transition-opacity"
+                  className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/35 to-black/10"
                 />
-                <div className="size-11 rounded-2xl bg-primary/10 text-primary grid place-items-center">
-                  <Icon className="size-5" strokeWidth={1.75} />
-                </div>
-                <div className="text-lg font-semibold tracking-tight text-foreground">
-                  {label}
+                <div className="relative h-full p-6 flex flex-col justify-between">
+                  <div className="size-11 rounded-2xl bg-white/85 text-primary grid place-items-center backdrop-blur-md shadow-sm">
+                    <Icon className="size-5" strokeWidth={1.75} />
+                  </div>
+                  <div className="text-lg font-semibold tracking-tight text-white drop-shadow-sm">
+                    {label}
+                  </div>
                 </div>
               </div>
             </RevealOnScroll>
