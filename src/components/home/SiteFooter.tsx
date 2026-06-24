@@ -56,7 +56,7 @@ export function SiteFooter() {
             <ul className="space-y-3 text-sm text-muted-foreground">
               <li><a href="mailto:info@secureexperts.in" className="hover:text-foreground transition-colors">info@secureexperts.in</a></li>
               <li><a href="tel:+917337433351" className="hover:text-foreground transition-colors">+91 733 743 3351</a></li>
-              <li>London · Singapore · Dubai</li>
+              <li>Vijayawada</li>
             </ul>
           </div>
         </div>
