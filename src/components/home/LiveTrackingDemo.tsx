@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Activity, Fuel, Gauge, Satellite, ShieldCheck, MapPin } from "lucide-react";
 import { useReveal } from "./useReveal";
+import trackingVideo from "@/assets/tracking-demo.mp4.asset.json";
 
 // Smooth route as a cubic Bezier-ish polyline
 const ROUTE = "M 40 220 C 110 60, 220 320, 320 180 S 520 80, 580 200 S 700 320, 760 160";
@@ -82,49 +83,16 @@ export function LiveTrackingDemo() {
 
           <div className="relative mt-3 grid grid-cols-1 lg:grid-cols-[1fr_280px] gap-3">
             {/* Map */}
-            <div className="relative aspect-[16/9] rounded-2xl overflow-hidden border border-border bg-gradient-to-br from-[#eef4fb] via-white to-[#f0f7ff]">
-              {/* grid pattern */}
-              <svg className="absolute inset-0 size-full opacity-60" aria-hidden>
-                <defs>
-                  <pattern id="ltd-grid" width="40" height="40" patternUnits="userSpaceOnUse">
-                    <path d="M 40 0 L 0 0 0 40" fill="none" stroke="rgba(10,132,255,0.08)" strokeWidth="1" />
-                  </pattern>
-                </defs>
-                <rect width="100%" height="100%" fill="url(#ltd-grid)" />
-              </svg>
-
-              {/* Roads */}
-              <svg viewBox="0 0 800 360" className="absolute inset-0 size-full" preserveAspectRatio="none" aria-hidden>
-                <path d="M 0 300 C 200 260, 300 320, 800 280" fill="none" stroke="rgba(17,17,17,0.05)" strokeWidth="22" strokeLinecap="round" />
-                <path d="M 0 120 C 220 160, 420 60, 800 140" fill="none" stroke="rgba(17,17,17,0.05)" strokeWidth="18" strokeLinecap="round" />
-
-                {/* Route */}
-                <path id="ltd-route" d={ROUTE} fill="none" stroke="rgba(10,132,255,0.25)" strokeWidth="4" strokeLinecap="round" />
-                <path
-                  d={ROUTE}
-                  fill="none"
-                  stroke="#0a84ff"
-                  strokeWidth="3"
-                  strokeLinecap="round"
-                  strokeDasharray={`${ROUTE_LEN * t} ${ROUTE_LEN}`}
-                />
-
-                {/* Start / End */}
-                <circle cx="40" cy="220" r="6" fill="#0a84ff" />
-                <circle cx="40" cy="220" r="12" fill="none" stroke="#0a84ff" strokeWidth="1.5" opacity="0.45" />
-                <circle cx="760" cy="160" r="6" fill="#111" />
-
-                {/* Vehicle dot */}
-                <g style={{ transition: "transform 0.2s linear" }}>
-                  <circle cx={pt.x} cy={pt.y} r="20" fill="rgba(10,132,255,0.18)">
-                    <animate attributeName="r" values="14;22;14" dur="2s" repeatCount="indefinite" />
-                    <animate attributeName="opacity" values="0.35;0.05;0.35" dur="2s" repeatCount="indefinite" />
-                  </circle>
-                  <circle cx={pt.x} cy={pt.y} r="9" fill="#fff" stroke="#0a84ff" strokeWidth="3" />
-                </g>
-              </svg>
-
-              {/* Floating telemetry chip */}
+            <div className="relative aspect-[16/9] rounded-2xl overflow-hidden border border-border bg-black">
+              <video
+                src={trackingVideo.url}
+                autoPlay
+                muted
+                loop
+                playsInline
+                preload="metadata"
+                className="absolute inset-0 size-full object-cover"
+              />
               <div
                 className="absolute top-3 left-3 rounded-xl bg-white/90 backdrop-blur-xl border border-border px-3 py-2 text-[11px] shadow-soft"
                 aria-hidden
