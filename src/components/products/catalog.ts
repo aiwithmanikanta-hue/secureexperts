@@ -1,12 +1,11 @@
-import { vltd4g, vltd2g, v5Basic, fuelSensor, gpsSoftware } from "@/assets";
+import { vltd4g, vltd2g, v5Basic, fuelSensor } from "@/assets";
 import { openWhatsApp } from "@/components/chatbot/whatsapp";
 
 export type ProductSlug =
   | "vltd-4g-device"
   | "vltd-2g-device"
   | "v5-basic-gps-device"
-  | "fuel-sensor"
-  | "gps-tracking-software";
+  | "fuel-sensor";
 
 export type ProductDetails = {
   deviceType: string;
@@ -286,69 +285,6 @@ export const PRODUCTS: Product[] = [
       installation: "Fuel Tank Mounted",
     },
     applications: ["Trucks", "Tankers", "Fleet Vehicles", "Construction Equipment", "Generators"],
-  },
-  {
-    slug: "gps-tracking-software",
-    name: "GPS Tracking Software",
-    tagline: "Cloud platform for live fleet visibility",
-    badge: "Platform",
-    badgeTone: "primary",
-    summary:
-      "A cloud-based GPS tracking platform with a web dashboard and Android app — built for fleet operators who need real-time visibility, replayable history, and clean analytics in one place.",
-    image: gpsSoftware,
-    highlights: [
-      "Live web & mobile dashboard",
-      "Route playback & history",
-      "Geofencing & driver reports",
-      "Fleet analytics & alerts",
-    ],
-    overview: [
-      "The Secure Experts GPS Tracking Software is the control room your fleet runs from — a clean, modern web and mobile platform that turns raw device data into clear, actionable visibility.",
-      "Monitor every vehicle live, replay any past trip, manage geofences, and pull driver and fleet reports without juggling tools or spreadsheets.",
-      "Built for transport businesses and logistics operators who want their entire operation in one trustworthy view, on any device.",
-    ],
-    features: [
-      { icon: "Satellite", title: "Live Vehicle Tracking", desc: "Real-time positions for every connected vehicle on one map." },
-      { icon: "History", title: "Route Playback", desc: "Replay any trip with timestamps, stops, and speed." },
-      { icon: "MapPin", title: "Geofence Management", desc: "Unlimited zones with entry, exit, and dwell alerts." },
-      { icon: "FileCheck2", title: "Driver Reports", desc: "Behavior, distance, and trip summaries per driver." },
-      { icon: "Signal", title: "Fleet Analytics", desc: "Utilisation, idling, and performance insights." },
-      { icon: "ShieldAlert", title: "Alert Notifications", desc: "Configurable alerts on web, mobile, and WhatsApp." },
-    ],
-    specs: [
-      { label: "Platform", value: "Cloud-based, multi-tenant" },
-      { label: "Access", value: "Web dashboard + Android app" },
-      { label: "Data Refresh", value: "Real-time streaming updates" },
-      { label: "Map Coverage", value: "Pan-India with road-level detail" },
-      { label: "User Roles", value: "Admin, manager, and viewer roles" },
-      { label: "Integrations", value: "Works with Secure Experts VLTDs & Fuel Sensor" },
-      { label: "Best For", value: "Fleet operators, logistics, transport" },
-      { label: "Support", value: "WhatsApp & email support" },
-    ],
-    useCases: [
-      "Fleet operators",
-      "Logistics companies",
-      "Transport businesses",
-      "School & passenger transport",
-      "Last-mile delivery",
-    ],
-    faqs: [
-      { q: "Do I need to install anything?", a: "No — the platform runs in the browser. Use the Android app for on-the-go access." },
-      { q: "How many vehicles can I track?", a: "There's no fixed cap — accounts scale from a single vehicle to large mixed fleets." },
-      { q: "Can I give limited access to my team?", a: "Yes. Admin, manager, and viewer roles let you control what each user can see and do." },
-      { q: "Does it work with my existing trackers?", a: "It's optimised for Secure Experts VLTDs and the Fuel Sensor. Talk to us about other devices on WhatsApp." },
-      { q: "How do I get pricing?", a: "Tap Request Quote or WhatsApp on this page — we'll share platform pricing tailored to your fleet size." },
-    ],
-    details: {
-      deviceType: "Cloud-Based Tracking Platform",
-      technology: "Web + Mobile Monitoring Platform",
-      workingCondition: "Real-Time Monitoring System",
-      connectivity: "Internet (Web + Mobile)",
-      powerSupply: "Cloud-hosted (no on-site hardware)",
-      installation: "No installation — sign-in based access",
-      accessibility: ["Web Dashboard", "Android App", "Mobile Browser"],
-    },
-    applications: ["Fleet Operators", "Logistics Companies", "Transport Businesses"],
   },
 ];
 
