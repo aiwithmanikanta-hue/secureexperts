@@ -1,8 +1,8 @@
 import { Link } from "react-router-dom";
-import { Check, ArrowRight } from "lucide-react";
+import { Check, ArrowRight, FileText } from "lucide-react";
 import { useTilt } from "@/components/home/useTilt";
 import { WhatsAppButton } from "./WhatsAppButton";
-import type { Product } from "./catalog";
+import { openProductQuoteWhatsApp, type Product } from "./catalog";
 
 const badgeStyles: Record<Product["badgeTone"], string> = {
   primary: "bg-primary text-primary-foreground",
@@ -86,6 +86,15 @@ export function ProductCard({ product, featured }: { product: Product; featured?
             View Details
             <ArrowRight className="size-4 transition-transform duration-300 group-hover/btn:translate-x-0.5" />
           </Link>
+          <button
+            type="button"
+            onClick={() => openProductQuoteWhatsApp(product.name)}
+            className="inline-flex h-11 items-center gap-1.5 rounded-full border border-border bg-white/80 px-5 text-sm font-medium text-foreground shadow-soft transition-all duration-300 hover:scale-[1.03] hover:border-primary/40 hover:text-primary"
+            aria-label={`Request a quote for ${product.name}`}
+          >
+            <FileText className="size-4" strokeWidth={1.75} />
+            Request Quote
+          </button>
           <WhatsAppButton productName={product.name} variant="outline" size="md">
             WhatsApp
           </WhatsAppButton>

@@ -1,10 +1,23 @@
-import { vltd4g, vltd2g, v5Basic } from "@/assets";
+import { vltd4g, vltd2g, v5Basic, fuelSensor, gpsSoftware } from "@/assets";
 import { openWhatsApp } from "@/components/chatbot/whatsapp";
 
 export type ProductSlug =
   | "vltd-4g-device"
   | "vltd-2g-device"
-  | "v5-basic-gps-device";
+  | "v5-basic-gps-device"
+  | "fuel-sensor"
+  | "gps-tracking-software";
+
+export type ProductDetails = {
+  deviceType: string;
+  technology: string;
+  workingCondition: string;
+  connectivity: string;
+  powerSupply: string;
+  installation: string;
+  accuracy?: string;
+  accessibility?: string[];
+};
 
 export type Product = {
   slug: ProductSlug;
@@ -20,6 +33,8 @@ export type Product = {
   specs: { label: string; value: string }[];
   useCases: string[];
   faqs: { q: string; a: string }[];
+  details: ProductDetails;
+  applications: string[];
 };
 
 export const PRODUCTS: Product[] = [
@@ -75,6 +90,16 @@ export const PRODUCTS: Product[] = [
       { q: "What warranty is included?", a: "Every VLTD 4G ships with a 1-year manufacturer warranty. Extended cover is available on request." },
       { q: "Can I use it across multiple vehicles?", a: "Each device is paired to one vehicle for accuracy, but your Secure Experts account manages an unlimited number of devices." },
     ],
+    details: {
+      deviceType: "Digital GPS Tracking Device",
+      technology: "4G LTE + GPS + GSM Tracking Technology",
+      workingCondition: "24/7 Continuous Tracking",
+      connectivity: "4G Network with 2G Fallback Support",
+      powerSupply: "Vehicle Battery Powered",
+      installation: "Hidden Vehicle Installation",
+      accuracy: "High Precision Location Tracking",
+    },
+    applications: ["Cars", "Trucks", "Buses", "Logistics Vehicles", "Fleet Vehicles"],
   },
   {
     slug: "vltd-2g-device",
@@ -128,6 +153,15 @@ export const PRODUCTS: Product[] = [
       { q: "Is the warranty the same as the flagship?", a: "Yes, every VLTD 2G ships with a 1-year manufacturer warranty." },
       { q: "How do I get help?", a: "Tap any WhatsApp button on this page to reach our support team instantly." },
     ],
+    details: {
+      deviceType: "Digital GPS Tracking Device",
+      technology: "2G GSM + GPS Technology",
+      workingCondition: "Continuous Vehicle Monitoring",
+      connectivity: "2G Network",
+      powerSupply: "Vehicle Battery Powered",
+      installation: "Professional Installation",
+    },
+    applications: ["Cars", "Commercial Vehicles", "Small Fleets"],
   },
   {
     slug: "v5-basic-gps-device",
@@ -181,6 +215,140 @@ export const PRODUCTS: Product[] = [
       { q: "Does it support SOS?", a: "SOS is available on the VLTD 4G. The V5 Basic focuses on live tracking, geofencing, and trip history." },
       { q: "How do I get a quote?", a: "Tap the WhatsApp button on this page — we'll share pricing and demo details directly." },
     ],
+    details: {
+      deviceType: "Compact Digital GPS Tracker",
+      technology: "GPS + GSM Tracking",
+      workingCondition: "Real-Time Vehicle Monitoring",
+      connectivity: "GSM Network",
+      powerSupply: "Vehicle Power Source",
+      installation: "Easy Installation",
+    },
+    applications: ["Cars", "Bikes", "Personal Vehicles"],
+  },
+  {
+    slug: "fuel-sensor",
+    name: "Fuel Sensor",
+    tagline: "Digital fuel monitoring & theft detection",
+    badge: "Add-on",
+    badgeTone: "emerald",
+    summary:
+      "A high-accuracy capacitive fuel sensor that pairs with your VLTD to deliver live fuel levels, theft alerts, and complete consumption analytics for every vehicle in your fleet.",
+    image: fuelSensor,
+    highlights: [
+      "Live fuel level monitoring",
+      "Instant fuel theft alerts",
+      "Refill detection & logs",
+      "Detailed consumption analytics",
+    ],
+    overview: [
+      "The Secure Experts Fuel Sensor is a digital capacitive sensor mounted directly into the fuel tank, giving you a precise, real-time view of how much fuel each vehicle has at any moment.",
+      "Integrated with the Secure Experts tracking platform, every drop, refill, and abnormal drain is logged and alerted — so theft and pilferage stop being invisible costs.",
+      "From single trucks to large mixed fleets, the Fuel Sensor turns fuel into a measurable, reportable line item you can finally control.",
+    ],
+    features: [
+      { icon: "Signal", title: "Live Fuel Level", desc: "Continuous tank-level monitoring streamed to your dashboard." },
+      { icon: "ShieldAlert", title: "Theft Detection", desc: "Instant alerts on sudden drops or siphoning attempts." },
+      { icon: "BatteryCharging", title: "Refill Detection", desc: "Auto-logs every fuel-up with timestamp and volume." },
+      { icon: "FileCheck2", title: "Consumption Reports", desc: "Per-trip, per-vehicle, and per-driver fuel reports." },
+      { icon: "History", title: "Fuel Analytics", desc: "Trends, anomalies, and efficiency insights over time." },
+      { icon: "Wrench", title: "Tank-Mounted", desc: "Professional in-tank installation for accuracy." },
+    ],
+    specs: [
+      { label: "Sensor Type", value: "Capacitive fuel level sensor" },
+      { label: "Output", value: "Digital, GPS platform integrated" },
+      { label: "Mounting", value: "Fuel tank mounted" },
+      { label: "Power", value: "Vehicle electrical system" },
+      { label: "Monitoring", value: "24/7 live fuel level" },
+      { label: "Compatibility", value: "Pairs with Secure Experts VLTDs" },
+      { label: "Best For", value: "Trucks, tankers, fleets, generators" },
+      { label: "Warranty", value: "1-year manufacturer warranty" },
+    ],
+    useCases: [
+      "Trucks",
+      "Tankers",
+      "Fleet vehicles",
+      "Construction equipment",
+      "Generators",
+    ],
+    faqs: [
+      { q: "Do I need a tracking device to use the Fuel Sensor?", a: "Yes — the Fuel Sensor integrates with our VLTD devices and the Secure Experts platform to deliver live data and alerts." },
+      { q: "How accurate are the readings?", a: "Capacitive sensing delivers high accuracy across the full tank range, calibrated per vehicle during installation." },
+      { q: "Will it detect siphoning?", a: "Yes. Sudden, abnormal drops trigger instant fuel theft alerts on the dashboard and WhatsApp." },
+      { q: "Can I track fuel across multiple vehicles?", a: "Absolutely — fleet-level dashboards summarise consumption, refills, and losses across every connected vehicle." },
+      { q: "Does installation damage the tank?", a: "No. Certified installers fit the sensor using a sealed, reversible mount." },
+    ],
+    details: {
+      deviceType: "Digital Fuel Monitoring Sensor",
+      technology: "Capacitive Fuel Sensing Technology",
+      workingCondition: "24/7 Fuel Level Monitoring",
+      connectivity: "Integrated with GPS Tracking Platform",
+      powerSupply: "Vehicle Electrical System",
+      installation: "Fuel Tank Mounted",
+    },
+    applications: ["Trucks", "Tankers", "Fleet Vehicles", "Construction Equipment", "Generators"],
+  },
+  {
+    slug: "gps-tracking-software",
+    name: "GPS Tracking Software",
+    tagline: "Cloud platform for live fleet visibility",
+    badge: "Platform",
+    badgeTone: "primary",
+    summary:
+      "A cloud-based GPS tracking platform with a web dashboard and Android app — built for fleet operators who need real-time visibility, replayable history, and clean analytics in one place.",
+    image: gpsSoftware,
+    highlights: [
+      "Live web & mobile dashboard",
+      "Route playback & history",
+      "Geofencing & driver reports",
+      "Fleet analytics & alerts",
+    ],
+    overview: [
+      "The Secure Experts GPS Tracking Software is the control room your fleet runs from — a clean, modern web and mobile platform that turns raw device data into clear, actionable visibility.",
+      "Monitor every vehicle live, replay any past trip, manage geofences, and pull driver and fleet reports without juggling tools or spreadsheets.",
+      "Built for transport businesses and logistics operators who want their entire operation in one trustworthy view, on any device.",
+    ],
+    features: [
+      { icon: "Satellite", title: "Live Vehicle Tracking", desc: "Real-time positions for every connected vehicle on one map." },
+      { icon: "History", title: "Route Playback", desc: "Replay any trip with timestamps, stops, and speed." },
+      { icon: "MapPin", title: "Geofence Management", desc: "Unlimited zones with entry, exit, and dwell alerts." },
+      { icon: "FileCheck2", title: "Driver Reports", desc: "Behavior, distance, and trip summaries per driver." },
+      { icon: "Signal", title: "Fleet Analytics", desc: "Utilisation, idling, and performance insights." },
+      { icon: "ShieldAlert", title: "Alert Notifications", desc: "Configurable alerts on web, mobile, and WhatsApp." },
+    ],
+    specs: [
+      { label: "Platform", value: "Cloud-based, multi-tenant" },
+      { label: "Access", value: "Web dashboard + Android app" },
+      { label: "Data Refresh", value: "Real-time streaming updates" },
+      { label: "Map Coverage", value: "Pan-India with road-level detail" },
+      { label: "User Roles", value: "Admin, manager, and viewer roles" },
+      { label: "Integrations", value: "Works with Secure Experts VLTDs & Fuel Sensor" },
+      { label: "Best For", value: "Fleet operators, logistics, transport" },
+      { label: "Support", value: "WhatsApp & email support" },
+    ],
+    useCases: [
+      "Fleet operators",
+      "Logistics companies",
+      "Transport businesses",
+      "School & passenger transport",
+      "Last-mile delivery",
+    ],
+    faqs: [
+      { q: "Do I need to install anything?", a: "No — the platform runs in the browser. Use the Android app for on-the-go access." },
+      { q: "How many vehicles can I track?", a: "There's no fixed cap — accounts scale from a single vehicle to large mixed fleets." },
+      { q: "Can I give limited access to my team?", a: "Yes. Admin, manager, and viewer roles let you control what each user can see and do." },
+      { q: "Does it work with my existing trackers?", a: "It's optimised for Secure Experts VLTDs and the Fuel Sensor. Talk to us about other devices on WhatsApp." },
+      { q: "How do I get pricing?", a: "Tap Request Quote or WhatsApp on this page — we'll share platform pricing tailored to your fleet size." },
+    ],
+    details: {
+      deviceType: "Cloud-Based Tracking Platform",
+      technology: "Web + Mobile Monitoring Platform",
+      workingCondition: "Real-Time Monitoring System",
+      connectivity: "Internet (Web + Mobile)",
+      powerSupply: "Cloud-hosted (no on-site hardware)",
+      installation: "No installation — sign-in based access",
+      accessibility: ["Web Dashboard", "Android App", "Mobile Browser"],
+    },
+    applications: ["Fleet Operators", "Logistics Companies", "Transport Businesses"],
   },
 ];
 
@@ -196,4 +364,12 @@ export function buildProductWhatsAppMessage(name: string) {
 
 export function openProductWhatsApp(name: string) {
   openWhatsApp(buildProductWhatsAppMessage(name));
+}
+
+export function buildProductQuoteMessage(name: string) {
+  return `Hello Secure Experts, I'd like to request a quote for ${name}. Please share pricing and details.`;
+}
+
+export function openProductQuoteWhatsApp(name: string) {
+  openWhatsApp(buildProductQuoteMessage(name));
 }
