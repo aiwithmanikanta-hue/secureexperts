@@ -1,87 +1,40 @@
-## Mobile Optimization — Secure Experts
+# Services Page — Build Plan
 
-A non-destructive pass that tunes layout, type, spacing, and touch targets for ≤768px while preserving the current design language, colors, branding, content, WhatsApp/AI chatbot behavior, and product info.
+A new `/services` route, designed in the existing Secure Experts visual language (white / off-white / light blue / brand blue / dark navy, SF-style typography, glassmorphism, magnetic buttons, reveal-on-scroll). It will reuse current building blocks (`Nav`, `SiteFooter`, `MagneticButton`, `RevealOnScroll`, `useReveal`, `useMagnetic`, `LiveTrackingDemo`, `FloatingActions`) so the page feels native to the site, not bolted on.
 
-### Guardrails
-- No color/brand/logo/content edits.
-- No changes to WhatsApp or Chatbot logic — only their mobile positioning and safe-area padding.
-- All work in frontend presentation only (CSS classes, fluid type, conditional spans).
+## Scope
 
-### Global
+Create `src/pages/Services.tsx` plus section components under `src/components/services/`. Add route in `src/App.tsx` and a "Services" link in `Nav.tsx` menu. No backend, no schema changes, no logo/branding/content changes elsewhere.
 
-- `index.html` viewport already correct. Add `overflow-x: hidden` safeguard on `body/html` in `src/styles.css` to kill any horizontal scroll.
-- Add fluid type utilities in `styles.css`:
-  - `--fs-hero: clamp(2rem, 6vw + 0.5rem, 5.5rem)`
-  - `--fs-h2: clamp(1.75rem, 3.5vw + 0.5rem, 3rem)`
-  - `--fs-h3: clamp(1.25rem, 1.5vw + 0.75rem, 1.5rem)`
-  - apply via small helper classes (`text-fluid-hero`, etc.) so we only swap classnames, not rewrite hierarchy.
-- Replace fixed `px-6` page gutters with `px-4 sm:px-6` site-wide where currently `px-6`.
-- Standardize CTA min-height: `h-12 sm:h-12` is fine on desktop; ensure mobile CTAs are `min-h-[48px]` and full-width inside narrow stacks (`w-full sm:w-auto` on the primary CTAs in Hero, AboutHero, AboutCTA, FinalCTA, ProductDetailPage hero).
-- Reduce mobile section padding from `py-24/28/32` to `py-16 sm:py-24 md:py-28` across Hero, Contact, AboutPage sections, Solutions, WhyChooseUs, IndustriesBento, Commitment, AboutCTA, FinalCTA.
+## Page structure
 
-### Navbar (`src/components/home/Nav.tsx`)
-Already has hamburger + drawer; refine:
-- Drawer: add slide-in transform (`translate-x-full → translate-x-0`) in addition to opacity for the premium feel.
-- Add WhatsApp CTA link inside the mobile drawer below "Get Quote".
-- Increase tap area of menu links to `py-5` and ensure each is ≥48px tall.
-- Ensure body scroll-lock already present continues to work.
+1. **Nav (existing)** — add "Services" item. Live Login / Admin Login buttons are not in the current nav; I'll skip adding them unless you want them (they aren't wired to any auth). Confirm if needed.
+2. **Hero** — eyebrow "OUR SERVICES", H1 "Smart Tracking Solutions for Every Business", subtitle, two CTAs (WhatsApp + Request Demo). Right side: layered glass cards showing GPS device, fuel sensor mini-widget, mobile dashboard mock, fleet tile — floating with soft parallax. Background: blue gradient blobs + particle dots.
+3. **Service Categories** — 6 glass cards (GPS Tracking, Fuel Monitoring, Fleet Management, AIS-140, Vehicle Cameras, Asset Tracking) with lucide icons (Satellite, Fuel, LayoutDashboard, ShieldCheck, Camera, Package), hover lift + light sweep.
+4. **Service Overview (Who we serve)** — two-column: left checklist of 9 industries with animated check ticks; right premium image (Indian highway/truck) with floating dashboard overlay cards.
+5. **Technology Stack** — 6 spec cards (GPS, Fuel Sensor, Cloud, Android & Web, Live Alerts, AI Analytics).
+6. **Live Tracking Demo** — reuse existing `LiveTrackingDemo` component (already in home), retitled with route caption "Vijayawada → Rajahmundry → Visakhapatnam".
+7. **Platform Features (Bento Grid)** — 12 features in an asymmetric bento layout with icons + hover.
+8. **Fuel Analytics** — 2 cards with inline SVG line charts (green fill events, red theft) with stroke-dash draw-in animation on reveal.
+9. **Industries We Serve** — 10 image cards with gradient overlay, hover zoom + lift. Uses Unsplash photos of Indian logistics/trucks/buses (royalty-free via picsum-style URLs or unsplash source) — confirm if you'd rather supply images.
+10. **Why Choose Secure Experts** — 10 icon tick cards in a clean 2/5 grid.
+11. **Final CTA** — headline + 3 buttons (WhatsApp via `openWhatsApp`, Request Demo scrolls to home `#contact`, Contact Sales `mailto:`).
+12. **SiteFooter (existing)**.
 
-### Hero (`src/components/home/Hero.tsx`)
-- Stack order is already vertical. Reduce mobile top padding (`pt-28` on mobile vs `pt-36`).
-- Floating feature chips and "Live · 24 satellites" widget are already `hidden md:flex` — keep.
-- Cursor parallax is mouse-only; safe on mobile. Ensure SignalWaves/blob blurs are toned down on mobile (`blur-2xl sm:blur-3xl`).
-- CTAs: stack full-width on `<sm`.
+## Files
 
-### Products list (`src/components/products/ProductsListPage.tsx`, `ProductCard.tsx`)
-- Force single column `<sm`, 2-col `sm`, 3-col `lg`. Increase card image area on mobile and ensure `object-contain` with adequate aspect ratio.
-- Cards full-width with comfortable padding; CTA full-width on mobile.
+- Add: `src/pages/Services.tsx`
+- Add: `src/components/services/ServicesHero.tsx`, `ServiceCategories.tsx`, `IndustriesChecklist.tsx`, `TechStack.tsx`, `PlatformBento.tsx`, `FuelAnalytics.tsx`, `IndustriesGrid.tsx`, `WhyChoose.tsx`, `ServicesCTA.tsx`
+- Edit: `src/App.tsx` (route `/services`), `src/components/home/Nav.tsx` (menu item), `src/components/home/SiteFooter.tsx` (Services link in Quick Links)
 
-### Product Detail (`src/components/products/ProductDetailPage.tsx`)
-- Hero is `lg:grid-cols-2` — already stacks. Move image first on mobile via `order-1 lg:order-2` and text `order-2 lg:order-1` so the user sees the product image at the top per spec.
-- CTAs (`WhatsApp`, `Request Quote`, `Request Demo`) become full-width on `<sm` and stack.
-- Feature/Spec/FAQ/CTA sections already vertical. Tighten gutters and font sizes; ensure no `whitespace-nowrap` truncation in spec rows.
+## Design & motion
 
-### About Page (`src/components/about/AboutPage.tsx`)
-- AboutHero: stack with headline first, image card second, CTAs third (already). Image card padding reduced (`p-6 sm:p-10`).
-- WhoWeAre, MissionVision, Solutions, WhyChooseUs, Commitment: keep single column `<md`; adjust paddings and large round radii (`rounded-[28px] sm:rounded-[36px]`).
-- Industries Bento: convert to **swipeable carousel on mobile** using a horizontal snap scroller (`flex overflow-x-auto snap-x snap-mandatory` with `snap-center` cards, `min-w-[78%]`), no library needed. Keep desktop bento grid as-is via `md:` breakpoint. Hide scrollbar with existing utility or new `.no-scrollbar` rule. Each card retains its image fully visible with `object-cover` and a sensible mobile aspect (`aspect-[4/3]`). Indian vehicle imagery preserved.
+- Tokens only — no hardcoded hex. Use existing `bg-card`, `border-border`, `text-foreground`, `text-primary`, `bg-tint-blue`, `shadow-soft`, `shadow-lift` classes already in `styles.css`.
+- Animations: `useReveal` fade-up, `useMagnetic` for CTAs, light-sweep on cards, SVG stroke-dash for analytics, breathing glow on hero badge.
+- Mobile-first: single-column stacks, swipeable horizontal scroll for category + industries cards on `sm:`, touch targets ≥44px, no horizontal overflow.
+- SEO: `<title>Services — GPS Tracking, Fuel Monitoring, Fleet Management | Secure Experts</title>`, meta description, single H1, alt text, JSON-LD `Service` schema.
 
-### Contact (`src/components/home/Contact.tsx`)
-- Reorder on mobile to: Form → Office Details → Map → WhatsApp CTA, using `order-*` classes inside the existing grid.
-- Inputs already `h-12`; keep. Ensure correct `inputMode`/`type` attributes: `type="tel" inputMode="tel"` on phone, `type="email" inputMode="email"` on email.
-- Map iframe: enforce `aspect-video sm:aspect-[4/3]` and `w-full` to avoid overflow.
+## Out of scope (flag for confirmation)
 
-### Floating actions (`src/components/chatbot/FloatingActions.tsx`)
-- Move from `bottom-6 right-6` to `bottom-[max(1rem,env(safe-area-inset-bottom))] right-[max(1rem,env(safe-area-inset-right))]` so iOS notch/home-bar safe area is respected.
-- Ensure proper vertical spacing between WhatsApp FAB and Chatbot FAB (`gap-4` mobile, `gap-5` desktop) so neither covers content.
-
-### Chatbot window (`src/components/chatbot/Chatbot.tsx`)
-- On `<sm`, render full-width sheet anchored bottom with `max-h-[85vh]`, rounded only on top corners, safe-area padding bottom. Desktop chat panel unchanged.
-- Input row: 16px font-size to prevent iOS zoom on focus.
-
-### Images / performance
-- Add `loading="lazy"` to all non-LCP images (industries, product list cards, gallery showcase). Hero device stays eager.
-- Add `decoding="async"` and explicit `width`/`height` where missing to stabilize CLS.
-- No format conversion (no build-system change requested); keep current PNGs.
-
-### Animations on mobile
-- In `styles.css`, wrap heavy keyframes (`aurora-drift`, `shimmer`, multiple `ambient-blob`s) with `@media (max-width: 640px)` overrides that disable or shorten them, and respect `prefers-reduced-motion` (already partly honored).
-
-### Files touched
-- `src/styles.css` — fluid type utilities, overflow guard, mobile animation throttles, `.no-scrollbar`.
-- `src/components/home/Nav.tsx` — slide-in drawer + WhatsApp link.
-- `src/components/home/Hero.tsx` — paddings, CTA stacking.
-- `src/components/home/Contact.tsx` — order classes, input modes, map aspect.
-- `src/components/home/FinalCTA.tsx`, `SiteFooter.tsx`, `Features.tsx`, `WhyUs.tsx`, `Trust.tsx`, `Stats.tsx`, `ProductBenefits.tsx`, `ProductShowcase.tsx`, `Specs.tsx`, `LiveTrackingDemo.tsx` — section paddings + CTA width fixes.
-- `src/components/products/ProductsListPage.tsx`, `ProductCard.tsx`, `ProductsHero.tsx` — single-col mobile, larger images, CTA width.
-- `src/components/products/ProductDetailPage.tsx` — order swap, CTA stacking, gutter trims.
-- `src/components/about/AboutPage.tsx` — bento → mobile carousel, paddings, image card tightening.
-- `src/components/chatbot/FloatingActions.tsx` — safe-area + mobile gap.
-- `src/components/chatbot/Chatbot.tsx` — mobile bottom-sheet sizing, 16px input.
-
-### Out of scope (explicit)
-- No content/copy edits.
-- No new pages, no router changes.
-- No backend changes.
-- No image regeneration or asset conversion (WebP, vite-imagetools) — would change build config; can be a follow-up if you want a perf-only PR later.
-- No PageSpeed audit run as part of this task; targets are best-effort via lazy-loading + dimensions.
+- Live Login / Admin Login buttons — no auth exists in the app. I will not add non-functional buttons unless you want placeholders.
+- Industry photos — will use Unsplash hotlinks for now; swap to uploaded assets when you provide them.
