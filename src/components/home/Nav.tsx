@@ -8,6 +8,7 @@ import { openWhatsApp } from "@/components/chatbot/whatsapp";
 const menu = [
   { label: "Home", href: "/" },
   { label: "Products", href: "/products" },
+  { label: "Services", href: "/services" },
   { label: "About Us", href: "/about" },
   { label: "Contact Us", href: "/#contact" },
 ];
@@ -54,7 +55,9 @@ export function Nav() {
                   ? pathname.startsWith("/products")
                   : m.href === "/about"
                     ? pathname.startsWith("/about")
-                    : false;
+                    : m.href === "/services"
+                      ? pathname.startsWith("/services")
+                      : false;
             return (
               <a
                 key={m.label}

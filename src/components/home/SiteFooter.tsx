@@ -38,8 +38,8 @@ export function SiteFooter() {
           <div>
             <h4 className="text-sm font-medium mb-5 text-foreground">Product</h4>
             <ul className="space-y-3 text-sm text-muted-foreground">
-              <li><a href="#product" className="hover:text-foreground transition-colors">VLTDAIS140</a></li>
-              <li><a href="#features" className="hover:text-foreground transition-colors">Features</a></li>
+              <li><a href="/products" className="hover:text-foreground transition-colors">All Products</a></li>
+              <li><a href="/services" className="hover:text-foreground transition-colors">Services</a></li>
               <li><a href="#specs" className="hover:text-foreground transition-colors">Specifications</a></li>
             </ul>
           </div>
