@@ -9,3 +9,4 @@ export const fuelSensor = "/assets/products/product-fuel-sensor.png";
 export const whatsappIcon = "/assets/icons/whatsapp-icon.png";
 export const heroDevice = "/assets/backgrounds/vltdais140-hero.png";
 export const showcaseDevice = "/assets/gallery/vltdais140-showcase.png";
+export const trackingVideo = "/assets/videos/tracking-demo.mp4";
