@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Activity, Fuel, Gauge, Satellite, ShieldCheck, MapPin } from "lucide-react";
 import { useReveal } from "./useReveal";
-import trackingVideo from "@/assets/tracking-demo.mp4.asset.json";
+import { trackingVideo } from "@/assets";
 
 // Smooth route as a cubic Bezier-ish polyline
 const ROUTE = "M 40 220 C 110 60, 220 320, 320 180 S 520 80, 580 200 S 700 320, 760 160";
@@ -85,7 +85,7 @@ export function LiveTrackingDemo() {
             {/* Map */}
             <div className="relative aspect-[16/9] rounded-2xl overflow-hidden border border-border bg-black">
               <video
-                src={trackingVideo.url}
+                src={trackingVideo}
                 autoPlay
                 muted
                 loop
