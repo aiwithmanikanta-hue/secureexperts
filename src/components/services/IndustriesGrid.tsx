@@ -1,16 +1,26 @@
 import { useReveal } from "@/components/home/useReveal";
+import imgLogistics from "@/assets/services/industry-logistics.jpg";
+import imgSchool from "@/assets/services/industry-school.jpg";
+import imgFuel from "@/assets/services/industry-fuel-tanker.jpg";
+import imgConstruction from "@/assets/services/industry-construction.jpg";
+import imgMining from "@/assets/services/industry-mining.jpg";
+import imgCorporate from "@/assets/services/industry-corporate.jpg";
+import imgGovernment from "@/assets/services/industry-government.jpg";
+import imgDelivery from "@/assets/services/industry-delivery.jpg";
+import imgPassenger from "@/assets/services/industry-passenger.jpg";
+import imgAgriculture from "@/assets/services/industry-agriculture.jpg";
 
 const industries = [
-  { title: "Logistics & Transportation", desc: "Long-haul fleet visibility, route compliance and ETA accuracy.", img: "https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?auto=format&fit=crop&w=1200&q=80" },
-  { title: "School Transportation", desc: "Parent visibility, route safety and live bus tracking.", img: "https://images.unsplash.com/photo-1597149961419-cf7e3b1f1e76?auto=format&fit=crop&w=1200&q=80" },
-  { title: "Fuel Tankers", desc: "Tamper-proof fuel monitoring and theft alerts.", img: "https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?auto=format&fit=crop&w=1200&q=80" },
-  { title: "Construction", desc: "Track heavy equipment, hours and on-site movement.", img: "https://images.unsplash.com/photo-1581094271901-8022df4466f9?auto=format&fit=crop&w=1200&q=80" },
-  { title: "Mining", desc: "Geofenced operations in remote, rugged terrain.", img: "https://images.unsplash.com/photo-1605098293553-d6efb15be0ea?auto=format&fit=crop&w=1200&q=80" },
-  { title: "Corporate Fleets", desc: "Driver accountability and centralized cost control.", img: "https://images.unsplash.com/photo-1549399542-7e3f8b79c341?auto=format&fit=crop&w=1200&q=80" },
-  { title: "Government Vehicles", desc: "AIS-140 compliant fleet supervision.", img: "https://images.unsplash.com/photo-1591768793355-74d04bb6608f?auto=format&fit=crop&w=1200&q=80" },
-  { title: "Delivery Services", desc: "Last-mile route optimization and proof-of-delivery.", img: "https://images.unsplash.com/photo-1605733513597-a8f8341084e6?auto=format&fit=crop&w=1200&q=80" },
-  { title: "Passenger Transport", desc: "Tourist coaches, taxis and shared mobility.", img: "https://images.unsplash.com/photo-1570125909232-eb263c188f7e?auto=format&fit=crop&w=1200&q=80" },
-  { title: "Agriculture", desc: "Tractor and farm-equipment monitoring across plots.", img: "https://images.unsplash.com/photo-1592982537447-7440770faae9?auto=format&fit=crop&w=1200&q=80" },
+  { title: "Logistics & Transportation", desc: "Long-haul fleet visibility, route compliance and ETA accuracy.", img: imgLogistics },
+  { title: "School Transportation", desc: "Parent visibility, route safety and live bus tracking.", img: imgSchool },
+  { title: "Fuel Tankers", desc: "Tamper-proof fuel monitoring and theft alerts.", img: imgFuel },
+  { title: "Construction", desc: "Track heavy equipment, hours and on-site movement.", img: imgConstruction },
+  { title: "Mining", desc: "Geofenced operations in remote, rugged terrain.", img: imgMining },
+  { title: "Corporate Fleets", desc: "Driver accountability and centralized cost control.", img: imgCorporate },
+  { title: "Government Vehicles", desc: "AIS-140 compliant fleet supervision.", img: imgGovernment },
+  { title: "Delivery Services", desc: "Last-mile route optimization and proof-of-delivery.", img: imgDelivery },
+  { title: "Passenger Transport", desc: "Tourist coaches, taxis and shared mobility.", img: imgPassenger },
+  { title: "Agriculture", desc: "Tractor and farm-equipment monitoring across plots.", img: imgAgriculture },
 ];
 
 export function IndustriesGrid() {
@@ -36,7 +46,10 @@ export function IndustriesGrid() {
                 <img
                   src={it.img}
                   alt={it.title}
+                  width={1600}
+                  height={1216}
                   loading="lazy"
+                  decoding="async"
                   className="absolute inset-0 size-full object-cover transition-transform duration-700 group-hover:scale-110"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-foreground/70 via-foreground/15 to-transparent" />

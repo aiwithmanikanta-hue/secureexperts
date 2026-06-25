@@ -1,5 +1,6 @@
 import { Check, MapPin, Activity } from "lucide-react";
 import { useReveal } from "@/components/home/useReveal";
+import checklistHero from "@/assets/services/checklist-hero.jpg";
 
 const industries = [
   "Logistics",
@@ -49,9 +50,12 @@ export function IndustriesChecklist() {
           <div className="absolute -inset-8 rounded-[40px] bg-primary/10 blur-3xl pointer-events-none ambient-blob" />
           <div className="relative rounded-[28px] overflow-hidden border border-border shadow-lift aspect-[4/5] sm:aspect-[5/6]">
             <img
-              src="https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?auto=format&fit=crop&w=1200&q=80"
+              src={checklistHero}
               alt="Indian highway with a truck under tracking"
+              width={1216}
+              height={1504}
               loading="lazy"
+              decoding="async"
               className="absolute inset-0 size-full object-cover"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-foreground/40 via-transparent to-transparent" />
