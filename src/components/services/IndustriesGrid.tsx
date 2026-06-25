@@ -1,26 +1,38 @@
 import { useReveal } from "@/components/home/useReveal";
-import imgLogistics from "@/assets/services/industry-logistics.jpg";
-import imgSchool from "@/assets/services/industry-school.jpg";
-import imgFuel from "@/assets/services/industry-fuel-tanker.jpg";
-import imgConstruction from "@/assets/services/industry-construction.jpg";
-import imgMining from "@/assets/services/industry-mining.jpg";
-import imgCorporate from "@/assets/services/industry-corporate.jpg";
-import imgGovernment from "@/assets/services/industry-government.jpg";
-import imgDelivery from "@/assets/services/industry-delivery.jpg";
-import imgPassenger from "@/assets/services/industry-passenger.jpg";
-import imgAgriculture from "@/assets/services/industry-agriculture.jpg";
+
+// Eager-import all WebP variants so Vite hashes and bundles them.
+const variants = import.meta.glob("@/assets/services/industry-*-*.webp", {
+  eager: true,
+  import: "default",
+}) as Record<string, string>;
+
+function build(slug: string) {
+  const widths = [480, 800, 1200, 1600];
+  const entries = widths
+    .map((w) => {
+      const key = Object.keys(variants).find((k) =>
+        k.endsWith(`/industry-${slug}-${w}.webp`),
+      );
+      return key ? { w, url: variants[key] } : null;
+    })
+    .filter((x): x is { w: number; url: string } => !!x);
+  return {
+    src: entries.find((e) => e.w === 800)!.url,
+    srcSet: entries.map((e) => `${e.url} ${e.w}w`).join(", "),
+  };
+}
 
 const industries = [
-  { title: "Logistics & Transportation", desc: "Long-haul fleet visibility, route compliance and ETA accuracy.", img: imgLogistics },
-  { title: "School Transportation", desc: "Parent visibility, route safety and live bus tracking.", img: imgSchool },
-  { title: "Fuel Tankers", desc: "Tamper-proof fuel monitoring and theft alerts.", img: imgFuel },
-  { title: "Construction", desc: "Track heavy equipment, hours and on-site movement.", img: imgConstruction },
-  { title: "Mining", desc: "Geofenced operations in remote, rugged terrain.", img: imgMining },
-  { title: "Corporate Fleets", desc: "Driver accountability and centralized cost control.", img: imgCorporate },
-  { title: "Government Vehicles", desc: "AIS-140 compliant fleet supervision.", img: imgGovernment },
-  { title: "Delivery Services", desc: "Last-mile route optimization and proof-of-delivery.", img: imgDelivery },
-  { title: "Passenger Transport", desc: "Tourist coaches, taxis and shared mobility.", img: imgPassenger },
-  { title: "Agriculture", desc: "Tractor and farm-equipment monitoring across plots.", img: imgAgriculture },
+  { title: "Logistics & Transportation", desc: "Long-haul fleet visibility, route compliance and ETA accuracy.", img: build("logistics") },
+  { title: "School Transportation", desc: "Parent visibility, route safety and live bus tracking.", img: build("school") },
+  { title: "Fuel Tankers", desc: "Tamper-proof fuel monitoring and theft alerts.", img: build("fuel-tanker") },
+  { title: "Construction", desc: "Track heavy equipment, hours and on-site movement.", img: build("construction") },
+  { title: "Mining", desc: "Geofenced operations in remote, rugged terrain.", img: build("mining") },
+  { title: "Corporate Fleets", desc: "Driver accountability and centralized cost control.", img: build("corporate") },
+  { title: "Government Vehicles", desc: "AIS-140 compliant fleet supervision.", img: build("government") },
+  { title: "Delivery Services", desc: "Last-mile route optimization and proof-of-delivery.", img: build("delivery") },
+  { title: "Passenger Transport", desc: "Tourist coaches, taxis and shared mobility.", img: build("passenger") },
+  { title: "Agriculture", desc: "Tractor and farm-equipment monitoring across plots.", img: build("agriculture") },
 ];
 
 export function IndustriesGrid() {
@@ -44,7 +56,9 @@ export function IndustriesGrid() {
             >
               <div className="relative aspect-[4/3] overflow-hidden">
                 <img
-                  src={it.img}
+                  src={it.img.src}
+                  srcSet={it.img.srcSet}
+                  sizes="(min-width: 1024px) 360px, (min-width: 640px) 45vw, 92vw"
                   alt={it.title}
                   width={1600}
                   height={1216}
