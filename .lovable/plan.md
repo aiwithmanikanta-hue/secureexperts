@@ -1,40 +1,71 @@
-# Services Page — Build Plan
+# Services Page — Image Quality, Alignment & Loading Fix
 
-A new `/services` route, designed in the existing Secure Experts visual language (white / off-white / light blue / brand blue / dark navy, SF-style typography, glassmorphism, magnetic buttons, reveal-on-scroll). It will reuse current building blocks (`Nav`, `SiteFooter`, `MagneticButton`, `RevealOnScroll`, `useReveal`, `useMagnetic`, `LiveTrackingDemo`, `FloatingActions`) so the page feels native to the site, not bolted on.
+Scope: only image-related changes on `/services`. No design, layout, color, typography, or spacing changes.
 
-## Scope
+## Problems found in current code
 
-Create `src/pages/Services.tsx` plus section components under `src/components/services/`. Add route in `src/App.tsx` and a "Services" link in `Nav.tsx` menu. No backend, no schema changes, no logo/branding/content changes elsewhere.
+1. **`IndustriesGrid.tsx`** — uses 10 Unsplash hotlinks. Several IDs are broken/return 404 (e.g. construction `1581094271901-8022df4466f9`, mining, government, agriculture variants), and **Logistics and Fuel Tankers reference the exact same Unsplash photo** (duplicate image). Hotlinks are also unreliable in production.
+2. **`IndustriesChecklist.tsx`** — single Unsplash hotlink for the side illustration; same risk of 404 / inconsistent quality.
+3. **No `width`/`height` on `<img>` tags** in industry/checklist cards → CLS as Unsplash loads.
+4. **No explicit `decoding="async"` / `fetchpriority`** hints.
+5. Aspect-ratio is set on the wrapper (`aspect-[4/3]`), which is good, but the images themselves should declare intrinsic dimensions to fully eliminate layout shift.
+6. Other Services-page components (`ServicesHero`, `ServiceCategories`, `TechStack`, `PlatformBento`, `FuelAnalytics`, `WhyChoose`, `ServicesCTA`) use icons/SVGs only — no raster images to fix. They will be re-checked but not modified unless an issue is found.
 
-## Page structure
+## Fix plan
 
-1. **Nav (existing)** — add "Services" item. Live Login / Admin Login buttons are not in the current nav; I'll skip adding them unless you want them (they aren't wired to any auth). Confirm if needed.
-2. **Hero** — eyebrow "OUR SERVICES", H1 "Smart Tracking Solutions for Every Business", subtitle, two CTAs (WhatsApp + Request Demo). Right side: layered glass cards showing GPS device, fuel sensor mini-widget, mobile dashboard mock, fleet tile — floating with soft parallax. Background: blue gradient blobs + particle dots.
-3. **Service Categories** — 6 glass cards (GPS Tracking, Fuel Monitoring, Fleet Management, AIS-140, Vehicle Cameras, Asset Tracking) with lucide icons (Satellite, Fuel, LayoutDashboard, ShieldCheck, Camera, Package), hover lift + light sweep.
-4. **Service Overview (Who we serve)** — two-column: left checklist of 9 industries with animated check ticks; right premium image (Indian highway/truck) with floating dashboard overlay cards.
-5. **Technology Stack** — 6 spec cards (GPS, Fuel Sensor, Cloud, Android & Web, Live Alerts, AI Analytics).
-6. **Live Tracking Demo** — reuse existing `LiveTrackingDemo` component (already in home), retitled with route caption "Vijayawada → Rajahmundry → Visakhapatnam".
-7. **Platform Features (Bento Grid)** — 12 features in an asymmetric bento layout with icons + hover.
-8. **Fuel Analytics** — 2 cards with inline SVG line charts (green fill events, red theft) with stroke-dash draw-in animation on reveal.
-9. **Industries We Serve** — 10 image cards with gradient overlay, hover zoom + lift. Uses Unsplash photos of Indian logistics/trucks/buses (royalty-free via picsum-style URLs or unsplash source) — confirm if you'd rather supply images.
-10. **Why Choose Secure Experts** — 10 icon tick cards in a clean 2/5 grid.
-11. **Final CTA** — headline + 3 buttons (WhatsApp via `openWhatsApp`, Request Demo scrolls to home `#contact`, Contact Sales `mailto:`).
-12. **SiteFooter (existing)**.
+### 1. Generate 11 high-quality, on-brand images (Lovable image generator, premium-quality photographic style, 1600×1200 = 4:3, .jpg)
 
-## Files
+Stored under `src/assets/services/` and externalized via `lovable-assets` so the repo stays light and the CDN serves them with cache headers (no 404 risk).
 
-- Add: `src/pages/Services.tsx`
-- Add: `src/components/services/ServicesHero.tsx`, `ServiceCategories.tsx`, `IndustriesChecklist.tsx`, `TechStack.tsx`, `PlatformBento.tsx`, `FuelAnalytics.tsx`, `IndustriesGrid.tsx`, `WhyChoose.tsx`, `ServicesCTA.tsx`
-- Edit: `src/App.tsx` (route `/services`), `src/components/home/Nav.tsx` (menu item), `src/components/home/SiteFooter.tsx` (Services link in Quick Links)
+| File | Subject |
+|---|---|
+| `industry-logistics.jpg` | Indian highway with logistics trucks, blue sky, modern |
+| `industry-school.jpg` | Yellow school bus, kids boarding, safe morning scene |
+| `industry-fuel-tanker.jpg` | Fuel tanker truck at depot, clean industrial look |
+| `industry-construction.jpg` | Construction site with heavy equipment, cranes |
+| `industry-mining.jpg` | Open-pit mining haul truck, rugged terrain |
+| `industry-corporate.jpg` | Corporate sedan fleet in glass-tower parking |
+| `industry-government.jpg` | Government/utility vehicle convoy, official look |
+| `industry-delivery.jpg` | Last-mile delivery van + courier, urban street |
+| `industry-passenger.jpg` | Modern tourist coach / intercity bus |
+| `industry-agriculture.jpg` | Tractor on green farmland at golden hour |
+| `checklist-hero.jpg` | Tall 4:5 hero — Indian highway truck POV at dusk, premium |
 
-## Design & motion
+All generated at consistent dimensions per section (industries: 1600×1200, checklist: 1200×1500) so card heights match exactly.
 
-- Tokens only — no hardcoded hex. Use existing `bg-card`, `border-border`, `text-foreground`, `text-primary`, `bg-tint-blue`, `shadow-soft`, `shadow-lift` classes already in `styles.css`.
-- Animations: `useReveal` fade-up, `useMagnetic` for CTAs, light-sweep on cards, SVG stroke-dash for analytics, breathing glow on hero badge.
-- Mobile-first: single-column stacks, swipeable horizontal scroll for category + industries cards on `sm:`, touch targets ≥44px, no horizontal overflow.
-- SEO: `<title>Services — GPS Tracking, Fuel Monitoring, Fleet Management | Secure Experts</title>`, meta description, single H1, alt text, JSON-LD `Service` schema.
+### 2. Refactor `IndustriesGrid.tsx`
 
-## Out of scope (flag for confirmation)
+- Import each image's `.asset.json`, use `it.img.url`.
+- Add explicit `width={1600} height={1200}` and `decoding="async"` to every `<img>`.
+- Keep existing wrapper `aspect-[4/3]`, `object-cover`, `object-center`, hover scale, gradient overlay, border-radius, shadow — unchanged.
+- Remove the duplicate Logistics/Fuel-Tanker image (now distinct assets).
 
-- Live Login / Admin Login buttons — no auth exists in the app. I will not add non-functional buttons unless you want placeholders.
-- Industry photos — will use Unsplash hotlinks for now; swap to uploaded assets when you provide them.
+### 3. Refactor `IndustriesChecklist.tsx`
+
+- Replace Unsplash hotlink with the generated `checklist-hero.jpg.asset.json`.
+- Add `width={1200} height={1500}`, `decoding="async"`.
+- Keep `aspect-[4/5] sm:aspect-[5/6]`, `object-cover`, rounded corners, blob halo, floating overlay cards — unchanged.
+
+### 4. Re-audit pass
+
+After changes, scan each Services component for any remaining `<img>` without size hints or with external hotlinks and confirm none remain. Confirm `ServicesHero` (SVG/lucide only) and other sections have no raster images.
+
+### 5. Verify
+
+- `bun run build` to ensure imports resolve.
+- Visual spot-check via Playwright at 1280px and 390px viewports, screenshot the Industries grid + checklist to confirm no broken icons, uniform card heights, no overflow, no CLS.
+
+## Out of scope
+
+- No changes to layout grid, spacing, typography, colors, animations, copy, or any non-image element.
+- No changes to other pages.
+- No new components or routes.
+
+## Files to edit
+
+- `src/components/services/IndustriesGrid.tsx`
+- `src/components/services/IndustriesChecklist.tsx`
+
+## Files to add
+
+- 11 generated `.jpg` images under `src/assets/services/`, each with its `.asset.json` pointer (binaries removed post-upload per the assets workflow).
